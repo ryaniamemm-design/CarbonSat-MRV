@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "CarbonSat-WorkedReviewRecord-v1",
+  "inputReferences": {
+    "caseA": {
+      "path": "web/npp_estimate_bundle.json",
+      "sha256": "090ef7a9c8a8532ee1b16d49dace5ac5b13af2420780dfdd420d415883c2d046"
+    },
+    "caseB": {
+      "path": "web/engebei_bundle.json",
+      "sha256": "077a072388fb71df38c3df9ff8e336b04e31444297d47f99996857b748b4d104"
+    }
+  },
+  "caseA": {
+    "cellId": "cell_0020",
+    "year": 2024,
+    "production_tC_yr": 4863.538075988655,
+    "integral_kgC_yr": 4863538.075988655,
+    "geometryAreaM2": 34047890.32399437,
+    "reductionTotalAreaM2": 34144791.67536766,
+    "validAreaM2": 34144791.67536766,
+    "validAreaRatio": 1
+  },
+  "caseB": {
+    "objectId": "engebei_paper_window_v1",
+    "year": 2024,
+    "production_tC_yr": 30780.13401430004,
+    "validAreaRatio": 0.9311618297166796
+  },
+  "reviewHandover": {
+    "ok": true,
+    "href": "changes.html?cell=cell_0020&era=2&year=2016",
+    "params": {
+      "cellId": "cell_0020",
+      "era": 2,
+      "year": 2016
+    },
+    "note": "只带定位信息（格 / 时段 / 年）；台账页会独立重算并核验，不复用本页结论。"
+  },
+  "ledgerCounts": {
+    "cells": 34,
+    "eras": 2,
+    "entries": 748,
+    "comparable": 748,
+    "notComparable": 0,
+    "refused": 34
+  },
+  "taskCounts": {
+    "tasks": 172,
+    "byType": {
+      "INSUFFICIENT_EVIDENCE": 104,
+      "NEED_MATERIAL": 68
+    },
+    "totalTriggers": 1496
+  },
+  "stableExportDigest": "local-sha256:c44ddd200ad7f6b879b520f4f2781ff6a8594219ac98b3104baae71c6c45fc9e",
+  "interpretation": "Derived modelled vegetation productivity and review tasks under the packaged method; no field-accuracy or net-removal claim."
+}

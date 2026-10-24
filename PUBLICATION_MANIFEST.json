@@ -1,6 +1,6 @@
 {
-  "schema": "CarbonSat-Publication-S5",
-  "generatedAtUTC": "2026-10-24T17:53:10.199448+00:00",
+  "schema": "CarbonSat-Publication-S6",
+  "generatedAtUTC": "2026-10-24T18:37:42.810864+00:00",
   "scope": "Current publication bytes only; historical manifests retain their original scope.",
   "excludedRuntimePaths": [
     "PUBLICATION_MANIFEST.json",
@@ -86,6 +86,11 @@
       "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_S5.json",
       "bytes": 3109,
       "sha256": "599436cc7994e47ab724cf0cbd89382536a100455aa969d6d4d368584dec72c6"
+    },
+    {
+      "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_S6.json",
+      "bytes": 3109,
+      "sha256": "d46db3f309089333840c0e9726ab480cd48d116ed5bf429efa5fb06fef5894a9"
     },
     {
       "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_v1.1.json",
@@ -188,9 +193,34 @@
       "sha256": "141b44dc13f649de0b013846667228a2767f0cd38aa050e2f4c3aa5e5689b635"
     },
     {
-      "path": "docs/PUBLICATION_S5.md",
-      "bytes": 2310,
-      "sha256": "6b810bfd716ad94c49d67394760de4e58f723f649d2e3b6e1595b8fe85a719ec"
+      "path": "docs/PUBLICATION_S6.md",
+      "bytes": 2150,
+      "sha256": "09a880930bc0aa414785d7bda713c85f053ebf74b3ebdfa70c3815d3c4b29714"
+    },
+    {
+      "path": "docs/review/MODEL_CARD_EN.md",
+      "bytes": 5949,
+      "sha256": "82fb900508dbef2333b76cf2ea15f903634f277175ba736c5369c81141effda8"
+    },
+    {
+      "path": "docs/review/REPRODUCTION_EN.md",
+      "bytes": 5457,
+      "sha256": "eaf5efdb62b876a0ff9b445073bec00bfd5435da3bf3a6281e7a1b72cd009a22"
+    },
+    {
+      "path": "docs/review/RESULTS_AND_EVALUATION_EN.md",
+      "bytes": 5418,
+      "sha256": "0b133d10729a1c27ce3e9a9cd3856e769be649bc44db778fd46b8a078ddff428"
+    },
+    {
+      "path": "docs/review/TECHNICAL_METHOD_EN.md",
+      "bytes": 5963,
+      "sha256": "c9ce86350c221f7375d95d1e9467d251cbbd722bb29038d80c163eaf461cc931"
+    },
+    {
+      "path": "docs/REVIEWER_GUIDE_EN.md",
+      "bytes": 3664,
+      "sha256": "3d413937f14dda8508434cb416d858782dbe51ec26194e23066678ed63db3791"
     },
     {
       "path": "docs/WORKBENCH_V1.md",
@@ -216,6 +246,16 @@
       "path": "evidence/npp_evidence_records.json",
       "bytes": 2639027,
       "sha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+    },
+    {
+      "path": "examples/review_tasks.json",
+      "bytes": 6165779,
+      "sha256": "3fe6952679c0205bb55e0d5dce997fbd1c27fde36f75c48669275f3e27079273"
+    },
+    {
+      "path": "examples/worked_record.json",
+      "bytes": 1698,
+      "sha256": "fedb819ded7c70f7a7b1a9489e14c61bdab99a74ad47034f37b65bd2045d10ec"
     },
     {
       "path": "favicon.ico",
@@ -389,13 +429,13 @@
     },
     {
       "path": "presentation/CarbonSat-MRV_EN_12slides.pptx",
-      "bytes": 1780946,
-      "sha256": "02b79093e60c907b9b46015f64381798fa4a2a123c72083e47238269768c4128"
+      "bytes": 1780829,
+      "sha256": "e46659edbe0d1c1c215f34b9057c158b06c19eeae0ae7731d8871ad8f3a24af4"
     },
     {
       "path": "README.md",
-      "bytes": 8101,
-      "sha256": "12639637b71e672eb23941b127ddcc8ae4cc15f357f93ef4a518d2c89f194ed3"
+      "bytes": 8558,
+      "sha256": "a5ded25f31da529193466bebc2b8d2661400e7008504ca139fd532ef6bd8e95b"
     },
     {
       "path": "records_schema.json",
@@ -455,7 +495,7 @@
     {
       "path": "scripts/verify_workbench_module.py",
       "bytes": 7607,
-      "sha256": "b543a16fdca2ca41797f25a36ba18b8d1685d0d2dc97ecc8e8f3dd86722d8871"
+      "sha256": "768fd79ce4fdc7e49bca00f42f7fca42e8f0426fc63f7258cda39a0db5c9b782"
     },
     {
       "path": "scripts/workbench_shots.js",
@@ -464,8 +504,8 @@
     },
     {
       "path": "submission/LINKS.json",
-      "bytes": 1384,
-      "sha256": "7c9717d7c50679a12ac8086241baf489c9f82ec40a61f135446de773bea2c84c"
+      "bytes": 222,
+      "sha256": "2a04c1c0be39b6eae5e28bd0136881972916ad06497d6f37090c46cd34424637"
     },
     {
       "path": "submission/PROJECT_STORY_EN.md",
@@ -541,6 +581,11 @@
       "path": "test/workbench.test.js",
       "bytes": 27204,
       "sha256": "8c731c1c0f1f066e22036e07e28e2024359297ac5e8dec3fb3fb56d0d77b52cb"
+    },
+    {
+      "path": "verification/RESULTS_SUMMARY.json",
+      "bytes": 4291,
+      "sha256": "26ba1002917128f1a03313ef6f3b9edf36b83882601479ce63e740e9a0a32b28"
     },
     {
       "path": "web/a2_core.js",

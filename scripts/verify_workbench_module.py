@@ -9,8 +9,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_S5.json"
-VERSION = "CarbonSat-ResearchWorkbench-Publication-S5"
+MANIFEST = ROOT / "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_S6.json"
+VERSION = "CarbonSat-ResearchWorkbench-Publication-S6"
 SCOPE = ("Read-only research workbench over existing products; not anchored by the scientific pack "
          "or public chain, and does not define any project boundary. The evidence registry binds "
          "historical conclusions to product identity only and executes no recomputation")

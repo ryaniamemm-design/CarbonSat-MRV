@@ -20,6 +20,10 @@ CarbonSat-MRV helps researchers hand over satellite vegetation results that anot
 - [English workbench](https://ryaniamemm-design.github.io/CarbonSat-MRV/web/workbench.html)
 - [Demo video](https://www.youtube.com/watch?v=JDcc-VNmPzY)
 
+## Reviewer materials
+
+Start with the [reviewer guide](docs/REVIEWER_GUIDE_EN.md), then inspect the [technical method](docs/review/TECHNICAL_METHOD_EN.md), [model card](docs/review/MODEL_CARD_EN.md), [reproduction guide](docs/review/REPRODUCTION_EN.md) and [results and evaluation plan](docs/review/RESULTS_AND_EVALUATION_EN.md). The worked record and complete task export in `examples/` are derived from the packaged inputs and covered by the current publication manifest.
+
 ## The review workflow
 
 1. Select a research object and year.
@@ -135,6 +139,6 @@ npm test
 
 ## Publication and rights
 
-[Publication S5](docs/PUBLICATION_S5.md) explains the source cleanup and distinguishes the current publication from historical byte manifests. Original scientific inputs, model artifacts, score tables and browser bundles are retained. Publication manifests establish byte integrity, not source authenticity or scientific accuracy.
+[Publication S6](docs/PUBLICATION_S6.md) describes the current release, reproducible examples and historical byte manifests. Original scientific inputs, model artifacts, score tables and browser bundles are retained. Publication manifests establish byte integrity, not source authenticity or scientific accuracy.
 
 The code is published for evaluation. **No open-source license is granted.** The existing `UNLICENSED` status is retained. Data attribution, third-party code and rights information are in [NOTICE.md](NOTICE.md).

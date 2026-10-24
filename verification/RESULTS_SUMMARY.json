@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "CarbonSat-TechnicalResultsSummary-S6",
+  "preparedAtUTC": "2026-10-24T18:37:41.385326+00:00",
+  "existingTechnicalValidation": {
+    "contractAndIntegration": {
+      "passing": 331,
+      "failing": 0,
+      "scope": "Retained local run using the existing dependency environment and local solc 0.8.26 override; not re-executed for this documentation update."
+    },
+    "models": {
+      "passed": 19,
+      "fvcScoresReproduced": 3420,
+      "nppScoresReproduced": 816,
+      "namedChecks": [
+        {
+          "name": "five packaged model artifacts",
+          "ok": true
+        },
+        {
+          "name": "model and feature dimensions: anomaly_model.joblib",
+          "ok": true
+        },
+        {
+          "name": "model and feature dimensions: npp_anomaly_model.joblib",
+          "ok": true
+        },
+        {
+          "name": "model and feature dimensions: npp_anomaly_model_cellholdout.joblib",
+          "ok": true
+        },
+        {
+          "name": "model and feature dimensions: npp_anomaly_model_timeholdout.joblib",
+          "ok": true
+        },
+        {
+          "name": "model and feature dimensions: anomaly_model.joblib",
+          "ok": true
+        },
+        {
+          "name": "formal FVC role",
+          "ok": true
+        },
+        {
+          "name": "FVC imputed inference path matches saved grid scores",
+          "ok": true
+        },
+        {
+          "name": "FVC v1.1 producer frame reproduces 3420 corrected scores",
+          "ok": true
+        },
+        {
+          "name": "NPP artifact hash matches role: formalModel",
+          "ok": true
+        },
+        {
+          "name": "NPP frozen parameters present: formalModel",
+          "ok": true
+        },
+        {
+          "name": "NPP artifact hash matches role: timeHoldout",
+          "ok": true
+        },
+        {
+          "name": "NPP frozen parameters present: timeHoldout",
+          "ok": true
+        },
+        {
+          "name": "NPP artifact hash matches role: cellHoldout",
+          "ok": true
+        },
+        {
+          "name": "NPP frozen parameters present: cellHoldout",
+          "ok": true
+        },
+        {
+          "name": "NPP 816 stored scores and feature bindings reproduced",
+          "ok": true
+        },
+        {
+          "name": "NPP input identity",
+          "ok": true
+        },
+        {
+          "name": "smoke remains SYNTHETIC",
+          "ok": true
+        },
+        {
+          "name": "all model bytes unchanged",
+          "ok": true
+        }
+      ],
+      "scope": "Retained read-only verification; model/input byte preservation is checked again in the S6 publication build."
+    },
+    "fvcPreprocessing": {
+      "passed": 11,
+      "scope": "Retained regression run. No training performed for S6."
+    }
+  },
+  "currentExampleVerification": {
+    "ok": true,
+    "checkedAtUTC": "2026-10-24T18:35:14.121Z",
+    "caseABundleVerified": true,
+    "caseBBundleVerified": true,
+    "caseAProductionRounded": "4863.54",
+    "caseACoveragePercent": "100.00",
+    "caseBCoveragePercent": "93.12",
+    "ledgerCounts": {
+      "cells": 34,
+      "eras": 2,
+      "entries": 748,
+      "comparable": 748,
+      "notComparable": 0,
+      "refused": 34
+    },
+    "taskCounts": {
+      "tasks": 172,
+      "byType": {
+        "INSUFFICIENT_EVIDENCE": 104,
+        "NEED_MATERIAL": 68
+      },
+      "totalTriggers": 1496
+    },
+    "completeExportReopenedAndVerified": true,
+    "repeatStableDigestMatches": true,
+    "stableDigest": "local-sha256:c44ddd200ad7f6b879b520f4f2781ff6a8594219ac98b3104baae71c6c45fc9e",
+    "inputsAndArtifactsModified": false,
+    "files": [
+      {
+        "path": "examples/review_tasks.json",
+        "sha256": "3fe6952679c0205bb55e0d5dce997fbd1c27fde36f75c48669275f3e27079273"
+      },
+      {
+        "path": "examples/worked_record.json",
+        "sha256": "fedb819ded7c70f7a7b1a9489e14c61bdab99a74ad47034f37b65bd2045d10ec"
+      }
+    ]
+  },
+  "interpretation": "Implementation and artifact checks under their stated scopes; no independent field-accuracy, real anomaly-detection accuracy or measured user-benefit claim."
+}
