@@ -36,6 +36,6 @@ The historical chain reference has a precise role: a later reader can compare th
 | What distinguishes FVC and NPP models? | [Model card](review/MODEL_CARD_EN.md) |
 | Which commands reproduce the checks? | [Reproduction guide](review/REPRODUCTION_EN.md) |
 | Which results exist and what is the next evaluation? | [Results and evaluation](review/RESULTS_AND_EVALUATION_EN.md) |
-| Which files belong to the current publication? | [Publication scope](PUBLICATION_S6.md) |
+| Which files belong to the current publication? | [Publication scope](PUBLICATION_S7.md) |
 
 `examples/worked_record.json` and `examples/review_tasks.json` provide machine-readable counterparts to the route above. They are derived from the packaged inputs. Fresh browser exports can differ in their event timestamp while retaining the same stable digest.

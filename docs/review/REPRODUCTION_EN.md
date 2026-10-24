@@ -13,7 +13,7 @@ node scripts/verify_engebei_case.js
 
 Python standard-library support and Node.js are sufficient for these checks. A successful publication verification reports `ok: true` and an empty error list. The evidence-registry check compares the registered report and artifact bindings; the module check compares its current manifest. The Engebei verifier checks that case's preparation and scope independently of interface rendering.
 
-`PUBLICATION_MANIFEST.json` covers current publication files and declares its exclusions. Historical module manifests describe earlier byte versions. Use the current `MODULE_MANIFEST_S6.json` for this publication; a mismatch against a historical manifest is not a reason to rewrite historical scientific inputs.
+`PUBLICATION_MANIFEST.json` covers current publication files and declares its exclusions. Historical module manifests describe earlier byte versions. Use the current `MODULE_MANIFEST_S7.json` for this publication; a mismatch against a historical manifest is not a reason to rewrite historical scientific inputs.
 
 ## 2. Serve the interface locally
 

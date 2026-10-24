@@ -1,0 +1,92 @@
+{
+  "moduleVersion": "CarbonSat-ResearchWorkbench-Publication-S7",
+  "generatedAtUTC": "2026-10-24T18:53:04.435341+00:00",
+  "scope": "Read-only research workbench over existing products; not anchored by the scientific pack or public chain, and does not define any project boundary. The evidence registry binds historical conclusions to product identity only and executes no recomputation",
+  "files": [
+    {
+      "path": "web/workbench_core.js",
+      "bytes": 40752,
+      "sha256": "1563aa4a9bc0e722673504d3e48abdc5d5732ff404e66b408440bdd36bc17883"
+    },
+    {
+      "path": "web/workbench.html",
+      "bytes": 6910,
+      "sha256": "b5c16a18ef97cc949fa0f896c84ae2dad9d020d716c77dcc464f8e1083547e9e"
+    },
+    {
+      "path": "web/workbench.css",
+      "bytes": 28591,
+      "sha256": "cf3c5d7f49c836602478562bdea72a1514fb7a02e58d72ae7c88613d2209afae"
+    },
+    {
+      "path": "web/workbench.js",
+      "bytes": 50669,
+      "sha256": "02055b51b4b1a0ab4e8bca8b767459576a2f4d93b45f3f1a42fbca33cc692176"
+    },
+    {
+      "path": "scripts/verify_workbench.js",
+      "bytes": 25242,
+      "sha256": "a0745a41416b5966a4a0771abdfd7e90969f3dd464c84d8925645ab748f0e4b9"
+    },
+    {
+      "path": "scripts/verify_workbench_module.py",
+      "bytes": 7607,
+      "sha256": "b1b4ad223d36a72e8ec1172121e21bb2ecf42a8db602370808c080d55c9dd77e"
+    },
+    {
+      "path": "scripts/browser_workbench_drive.js",
+      "bytes": 31046,
+      "sha256": "c4129985ccd6c0921b619c63b0ec37701c2fd2f55f2cdce12056e30ffc3c5a90"
+    },
+    {
+      "path": "scripts/build_workbench_evidence_registry.js",
+      "bytes": 9694,
+      "sha256": "86e6677733d7c3e6e575671db8d9313761981ba6d8fb0012711b944b402c9538"
+    },
+    {
+      "path": "scripts/workbench_shots.js",
+      "bytes": 8658,
+      "sha256": "2989a917f06d71234734bc3194c916d67c05d1f770d55a8efac78f5e6d2b548f"
+    },
+    {
+      "path": "web/workbench_evidence_registry.json",
+      "bytes": 6902,
+      "sha256": "2a9fec384db14e9ff8a26598ba8e192ffeb23b468dc48d5c3f84b4df3b157efd"
+    },
+    {
+      "path": "test/workbench.test.js",
+      "bytes": 27204,
+      "sha256": "8c731c1c0f1f066e22036e07e28e2024359297ac5e8dec3fb3fb56d0d77b52cb"
+    },
+    {
+      "path": "docs/WORKBENCH_V1.md",
+      "bytes": 20312,
+      "sha256": "406207ad14644491b9c763d8cb58c63604bb52c0b43301a68e435c839c4e7e4a"
+    },
+    {
+      "path": "web/ui_en.js",
+      "bytes": 4532,
+      "sha256": "96437b4a8c3ce9abcb27eee98badd6ad827eba0acede2db4d71d64d264b23c94"
+    },
+    {
+      "path": "web/changes.html",
+      "bytes": 4996,
+      "sha256": "cb8014bf95f365660385d6ea6f12c2daeb5d417f151e86aa6b81ef44f8ace1e3"
+    },
+    {
+      "path": "web/changes.css",
+      "bytes": 4960,
+      "sha256": "f3cabfbc5f70c46e94e79c4b7f20420e78a02f213a1d6e6ef9eb1952161ca637"
+    },
+    {
+      "path": "web/changes.js",
+      "bytes": 19044,
+      "sha256": "e51c94552ac84178291595408683112e98245ac06dffa728adda59eb0fa3272a"
+    },
+    {
+      "path": "docs/CHANGE_LEDGER_V1.md",
+      "bytes": 36374,
+      "sha256": "bef0ee9c3f0dca89c3c9abf67483f97db4863ee280f6e67ec93a6f51870721a1"
+    }
+  ]
+}

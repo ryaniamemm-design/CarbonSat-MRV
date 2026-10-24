@@ -1,6 +1,6 @@
 {
-  "schema": "CarbonSat-Publication-S6",
-  "generatedAtUTC": "2026-10-24T18:37:42.810864+00:00",
+  "schema": "CarbonSat-Publication-S7",
+  "generatedAtUTC": "2026-10-24T18:53:04.753320+00:00",
   "scope": "Current publication bytes only; historical manifests retain their original scope.",
   "excludedRuntimePaths": [
     "PUBLICATION_MANIFEST.json",
@@ -91,6 +91,11 @@
       "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_S6.json",
       "bytes": 3109,
       "sha256": "d46db3f309089333840c0e9726ab480cd48d116ed5bf429efa5fb06fef5894a9"
+    },
+    {
+      "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_S7.json",
+      "bytes": 3109,
+      "sha256": "cba3b4dd1b98622b35c6a71265fbff2fb670034f985669fb8d2d9d5a18a6b35b"
     },
     {
       "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_v1.1.json",
@@ -193,9 +198,9 @@
       "sha256": "141b44dc13f649de0b013846667228a2767f0cd38aa050e2f4c3aa5e5689b635"
     },
     {
-      "path": "docs/PUBLICATION_S6.md",
-      "bytes": 2150,
-      "sha256": "09a880930bc0aa414785d7bda713c85f053ebf74b3ebdfa70c3815d3c4b29714"
+      "path": "docs/PUBLICATION_S7.md",
+      "bytes": 2473,
+      "sha256": "53e5ed8262fe593d5fcd3db791db28ed2de72468ddf7052a46882d04b81ea9df"
     },
     {
       "path": "docs/review/MODEL_CARD_EN.md",
@@ -205,7 +210,7 @@
     {
       "path": "docs/review/REPRODUCTION_EN.md",
       "bytes": 5457,
-      "sha256": "eaf5efdb62b876a0ff9b445073bec00bfd5435da3bf3a6281e7a1b72cd009a22"
+      "sha256": "cbc5f2ad95fd5e3009ca9a7ef1d9511b3fb5a6c2f7eaf070cd21085460b9e8d4"
     },
     {
       "path": "docs/review/RESULTS_AND_EVALUATION_EN.md",
@@ -220,7 +225,7 @@
     {
       "path": "docs/REVIEWER_GUIDE_EN.md",
       "bytes": 3664,
-      "sha256": "3d413937f14dda8508434cb416d858782dbe51ec26194e23066678ed63db3791"
+      "sha256": "0e67c8dcc0e712d701b4aaebd661f3539c37c14330320bff3eceeaef0dea3cd2"
     },
     {
       "path": "docs/WORKBENCH_V1.md",
@@ -434,8 +439,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8558,
-      "sha256": "a5ded25f31da529193466bebc2b8d2661400e7008504ca139fd532ef6bd8e95b"
+      "bytes": 8531,
+      "sha256": "96eb743adee60e8334d74cbff9482c144e962d34b08ce874f35f9a5b8b332469"
     },
     {
       "path": "records_schema.json",
@@ -495,7 +500,7 @@
     {
       "path": "scripts/verify_workbench_module.py",
       "bytes": 7607,
-      "sha256": "768fd79ce4fdc7e49bca00f42f7fca42e8f0426fc63f7258cda39a0db5c9b782"
+      "sha256": "b1b4ad223d36a72e8ec1172121e21bb2ecf42a8db602370808c080d55c9dd77e"
     },
     {
       "path": "scripts/workbench_shots.js",
@@ -509,8 +514,8 @@
     },
     {
       "path": "submission/PROJECT_STORY_EN.md",
-      "bytes": 7809,
-      "sha256": "fd17923d33fe7a98883ba06a72a8ef93beead5ba69849fa42e21730b398d3664"
+      "bytes": 8937,
+      "sha256": "ce0fca47c6c4e1118e77393f8059c3a8f62139ed174ea214fae348de4455c46e"
     },
     {
       "path": "test/a2_cross_impl.test.js",

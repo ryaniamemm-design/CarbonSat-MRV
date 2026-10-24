@@ -1,85 +1,92 @@
 ## Inspiration
 
-**4,863.54 tC/yr.** That is the modelled annual vegetation production shown for one record in our workbench. To use it, a reviewer needs to know which footprint it covers, how it was calculated, which comparisons are valid and what evidence should be checked next.
+Environmental monitoring produces results that need to survive review. When a satellite-derived vegetation number moves from a researcher into a report, its footprint, calculation basis and unresolved questions can remain scattered across files. The next reviewer has to reconstruct that context before deciding what the result supports.
 
-Those questions become harder when satellite results move between spreadsheets, presentations and environmental reports. The number travels; its coverage, source context and unresolved questions can get left behind.
+**We built CarbonSat-MRV to keep that context attached to the result.**
 
-We built **CarbonSat-MRV** to keep that context with the result. For **Track 4: Climate Data & Environmental Monitoring**, our focus is practical environmental transparency: helping researchers hand over satellite evidence that another person can inspect and continue reviewing.
+Our target users are environmental researchers preparing satellite-derived evidence and reviewers receiving it. For **Track 4: Climate Data & Environmental Monitoring**, we address a practical part of environmental transparency: making a result, its supporting evidence and its next review steps accessible together.
 
 ## What it does
 
-**CarbonSat-MRV is a satellite evidence workbench for environmental review, supported by two complementary unsupervised model families and a historical blockchain registration reference.**
+**CarbonSat-MRV is a satellite evidence workbench that turns a vegetation result into a review handover another person can inspect and continue.**
 
-The reviewer has a concrete path through the product:
+The prototype brings together **two complementary unsupervised model families**, an English evidence workbench, a linked change ledger and a public reference for one historical blockchain registration.
 
-1. **Locate a result.** Select a research object and year; inspect annual production, its unit and temporal context together.
-2. **Understand its coverage.** Compare geometry area, reduction total area and valid product area, with the valid-area ratio beside the result.
-3. **Inspect the evidence.** Distinguish internal consistency, agreement with a release reference and applicable historical source checks.
-4. **Carry the record into review.** Follow the selected cell and year into the change ledger, inspect an adjacent-year difference, recompute the ledger and export the complete task list with its stable content digest.
+Follow one record through the demonstration:
 
-The prototype makes these choices visible through two independent cases. **Case A** contains **816 cell-year records from 34 research cells over 2001–2024**. **Case B** is a separate Engebei research window with **24 annual records**, each with partial valid coverage of approximately **93.12%**. Coverage changes the interpretation of a result, so the interface presents it as part of the result itself.
+1. **Start with the number.** Case A, `cell_0020`, 2024 displays **4,863.54 tC/yr** of modelled annual vegetation production, with its identity and temporal context.
+2. **See the footprint behind it.** Open geometry area, reduction total area and valid area alongside the raw integral. Switch to the separate Engebei research window to see why **93.12% valid coverage** belongs beside the result.
+3. **Inspect the basis.** The evidence panel distinguishes internal checks, release-reference agreement and applicable historical source checks, each with its stated scope.
+4. **Continue the review.** Select the 2016 record, follow it into the located ledger, inspect the 2015→2016 difference, recompute the ledger and export the complete task list.
 
-The ledger produces **748 within-segment differences**, refuses **34 comparisons across the 2012 boundary**, and exports **172 rule-derived review tasks**. A reviewer receives record identity, sources and concrete next steps together.
+Case A contains **816 cell-years from 34 research cells over 2001–2024**. Case B contains **24 annual records** for the independent Engebei research window. The ledger yields **748 within-segment differences**, refuses **34 cross-2012 pairs** and exports **172 rule-derived review tasks** with their triggers, sources and stable content digest.
+
+The climate contribution is environmental transparency at the point of review: a receiving researcher can inspect what a satellite result covers, which checks apply and what material is needed next. The product makes that sequence explicit and preserves it in a portable handover.
 
 ## How we built it
 
-### Complementary anomaly prescreening
+### Two unsupervised models for complementary observation streams
 
-Vegetation cover and productivity expose different observation patterns. We use two **Isolation Forest** model families with feature sets tailored to those streams:
+Vegetation cover and productivity raise different review questions. We use **Isolation Forest** with features tailored to each stream:
 
-| Model family | Review focus | Packaged inputs |
+| Model family | What it examines | Packaged evidence |
 |---|---|---|
-| **FVC** | Vegetation cover, observation quality and temporal change | 3,420 annual inputs from 90 cells; seven features |
-| **NPP** | Productivity variation, valid-area behaviour and analysis-segment context | 816 annual inputs from 34 cells; eight features |
+| **FVC** | Vegetation cover, observation quality and temporal change | 3,420 annual inputs from 90 cells; seven features; a 72/18-cell training/holdout split |
+| **NPP** | Productivity variation, valid-area behaviour and analysis-segment context | 816 annual inputs from 34 cells; eight features; distinct formal, time-holdout and cell-holdout artifacts |
 
-The FVC spatial split holds out 18 cells from 72 training cells. The NPP materials distinguish formal scoring from time-holdout and cell-holdout evaluation. Saved models, inputs, feature definitions and score tables make both implementations inspectable.
+Saved models, feature definitions, inputs and score tables make both implementations reproducible. The models provide **offline advisory prescreening**; the browser presents prepared evidence. The ledger's exported tasks come from explicit comparison rules, keeping model scores and review obligations separately inspectable.
 
-These models provide **offline advisory prescreening**. The workbench presents prepared evidence; its exported review tasks are derived from ledger rules. The model scores and the task queue have explicit, separate roles.
+### Coverage and provenance at record level
 
-### Evidence that remains attached to the record
+Google Earth Engine reductions of **MODIS MOD17A3HGF v6.1** and **MCD12Q1** supply derived NPP and land-cover inputs. Annual production integrates NPP density over valid pixel area. Python and Node.js support preparation and verification; HTML, CSS and JavaScript provide the interface.
 
-Google Earth Engine reductions of **MODIS MOD17A3HGF v6.1** and **MCD12Q1** supply derived NPP and land-cover inputs. Annual production integrates NPP density over valid pixel area. We retain the separate area definitions and declare the spatial and temporal scope of each case.
+Record identity carries from the workbench into the ledger. The ledger loads and checks its own input, binds comparisons and tasks to their sources, and separates stable export content from the event timestamp. A later reviewer can reopen the handover and check the same content.
 
-Python and Node.js support preparation and verification. HTML, CSS and JavaScript provide the English interface using local assets, with no frontend build step. Selecting a record carries its identity into the ledger, where the comparison, supporting material and review tasks can be inspected together.
+### A public blockchain reference with a defined purpose
 
-### A public reference for later comparison
+Our Solidity prototype uses Hardhat and ethers.js. One historical descriptive record, **`cell_0030_2012`**, was registered on **Sepolia**, preserving its single-record payload hash, method version and declaration category.
 
-Our Solidity registration prototype uses Hardhat and ethers.js. One historical descriptive record, **cell_0030_2012**, was registered on **Sepolia**, preserving a single-record payload hash, method version and declaration category as a public reference.
+The registration gives a later reviewer a public reference for comparing those fields with the corresponding local record. The current full bundle, Engebei case and review ledger remain off-chain. The chain reference complements the local evidence workflow with a precise, checkable registration scope.
 
-This gives a later reviewer a reference for comparing those registered fields with the corresponding local record. The current full bundle, Engebei case and review ledger remain off-chain; the historical reference and local evidence checks serve distinct purposes.
+### A practical route to adoption
 
-## Challenges we faced
+The English prototype is available through a public web link and can run from a local static server, with no frontend build step. The demonstrated review path requires no browser wallet or paid API key. A research group can examine the prepared cases and supplied artifacts before undertaking its own data preparation or model fitting.
 
-**Keeping area definitions consistent.** Interchanging valid area, reduction total area and geometry area can change what a result means. We retain all three and present their relationship directly in the interface.
+The reusable structure is the record-and-task contract: identity, footprint, method, evidence scope and follow-up actions. Extending it to another study area requires documented inputs, a prepared bundle and the corresponding verification checks. That is our planned path to broader use.
 
-**Handling an unresolved temporal break.** A synchronous change around 2012 has an unverified cause. We split the analysis into two segments and explicitly refuse cross-boundary differences, giving reviewers an inspectable comparison rule.
+## Challenges we ran into
 
-**Reproducing model scores.** We aligned the FVC producer and inference paths around the saved training imputer. The corrected score table reproduces without retraining the formal forest; the repair history and regression checks remain available with the model materials.
+**Preserving the meaning of area.** Geometry area, reduction total area and valid product area answer different questions. We retained all three and put their relationship beside the result so the spatial denominator stays visible.
 
-**Handing work to the next reviewer.** We separated stable task content from export-event timestamps so repeated exports can be compared while preserving when each handover occurred.
+**Defining defensible comparisons.** A synchronous change around 2012 has an unresolved cause. We split the analysis into two segments and refuse cross-boundary differences, making the comparison rule visible to the reviewer.
+
+**Reproducing model behaviour.** FVC scoring needed the same saved training imputer across preparation and inference. We aligned those paths and verified the corrected scores without retraining the formal forest.
+
+**Keeping a handover comparable across exports.** We bound stable task content to its sources and kept export-event timestamps outside the stable digest. Repeated exports can then preserve content identity while recording each handover event.
 
 ## Accomplishments that we're proud of
 
-| Delivered capability | Concrete evidence |
+| Delivered capability | Evidence a reviewer can inspect |
 |---|---|
-| An English review workflow | Record selection, coverage inspection, evidence details and a linked change ledger |
-| Two inspectable model families | Implementations, saved models, inputs and reproducible checks for 3,420 FVC and 816 NPP scores |
-| A review handover | Complete export of 172 rule-derived tasks with a stable content digest |
-| A historical blockchain reference | One descriptive record registered on Sepolia |
-| Local technical verification | 331 contract/integration tests passed in a local run; 19 read-only model checks and 11 FVC preprocessing regression tests passed |
+| A working English review route | Record selection, coverage details, evidence inspection and a located change ledger |
+| Two reproducible model families | Implementations, saved models and checks for all 3,420 FVC and 816 NPP scores |
+| A complete review handover | 172 rule-derived tasks, including their triggers, sources and stable digest |
+| A historical public registration | One descriptive record and its declared fields on Sepolia |
+| Technical verification | A local run with 331 contract/integration tests passed; 19 read-only model checks and 11 FVC preprocessing regressions passed |
+| Materials ready for inspection | Public source, a live English demo, an English demonstration video, a model card, method notes and worked export examples |
 
 ## What we learned
 
-Environmental transparency becomes practical when the person reading a result can inspect its meaning and decide what to investigate next. Keeping coverage, evidence scope and follow-up work together is central to that experience.
+Building this prototype taught us to treat footprint, method and unresolved questions as part of the result itself. An anomaly score, a digest and an annual total each answer a different question. Their value in environmental review depends on making those roles clear and keeping the evidence available to the next person.
 
-Our intended users are environmental researchers preparing satellite-derived results and reviewers receiving those results. The prototype provides an inspectable starting point for their handover. Independent user trials will test whether it improves task completion and understanding.
-
-The current quantities describe **modelled vegetation productivity**. Field accuracy, restoration causality, real anomaly-detection performance and user benefits remain to be evaluated. Historical upstream reproduction covers **9 of 840 object-years** under its stated protocol. The prototype does not issue carbon credits or calculate net carbon removal.
+Our current evidence covers implementation behaviour and stored-score reproduction. Historical upstream reproduction covers **9 of 840 object-years** under its stated protocol. Field accuracy, real anomaly-detection performance and measured user benefits remain to be evaluated. The quantities describe **modelled vegetation productivity**; the prototype does not issue carbon credits or calculate net carbon removal.
 
 ## What's next for CarbonSat-MRV
 
-We will run a structured reviewer trial around the demonstrated workflow: locate a record, interpret its coverage, inspect a difference and continue from an exported task. We will record completion, misunderstandings and feedback to guide product changes.
+Our next milestone is a structured reviewer trial: locate a record, interpret its coverage, examine an admitted and a refused comparison, and continue from an exported task. We will record completion, elapsed time, misunderstandings and assistance to assess the workflow's practical value.
 
-Next technical priorities are independently labelled anomaly examples, broader upstream reproduction and investigation of the 2012 break. Additional study areas can follow the same record-and-task structure with documented inputs, explicit scope and verification contracts; large-scale operation remains a future test.
+In parallel, we will develop independently labelled anomaly examples, broaden upstream reproduction, investigate the 2012 break and add valid-pixel footprint evidence. New study areas will follow the same documented input and verification contracts before broader deployment is evaluated.
 
-**Our goal is to make satellite evidence useful at the point where someone must examine it, explain it and hand the work on.**
+**Our goal is satellite evidence that the next reviewer can examine, explain and carry forward.**
+
+[Open the English demo](https://ryaniamemm-design.github.io/CarbonSat-MRV/web/workbench.html) · [Watch the demonstration](https://www.youtube.com/watch?v=JDcc-VNmPzY) · [Inspect the source and technical materials](https://github.com/ryaniamemm-design/CarbonSat-MRV)

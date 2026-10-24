@@ -1,10 +1,10 @@
 # CarbonSat-MRV
 
-**Keep satellite results, coverage and supporting evidence together for environmental review.**
+**Satellite evidence the next reviewer can examine, explain and carry forward.**
 
 IEEE ClimateChain Global Hackathon 2026 · Track 4: Climate Data & Environmental Monitoring
 
-CarbonSat-MRV helps researchers hand over satellite vegetation results that another reviewer can inspect and continue investigating. Two complementary offline anomaly-prescreening model families support the research materials; the English workbench connects record values, coverage and evidence with a rule-derived review handover. One historical Sepolia registration provides a public reference for its registered fields.
+CarbonSat-MRV turns satellite vegetation results into a review handover with their footprint, calculation basis, evidence scope and next actions kept together. Built for environmental researchers and reviewers, the prototype combines two complementary offline unsupervised model families, an English evidence workbench, a rule-derived task export and a public reference for one historical Sepolia registration.
 
 ![English research workbench](docs/images/workbench-en.jpg)
 
@@ -139,6 +139,6 @@ npm test
 
 ## Publication and rights
 
-[Publication S6](docs/PUBLICATION_S6.md) describes the current release, reproducible examples and historical byte manifests. Original scientific inputs, model artifacts, score tables and browser bundles are retained. Publication manifests establish byte integrity, not source authenticity or scientific accuracy.
+[Publication S7](docs/PUBLICATION_S7.md) describes the current release, reproducible examples and historical byte manifests. Original scientific inputs, model artifacts, score tables and browser bundles are retained. Publication manifests establish byte integrity, not source authenticity or scientific accuracy.
 
 The code is published for evaluation. **No open-source license is granted.** The existing `UNLICENSED` status is retained. Data attribution, third-party code and rights information are in [NOTICE.md](NOTICE.md).
