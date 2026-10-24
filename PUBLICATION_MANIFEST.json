@@ -1,6 +1,6 @@
 {
   "schema": "CarbonSat-Publication-S5",
-  "generatedAtUTC": "2026-10-24T14:26:37.855985+00:00",
+  "generatedAtUTC": "2026-10-24T17:36:54.042137+00:00",
   "scope": "Current publication bytes only; historical manifests retain their original scope.",
   "excludedRuntimePaths": [
     "PUBLICATION_MANIFEST.json",
@@ -85,7 +85,7 @@
     {
       "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_S5.json",
       "bytes": 3109,
-      "sha256": "6db16e39df51b5e990e6b948087245a9b7e9b32494f11165a25b68139c3e465d"
+      "sha256": "e7f21dc84ea4c8e94a42f05618c2468d9b6edfddfc0f14a8731aa5144a317db8"
     },
     {
       "path": "audit/workbench_v1_2026-10-19/MODULE_MANIFEST_v1.1.json",
@@ -394,8 +394,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7378,
-      "sha256": "f2d52d11bb43bab159dd65856b9283d66977c70bf0bd453fd3d8b61b73fe0840"
+      "bytes": 7856,
+      "sha256": "52082d4d56d826be2e50ffdb2992fe911abd07b3022891aa1fa4a7993b662636"
     },
     {
       "path": "records_schema.json",
@@ -464,8 +464,8 @@
     },
     {
       "path": "submission/LINKS.json",
-      "bytes": 351,
-      "sha256": "5cf1f20aa46fd65442e0a049d168658b59e4501f6dcbf78d1805f41204905f7f"
+      "bytes": 787,
+      "sha256": "1a747acb31077fd175191496837534ff167860064396d9d8c555806460f41219"
     },
     {
       "path": "submission/PROJECT_STORY_EN.md",

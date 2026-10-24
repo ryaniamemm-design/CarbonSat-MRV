@@ -1,13 +1,19 @@
 {
-  "repositoryUrl": null,
+  "repositoryUrl": "https://github.com/ryaniamemm-design/CarbonSat-MRV",
   "repositoryTarget": {
     "owner": "ryaniamemm-design",
     "name": "CarbonSat-MRV",
     "visibility": "public"
   },
   "videoUrl": null,
-  "demoUrl": "https://carbonsat-mrv.app.workbuddy.link/?sharecode=LCOGLBOECZ",
-  "demoCurrentEnglishVersionPublished": false,
+  "demoUrl": "https://ryaniamemm-design.github.io/CarbonSat-MRV/web/workbench.html",
+  "demoCurrentEnglishVersionPublished": true,
   "devpostProjectUrl": null,
-  "devpostSubmitted": false
+  "devpostSubmitted": false,
+  "demoSiteUrl": "https://ryaniamemm-design.github.io/CarbonSat-MRV/",
+  "repositoryPublicationCompleted": true,
+  "anonymousHttpVerificationCompleted": true,
+  "browserVisualAndClickDownloadChecked": false,
+  "deploymentRunUrl": "https://github.com/ryaniamemm-design/CarbonSat-MRV/actions/runs/40116488807",
+  "verifiedAtUTC": "2026-10-24T17:36:52.876223+00:00"
 }

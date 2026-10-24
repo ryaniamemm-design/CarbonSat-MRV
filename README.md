@@ -8,6 +8,12 @@ CarbonSat-MRV helps researchers hand over satellite vegetation results that anot
 
 ![English research workbench](docs/images/workbench-en.jpg)
 
+## Try CarbonSat-MRV
+
+- [Open the English workbench](https://ryaniamemm-design.github.io/CarbonSat-MRV/web/workbench.html?case=A&object=cell_0020&year=2024)
+- [Open the located change ledger](https://ryaniamemm-design.github.io/CarbonSat-MRV/web/changes.html?cell=cell_0020&era=2&year=2016)
+- [Demo landing page](https://ryaniamemm-design.github.io/CarbonSat-MRV/)
+
 ## The review workflow
 
 1. Select a research object and year.
@@ -32,9 +38,13 @@ Open **http://127.0.0.1:8777/web/workbench.html**. The linked ledger is at `web/
 
 There is no frontend build step. Bundles are local; the optional basemap is off by default. Use HTTP rather than opening HTML files directly.
 
+Current English demo: https://ryaniamemm-design.github.io/CarbonSat-MRV/web/workbench.html
+
+The English workbench is published through the included GitHub Pages workflow. The same source can be served locally with the command above.
+
 Historical hosted demo: https://carbonsat-mrv.app.workbuddy.link/?sharecode=LCOGLBOECZ
 
-That instance is separate from this source snapshot and may show the previous interface. The local English workbench is the reproducible reference. The included GitHub Pages workflow requires repository Pages configuration before it can publish a current English demo.
+That earlier instance is retained as a historical reference and may show the previous interface. Use the current English demo for this submission.
 
 ## Two unsupervised model families
 
