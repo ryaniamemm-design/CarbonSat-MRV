@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarbonSat-MRV · NPP AI 人工复核闭环（全 816 检索）</title>
+<style>
+  :root{--ink:#1f2933;--muted:#5b6b7b;--line:#d9e2ec;--bg:#f7fafc;--hdr:#102a43;--acc:#1a4f8b;
+        --ok:#1b7f4b;--okbg:#e7f6ee;--warn:#a8650b;--warnbg:#fdf1e3;--bad:#9b2226;--badbg:#fbe8e8}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);font-size:13px;line-height:1.55}
+  .wrap{max-width:1080px;margin:0 auto;padding:18px 22px;background:#fff}
+  h1{font-size:18px;margin:0 0 4px;color:var(--hdr)}
+  h2{font-size:14px;margin:18px 0 8px;color:var(--acc);border-left:4px solid var(--acc);padding-left:8px}
+  .sub{color:var(--muted);font-size:12px;margin:0 0 6px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;background:#fff}
+  .card:hover{border-color:var(--acc)}
+  .card.sel{border-color:var(--acc);background:var(--okbg);box-shadow:0 0 0 2px rgba(26,79,139,.15)}
+  .card .rid{font-weight:700;font-size:13px}
+  .card .tag{display:inline-block;border-radius:10px;padding:1px 8px;font-size:11px;font-weight:700;margin-top:4px}
+  .tag.b{background:var(--warnbg);color:var(--warn)} .tag.s{background:var(--badbg);color:var(--bad)} .tag.n{background:#eef3f8;color:var(--muted)}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:12.5px}
+  .kv b{color:var(--muted);font-weight:600}
+  .panel{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--bg)}
+  .op{display:block;border:1px solid var(--line);border-radius:6px;padding:8px 10px;margin:6px 0;cursor:pointer;background:#fff}
+  .op:hover{border-color:var(--acc)}
+  .op input{margin-right:8px}
+  textarea,input[type=text],input[type=datetime-local],input[type=search]{width:100%;font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:#fff}
+  .btns{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+  button{font:inherit;font-weight:600;padding:7px 14px;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:6px;cursor:pointer}
+  button.ghost{background:#fff;color:var(--acc)}
+  button.danger{background:var(--bad);border-color:var(--bad)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  #out{margin-top:10px;white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;border:1px dashed var(--line);border-radius:6px;padding:10px;min-height:40px;background:#fff;max-height:240px;overflow:auto}
+  .ok{color:var(--ok);font-weight:700} .bad{color:var(--bad);font-weight:700}
+  .note{border-left:3px solid var(--warn);background:var(--warnbg);padding:6px 10px;margin:8px 0;font-size:12px}
+  .lim{font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);margin-top:8px;padding-top:6px}
+  code{background:#eef3f8;padding:1px 5px;border-radius:4px;font-size:11.5px}
+  .hash{word-break:break-all;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px}
+  .stale{border:1px solid var(--bad);background:var(--badbg);color:var(--bad);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px}
+  .fresh{border:1px solid var(--ok);background:var(--okbg);color:var(--ok);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px}
+  #searchResults{max-height:240px;overflow:auto;margin-top:8px}
+  @media print{body{background:#fff}.wrap{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>CarbonSat-MRV · NPP AI 人工复核闭环（全 816 检索）</h1>
+  <p class="sub">主赛道 Track 4（Climate Data &amp; Environmental Monitoring）· 描述性 NPP 证据（DESCRIPTIVE_NPP_ONLY）· 仅人工复核，不发证信、不量化碳汇、不部署</p>
+
+  <div class="note">
+    <b>诚实边界</b>：本页展示 AI（Isolation Forest，无真实标签）的 advisory 预审结果，供人工复核参考；
+    人工审查意见<b>单独保存</b>，不反写为训练真值，也<b>不改变</b> <code>attributionStatus = insufficient_evidence</code>。
+    每份审查意见都<b>绑定当时</b>的 evidenceRef、模型版本、整包哈希；源证据包重新生成后，旧意见会显示<b>「版本过期」</b>，<b>不得静默套用到新证据</b>。
+  </div>
+
+  <h2>① 选择证据（两条验收案例 + 全 816 条检索）</h2>
+  <p class="sub">验收案例（可重跑）：</p>
+  <div id="selector" class="grid2"></div>
+
+  <p class="sub" style="margin-top:12px">全量检索（按 recordId 或 cellId+year，如 <code>cell_0020_2002</code> / <code>cell_0030 2012</code>）：</p>
+  <div class="grid2">
+    <div><input type="search" id="searchInput" placeholder="输入 recordId 或 cellId+year…"></div>
+    <div><button id="btnSearch" class="ghost">检索</button></div>
+  </div>
+  <div id="searchResults" class="grid2"></div>
+
+  <h2>② 证据详情（含规则与 ML 结果、来源锚点、适用限制、版本绑定）</h2>
+  <div id="detail" class="panel">请选择一条记录。</div>
+
+  <h2>③ 人工审查意见（三类之一，附依据与时间）</h2>
+  <div class="panel">
+    <label class="op"><input type="radio" name="opinion" value="DATA_ISSUE_PENDING"> <b>数据问题待核</b> — 原始数据/导出链路存在疑问，需进一步核查后方可判断</label>
+    <label class="op"><input type="radio" name="opinion" value="INSUFFICIENT_EVIDENCE" checked> <b>证据不足暂无法判断</b> — 现有证据不足以支持任何结论</label>
+    <label class="op"><input type="radio" name="opinion" value="VERIFIED_NO_ATTRIBUTION"> <b>已核查但不作治理归因</b> — 已人工核对，但明确不将其归因为治理增汇</label>
+    <div style="margin-top:8px">
+      <b>审查依据</b>
+      <textarea id="basis" rows="3" placeholder="例如：2012 年 flag 属结构性断点（34/34 格同升），跨年异常判定不可用，故不作治理归因。"></textarea>
+    </div>
+    <div class="grid2" style="margin-top:8px">
+      <div><b>审查人</b><input type="text" id="reviewer" placeholder=" reviewer / 团队"></div>
+      <div><b>时间</b><input type="datetime-local" id="ts"></div>
+    </div>
+    <div class="btns">
+      <button id="btnBuild">生成审查记录</button>
+      <button id="btnVerify" class="ghost">本地核验</button>
+      <button id="btnTamper" class="danger">篡改示范（改意见→核验失败）</button>
+      <button id="btnDownload" class="ghost">下载审查记录</button>
+    </div>
+  </div>
+
+  <h2>④ 审查记录哈希 / 版本状态</h2>
+  <div id="reviewHashBox" class="hash" style="margin-bottom:6px"></div>
+  <div id="versionStatus"></div>
+  <div id="out">（尚未生成审查记录）</div>
+
+  <h2>⑤ 载入已有审查意见（校验完整性 + 版本过期判定）</h2>
+  <div class="panel">
+    <div class="grid2">
+      <div><b>载入本地审查记录 JSON</b><input type="file" id="fileLoad" accept=".json,application/json"></div>
+      <div><b>模拟新证据包哈希（演示用，留空=当前包）</b><input type="text" id="simPack" placeholder="留空使用 current_pack.json 的真实哈希"></div>
+    </div>
+    <div class="btns">
+      <button id="btnReReview" class="ghost" disabled>基于当前证据重新复核</button>
+    </div>
+    <div id="historicalPanel" style="margin-top:10px"></div>
+  </div>
+</div>
+
+
+<script src="vendor/ethers.umd.min.js"></script>
+<script src="e2e_core.js"></script>
+<script src="review.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>CarbonSat-MRV · 地上生物量碳储量情景试算 v0.2</title>
+<style>
+:root{--ink:#153b3a;--muted:#607671;--line:#d9e5df;--green:#176750;--bg:#f4f8f5;--amber:#805500;--red:#a32e37}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI","Microsoft YaHei",sans-serif}
+header{background:#133f39;color:white;padding:24px max(22px,calc((100vw - 1280px)/2))}
+header a{color:#d3eadb}
+h1{font-size:26px;margin:8px 0}
+h2{font-size:18px;margin:0 0 12px}
+h3{font-size:15px;margin:14px 0 8px}
+.sub{color:#d3e4db;max-width:920px;margin:0}
+main{max-width:1320px;padding:20px;margin:auto}
+.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(330px,1fr);gap:20px;align-items:start}
+.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+
+
+.sidebar{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow-y:auto;overscroll-behavior:contain}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wide{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:600}
+input,select,textarea{display:block;width:100%;margin-top:5px;padding:8px 10px;border:1px solid #bacdc3;border-radius:7px;background:white;color:var(--ink);font:inherit}
+textarea{min-height:64px;resize:vertical;font-size:12.5px}
+input[type=checkbox]{display:inline;width:auto;margin:0 6px 0 0}
+button{display:inline-block;border:1px solid #9ebdaf;border-radius:8px;padding:9px 13px;background:white;color:var(--green);font:600 13px/1.4 inherit;cursor:pointer}
+button:hover{background:#edf6ef}
+button.primary{background:var(--green);color:white;border-color:var(--green)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.big{font-size:26px;font-weight:700;color:var(--green)}
+.small{font-size:12.5px;color:var(--muted)}
+.notice{background:#eef8f2;border:1px solid #9ccfb6;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px}
+.warn{background:#fdf8ea;border:1px solid #e0c88a;color:#7a5300;border-radius:8px;padding:10px 12px;font-size:13px;margin:8px 0}
+.bad{background:#fdf2f2;border:1px solid #e2aeae;color:#8a2b2b;border-radius:8px;padding:10px 12px;font-size:13px;margin:8px 0}
+.tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;background:#e3f4ea;color:#1d5c43;border:1px solid #a9d5bf;margin-right:6px}
+.tag.no{background:#f1f4f7;color:#5b7083;border-color:#cfd9e2}
+.tag.bad{background:#fdecec;color:#8a2b2b;border-color:#e2aeae}
+.tag.warn{background:#fdf8ea;color:#7a5300;border-color:#e0c88a}
+pre{white-space:pre-wrap;word-break:break-all;font-size:12px;background:#f6f9f6;border:1px solid var(--line);border-radius:8px;padding:10px;margin:0}
+code{font-family:Consolas,"Courier New",monospace;font-size:12px;background:#eef3f8;padding:1px 4px;border-radius:3px;word-break:break-all}
+ol.tasks{margin:6px 0 0 18px;padding:0;font-size:12.8px}
+ol.tasks li{margin:4px 0}
+ul.pools{margin:6px 0 0 18px;padding:0;font-size:12.8px}
+fieldset{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+legend{font-weight:600;font-size:13.5px;padding:0 6px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static;max-height:none;overflow:visible}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <a href="entry.html">← 返回项目证据入口</a>
+  <h1>地上生物量碳储量情景试算 v0.2</h1>
+  <p class="sub">唯一计算式 <code style="background:#1b4f86;color:#dbe9f7">C_AGB = A[ha] × B[tDM/ha] × f_C</code>。只算地上活生物量碳库；缺参数就输出补资料任务，不编数值、不外推、不出信用量。</p>
+</header>
+<main>
+<div class="notice">对象：<b>指定时点、指定面积、指定干生物量密度与碳分数条件下的地上生物量碳储量情景</b>（tC）。<b>不是</b>整个生态系统碳储量、<b>不是</b>年碳汇、<b>不是</b>治理增汇或可签发量。禁止用 NPP 累加、NPP×碳分数、FVC×任意系数代替库存。</div>
+<div class="tools">
+  <button id="btnBlank" type="button">新建空白情景</button>
+  <label>软件演示（不是真实地块）<select id="demoCase"><option value="synthetic">SYNTHETIC · 合成参数端到端</option><option value="missing">SYNTHETIC 骨架 · 缺参数</option><option value="badunit">SYNTHETIC 骨架 · 错误单位（应被拒）</option></select></label>
+  <button id="btnDemo" type="button">载入演示</button>
+  <span id="modeBadge" class="tag no">真实情景（空白）</span>
+</div>
+<div class="layout">
+<form id="agbForm" novalidate>
+<section class="panel"><h2>1 地块与面积（A）</h2><div class="grid">
+<label>地块编号<input id="parcelId" maxlength="300"></label>
+<label>名称<input id="parcelName" maxlength="1000"></label>
+<label>本次登记日期<input id="asOfDate" type="date"></label>
+<label>面积来源类型<select id="areaSourceType"><option value="MANUAL">手工填写（未经几何核验）</option><option value="GEOMETRY_DERIVED">本模块几何派生</option><option value="EXTERNAL_GIS">外部 GIS 计算结果</option></select></label>
+<label>面积（水平 ha）<input id="areaHa" type="number" step="any" min="0"></label>
+<label>面积几何摘要（sha256，小写 64 位）<input id="geometrySha256" maxlength="64" placeholder="外部 GIS 计算的几何摘要"></label>
+<label>坐标系（CRS）<input id="crs" maxlength="60" placeholder="如 EPSG:4326 / EPSG:4528"></label>
+<label>面积算法<input id="algorithm" maxlength="200" placeholder="如 投影后测地面积 / Albers 等积投影"></label>
+<label class="wide">计算对象<input id="areaObject" maxlength="200"></label>
+<label class="wide">面积文件出处<input id="fileReference" maxlength="500" placeholder="文件名 / 图层 / 出具单位"></label>
+<label class="wide"><input id="overlapChecked" type="checkbox">分层面积已做覆盖与重叠核查（用户申报，不证明 GIS 拓扑）</label>
+<label class="wide">分层面积（JSON 数组，可留空）<textarea id="layersJson" placeholder='[{"layerId":"L1","areaHa":5.0,"classLabel":"类别A"}]'>[]</textarea></label>
+</div><p class="small">手工面积或只填元数据都<b>不会</b>被视为已由几何核验（几何独立核验恒为未做）。分层面积未声明覆盖与重叠核查、任一层面积缺失、或层之和与声明总面积不闭合时，都不得求和成全地块。本版本不接受浏览器近似的经纬度面积。</p></section>
+<section class="panel"><h2>2 参数 B（地上干生物量密度）</h2><div id="paramB" class="grid"></div></section>
+<section class="panel"><h2>3 参数 f_C（干物质碳质量分数）</h2><div id="paramFC" class="grid"></div></section>
+<section class="panel"><h2>4 备注</h2><label>备注<textarea id="notes"></textarea></label></section>
+</form>
+<aside class="sidebar">
+<section class="panel"><h2>情景结果</h2><div id="resultMode"></div><div id="resultBox"></div><div id="resultWarn"></div>
+<h3>敏感性与情景范围</h3><div id="sensBox"></div>
+<h3>下一步需要补什么</h3><ol id="tasks" class="tasks"></ol>
+<h3>明确未纳入的碳库</h3><ul id="excluded" class="pools"></ul>
+<h3>未评估的信用核算 / 资格要素</h3><ul id="unassessed" class="pools"></ul>
+<p class="small">实际误差、区间覆盖率、治理因果效果均未验证；情景范围不得称为高精度。面积只做元数据登记，未做几何独立核验。</p></section>
+<section class="panel"><h2>下载与核验</h2><button id="btnDownload" class="primary" type="button">下载情景包 JSON</button><label style="margin-top:10px">导入情景包 JSON<input id="packageFile" type="file" accept=".json,application/json"></label><label>外部可信情景摘要（可选）<input id="expectedSha" maxlength="90" placeholder="local-sha256:…"></label><button id="btnVerifyCurrent" type="button" style="margin-top:10px">核验当前情景</button><div id="packageVerdict" class="small"></div><details><summary>摘要与核验范围</summary><pre id="hashDetails"></pre></details></section>
+</aside>
+</div>
+</main>
+<footer style="text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px">CarbonSat-MRV · 地上生物量碳储量情景试算 v0.2 · 零 CDN · 不部署、不发交易、不读私钥</footer>
+<script src="vendor/ethers.umd.min.js"></script>
+<script src="agb_core.js"></script>
+<script src="agb_scenario.js"></script>
+</body></html>

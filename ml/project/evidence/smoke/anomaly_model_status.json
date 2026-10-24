@@ -1,0 +1,96 @@
+{
+  "trained": true,
+  "synthetic": true,
+  "generatedAt": "2026-10-03T10:35:00.722400+00:00",
+  "csvUsed": "<synthetic>",
+  "modelPath": "evidence/smoke/anomaly_model.joblib",
+  "modelVersion": "CarbonSat-AnomalyIF-v1.0",
+  "modelType": "IsolationForest(unsupervised)",
+  "contamination": 0.05,
+  "nEstimators": 200,
+  "features": [
+    "fvc",
+    "ndvi",
+    "clearPixelRatio",
+    "spatialCoverage",
+    "sensorAgreement",
+    "fvcJump",
+    "yearNorm"
+  ],
+  "imputer": {
+    "method": "median",
+    "column": "sensorAgreement",
+    "value": 0.8961812894791104,
+    "nTrain": 3648,
+    "nMissingInTrain": 3360,
+    "allMissing": false,
+    "note": "按训练集中位数填补（仅用训练集拟合）。"
+  },
+  "sufficiency": {
+    "ok": true,
+    "reason": "样本充足，可训练",
+    "found": {
+      "cells": 120,
+      "yearsPerCellMin": 38,
+      "yearsPerCellMean": 38.0,
+      "samples": 4560
+    },
+    "required": {
+      "cells": 50,
+      "yearsPerCellMin": 10,
+      "samples": 500
+    }
+  },
+  "csvContract": null,
+  "missingReport": null,
+  "sensorAgreementAllMissing": false,
+  "featureMeta": {
+    "nCells": 96,
+    "nSamples": 3648,
+    "yearsPerCellMean": 38.0,
+    "yearsPerCellMin": 38,
+    "sensorAgreementImputed": 3360,
+    "sensorAgreementFillValue": 0.8962,
+    "imputerSource": "train_fit(saved)",
+    "featureList": [
+      "fvc",
+      "ndvi",
+      "clearPixelRatio",
+      "spatialCoverage",
+      "sensorAgreement",
+      "fvcJump",
+      "yearNorm"
+    ]
+  },
+  "split": {
+    "nTrainCells": 96,
+    "nTestCells": 24,
+    "testCellsSample": [
+      "cell_0002",
+      "cell_0003",
+      "cell_0004",
+      "cell_0013",
+      "cell_0016"
+    ]
+  },
+  "evaluation": {
+    "nLabeledAnomalies": 137,
+    "nFlagged": 86,
+    "truePositives": 36,
+    "falsePositives": 50,
+    "falseNegatives": 101,
+    "precision": 0.4186,
+    "recall": 0.2628,
+    "f1": 0.3229,
+    "prAuc": 0.3942,
+    "precisionAtK_anomalies": 0.3796,
+    "precisionAtTop5pct": 0.3654,
+    "scoreMean": -0.0791,
+    "scoreStd": 0.0493,
+    "note": "评估在注入的合成异常（仅见于验证单元，未参与训练）上进行；真实观测的异常分数为连续量，仅作 REVIEW 建议，不驱动最终判定。",
+    "evalScope": "PROCESS_TEST_ONLY（合成注入；不代表真实地块检出率）"
+  },
+  "scoreTable": "evidence/smoke/anomaly_scores_grid.csv",
+  "advisoryOnly": "模型仅输出 REVIEW 建议分数，不参与 REGISTER/REJECT 判定，不越过数据/参数/归因硬门禁。",
+  "note": "SYNTHETIC：合成数据流程测试，产物已隔离到 evidence/smoke/，正式评分入口拒绝加载 synthetic 模型。"
+}

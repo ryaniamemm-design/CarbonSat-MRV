@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://carbonsat-mrv.local/schemas/records.schema.json",
+  "title": "CarbonSat-MRV records.json",
+  "description": "Single Source of Truth schema for the evidence-record bundle produced by pipeline/produce_records.py and consumed by scripts/register.js (contract input) and web/app.js (frontend). Field names, units, and Status values are aligned with CarbonMRV.sol.",
+  "type": "object",
+  "required": [
+    "schemaVersion", "projectId", "methodologyVersion", "generatedAt",
+    "units", "chain", "governanceStartYear", "dataProvenance", "externalEvidence",
+    "honesty", "attributionReport", "parcels", "claims"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "examples": ["v3"] },
+    "projectId": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "methodologyVersion": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "units": {
+      "type": "object",
+      "required": ["carbon", "display", "tokenPrecision"],
+      "properties": {
+        "carbon": { "type": "string", "const": "tC" },
+        "display": { "type": "string" },
+        "tokenPrecision": { "type": "string", "examples": ["1 token = 0.001 tC"] }
+      }
+    },
+    "chain": {
+      "type": "object",
+      "required": ["name", "deployed", "note"],
+      "properties": {
+        "name": { "type": "string" },
+        "contractAddress": { "type": "string" },
+        "explorer": { "type": "string" },
+        "deployed": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "governanceStartYear": { "type": ["integer", "null"] },
+    "dataProvenance": { "type": "object" },
+    "externalEvidence": {
+      "type": "object",
+      "required": ["ready", "registryPath", "scope"],
+      "properties": {
+        "ready": { "type": "boolean" },
+        "requiredCount": { "type": "integer", "minimum": 0 },
+        "registryPath": { "type": "string" },
+        "scope": { "type": "string" },
+        "error": { "type": "string" }
+      }
+    },
+    "honesty": {
+      "type": "object",
+      "required": [
+        "allCarbonIndicative", "placeholderParamsDriveNoVerdict",
+        "stocksNotAdditiveAcrossYears", "noCertifiedCredit", "attributionConclusion"
+      ],
+      "properties": {
+        "allCarbonIndicative": { "type": "boolean" },
+        "placeholderParamsDriveNoVerdict": { "type": "boolean" },
+        "stocksNotAdditiveAcrossYears": { "type": "boolean" },
+        "noCertifiedCredit": { "type": "boolean" },
+        "attributionConclusion": { "type": "string", "enum": ["insufficient_evidence", "credible_positive"] }
+      }
+    },
+    "attributionReport": { "type": "object" },
+    "parcels": { "type": "array", "items": { "type": "object" } },
+    "claims": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/claim" } }
+  },
+  "definitions": {
+    "claim": {
+      "type": "object",
+      "required": [
+        "claimId", "claimClass", "projectId", "geometryHash", "vintage",
+        "claimType", "claimTypeName", "sensor", "resolutionEra",
+        "carbon_tC", "carbon_tokens", "uncertainty", "evidenceConfidence",
+        "modelAnomalyScore", "anomalyStatus", "triage", "registrable", "parameterStatus",
+        "cid", "evidenceRef", "ipfs", "spatialCells", "status", "registerToChain"
+      ],
+      "properties": {
+        "claimId": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+        "claimClass": { "type": "string", "enum": ["STOCK", "FLOW"] },
+        "projectId": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+        "geometryHash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+        "vintage": { "type": "integer", "minimum": 1980, "maximum": 2100 },
+        "claimType": { "type": "integer", "enum": [0, 1, 2] },
+        "claimTypeName": { "type": "string", "enum": ["BIOMASS_STOCK", "REMOVAL", "REDUCTION"] },
+        "sensor": { "type": "string" },
+        "resolutionEra": { "type": "integer" },
+        "carbon_tC": { "type": "number", "minimum": 0 },
+        "carbon_tokens": { "type": "integer", "minimum": 0 },
+        "uncertainty": { "type": "number", "minimum": 0 },
+        "evidenceConfidence": { "type": "number", "minimum": 0, "maximum": 100 },
+        "modelAnomalyScore": { "type": ["number", "null"], "description": "异常预审模型分数；未训练时为 null（前端显式 N/A）。仅作 REVIEW 建议，不驱动最终判定。" },
+        "anomalyStatus": { "type": "integer", "enum": [0, 1] },
+        "triage": { "type": "string", "enum": ["REGISTER", "REVIEW", "REJECT"] },
+        "registrable": { "type": "boolean" },
+        "parameterStatus": { "type": "object" },
+        "fvc": { "type": "number" },
+        "cid": { "type": "string" },
+        "evidenceRef": { "type": "string", "minLength": 1 },
+        "ipfs": { "type": "boolean" },
+        "spatialCells": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string", "enum": ["REVIEW", "REJECTED", "REGISTERED"] },
+        "registerToChain": { "type": "boolean" },
+        "isControl": { "type": "boolean" }
+      }
+    }
+  }
+}

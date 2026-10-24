@@ -1,0 +1,18 @@
+{
+  "bundleBytes": 739013,
+  "bundleContentSha256": "local-sha256:138e8c2dd68b08b3946550e85e7e2baccb78c45240494c18d955cc35772268e2",
+  "bundleFileSha256": "090ef7a9c8a8532ee1b16d49dace5ac5b13af2420780dfdd420d415883c2d046",
+  "bundlePath": "web/npp_estimate_bundle.json",
+  "bundleSchemaVersion": "CarbonSat-NppEstimateBundle-v1.1",
+  "generatedFrom": {
+    "a2ValidFootprint": {
+      "path": "evidence/a2_landcover_valid_footprint.json",
+      "sha256": "b80ca8ec13a704489d882d9eda388d765f14dfa591dc65185eb32c809d598bc1"
+    },
+    "productionIntegral": {
+      "path": "data/npp_annual_production_integral.csv",
+      "sha256": "065d5d8f6737e48344c3ba082d96a03706d21a699ee427d325fb6b598af197a5"
+    }
+  },
+  "schemaVersion": "CarbonSat-NppEstimateBundlePin-v1.0"
+}

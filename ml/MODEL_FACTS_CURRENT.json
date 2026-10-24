@@ -1,0 +1,108 @@
+{
+  "asOfLocalDate": "2026-10-24",
+  "formalModelFamilies": 2,
+  "algorithmForBoth": "IsolationForest",
+  "FVC": {
+    "version": "CarbonSat-AnomalyIF-v1.1",
+    "releaseScope": "separate offline development repair; not integrated into H1/S2 or public demo",
+    "inputRows": 3420,
+    "inputCells": 90,
+    "inputYearRange": [
+      1987,
+      2024
+    ],
+    "featureCount": 7,
+    "features": [
+      "fvc",
+      "ndvi",
+      "clearPixelRatio",
+      "spatialCoverage",
+      "sensorAgreement",
+      "fvcJump",
+      "yearNorm"
+    ],
+    "trainingRows": 2736,
+    "trainingCells": 72,
+    "spatialHoldoutRows": 684,
+    "spatialHoldoutCells": 18,
+    "formalForestRetrainedDuringRepair": false,
+    "storedGridScoreReproduction": {
+      "matched": 3420,
+      "total": 3420
+    },
+    "repairImpact": {
+      "changedRoundedScoreRows": 111,
+      "maxAbsoluteRoundedScoreChange": 0.0005,
+      "changedFlagRows": 0,
+      "changedRankRows": 463,
+      "changedExistingClaimScores": 0,
+      "changedExistingClaimFlags": 0
+    },
+    "evaluationScope": "PROCESS_TEST_ONLY synthetic injection; real anomaly performance unverified"
+  },
+  "NPP": {
+    "version": "CarbonSat-NPP-AnomalyIF-v1.0",
+    "inputRows": 816,
+    "inputCells": 34,
+    "inputYearRange": [
+      2001,
+      2024
+    ],
+    "featureCount": 8,
+    "features": [
+      "npp",
+      "nppJump",
+      "nppRelJump",
+      "nppZscore",
+      "validAreaRatio",
+      "varJump",
+      "yearNorm",
+      "eraFlag"
+    ],
+    "formalTrainingRows": 816,
+    "timeHoldout": {
+      "trainingRows": 544,
+      "testRows": 272
+    },
+    "cellHoldout": {
+      "trainingRows": 624,
+      "testRows": 192,
+      "trainingCells": 26,
+      "testCells": 8
+    },
+    "artifactRoles": [
+      "formal scoring",
+      "time holdout evaluation",
+      "cell holdout evaluation"
+    ],
+    "notAnNppProductionPredictor": true,
+    "realAnomalyPerformanceVerified": false
+  },
+  "workbench": {
+    "caseACellYears": 816,
+    "caseBWindowYears": 24,
+    "ruleDerivedTaskCount": 172,
+    "browserLiveModelInference": false,
+    "taskExportsModelDerived": false
+  },
+  "historicalChain": {
+    "network": "Sepolia",
+    "recordCount": 1,
+    "recordId": "cell_0030_2012",
+    "registeredFields": [
+      "packHash(single-record payload)",
+      "methodVersion",
+      "declarationCategory"
+    ],
+    "wholeBundleAnchored": false,
+    "engebeiAnchored": false,
+    "merkleRootAnchored": false,
+    "realTimeReadbackInThisBrief": false
+  },
+  "claimsBoundary": {
+    "fieldAccuracyVerified": false,
+    "realUserBenefitValidated": false,
+    "carbonCreditsIssued": false,
+    "restorationCausalityVerified": false
+  }
+}

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>CarbonSat-MRV · 已有 NPP 估算结果入口 v1.1</title>
+<style>
+:root{--ink:#153b3a;--muted:#607671;--line:#d9e5df;--green:#176750;--bg:#f4f8f5;--amber:#805500;--red:#a32e37}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI","Microsoft YaHei",sans-serif}
+header{background:#133f39;color:white;padding:24px max(22px,calc((100vw - 1280px)/2))}
+header a{color:#d3eadb}
+h1{font-size:26px;margin:8px 0}
+h2{font-size:18px;margin:0 0 12px}
+h3{font-size:15px;margin:16px 0 8px}
+.sub{color:#d3e4db;max-width:900px;margin:0}
+main{max-width:1320px;padding:20px;margin:auto}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);gap:20px;align-items:start}
+.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+
+.sidebar{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow-y:auto;overscroll-behavior:contain}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:14px}
+label{display:block;font-size:13px;font-weight:600}
+select,input[type=file]{display:block;margin-top:5px;padding:8px 10px;border:1px solid #bacdc3;border-radius:7px;background:white;color:var(--ink);font:inherit}
+input[type=file]{font-size:12px}
+button{display:inline-block;border:1px solid #9ebdaf;border-radius:8px;padding:9px 13px;background:white;color:var(--green);font:600 13px/1.4 inherit;cursor:pointer}
+button:hover{background:#edf6ef}
+button.primary{background:var(--green);color:white;border-color:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.big{font-size:22px;font-weight:700;color:var(--green)}
+.small{font-size:12.5px;color:var(--muted)}
+.notice{background:#eef8f2;border:1px solid #9ccfb6;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px}
+.warn{background:#fdf8ea;border:1px solid #e0c88a;color:#7a5300;border-radius:8px;padding:10px 12px;font-size:13px;margin:8px 0}
+.bad{background:#fdf2f2;border:1px solid #e2aeae;color:#8a2b2b;border-radius:8px;padding:10px 12px;font-size:13px;margin:8px 0}
+details{border:1px solid var(--line);border-radius:10px;background:white;margin:10px 0}
+summary{padding:12px 14px;cursor:pointer;font-weight:600}
+details .inside{padding:0 14px 14px}
+pre{white-space:pre-wrap;word-break:break-all;font-size:12px;background:#f6f9f6;border:1px solid var(--line);border-radius:8px;padding:10px;margin:0}
+code{font-family:Consolas,"Courier New",monospace;font-size:12px;background:#eef3f8;padding:1px 4px;border-radius:3px;word-break:break-all}
+.kv{display:flex;gap:8px;padding:4px 0;border-bottom:1px dashed #eef2f6;font-size:12.5px}
+.kv>span{flex:0 0 150px;color:var(--muted)}
+.kv>b{flex:1;font-weight:500;word-break:break-all}
+.lc-bar{height:12px;border-radius:3px;background:#cfe3d6;position:relative;min-width:2px}
+.tag{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:10px;background:#e3f4ea;color:#1d5c43;border:1px solid #a9d5bf;margin-left:6px}
+.tag.no{background:#f1f4f7;color:#5b7083;border-color:#cfd9e2}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static;max-height:none;overflow:visible}}
+</style>
+</head>
+<body>
+<header>
+  <a href="entry.html">← 返回项目证据入口</a>
+  <h1>已有 NPP 估算结果入口 v1.1</h1>
+  <p class="sub">只展示已有的 MOD17 模型年度 NPP 碳生产量（tC/yr）与地类有效足迹分解：只读、可复算、失败关闭；不新增数值、不计算净碳汇或信用量。</p>
+</header>
+<main>
+<div class="notice" id="loadState">正在读取本地产物…</div>
+<div class="tools">
+  <label>格（离散采样框）<select id="cellSelect"></select></label>
+  <label>年份<select id="yearSelect"></select></label>
+  <label>载入数据包（浏览器无法自动读取时）<input type="file" id="bundleFile" accept=".json,application/json"></label>
+</div>
+<div class="layout">
+  <div>
+    <section class="panel">
+      <h2>1 足迹与身份</h2>
+      <div id="identity" class="small"></div>
+      <div id="footprintSvg" style="margin-top:10px"></div>
+      <div class="warn">这是一个<b>离散采样框</b>（格心 ±0.03° 的示意方框），<b>不是</b>治理地块边界；面积口径以栅格有效面积为准。</div>
+    </section>
+    <section class="panel">
+      <h2>2 数值（单位分列，不可混用）</h2>
+      <div id="values"></div>
+      <div id="usableState"></div>
+    </section>
+    <section class="panel">
+      <h2>3 地类分解（R31 有效足迹）</h2>
+      <div id="landCover"></div>
+      <p class="small">无有效足迹的类别显示“无有效产品值”（null），<b>不是真零</b>；地类逐年变化不得解读为植被恢复。</p>
+    </section>
+    <section class="panel">
+      <h2>4 所选 34 格离散足迹的年度合计（失败关闭）</h2>
+      <div id="yearTotals"></div>
+      <p class="small">任一格年不可用 ⇒ 该年合计为<b>空</b>，并列出缺失格；绝不用剩余格求和冒充。</p>
+    </section>
+    <section class="panel">
+      <h2>5 单格 2001–2024 原始描述性序列（按 era 分段，无增长箭头）</h2>
+      <div id="series"></div>
+    </section>
+  </div>
+  <aside class="sidebar">
+    <section class="panel">
+      <h2>来源证明（三级，互不代替）</h2>
+      <div id="verification"></div>
+      <p class="small">① 浏览器内部重算是否通过；② 是否与<b>已发布摘要</b>（pin 文件 / 文件内声明）一致；③ 源文件逐项复算 —— 本页不读源 CSV/A2，<b>恒记为未核验</b>。自摘要不是外部信任根。</p>
+    </section>
+    <section class="panel">
+      <h2>出处与可复算</h2>
+      <div id="provenance"></div>
+      <h3>视图摘要</h3>
+      <pre id="viewHash"></pre>
+      <div style="margin-top:10px"><button id="btnExport" class="primary" type="button">导出当前视图快照 JSON</button></div>
+      <div id="exportVerdict" class="small"></div>
+    </section>
+    <section class="panel">
+      <h2>未纳入的误差项</h2>
+      <ul id="excluded" class="small"></ul>
+      <p class="small">这些误差项<b>未评估</b>，不能按 0 处理。</p>
+    </section>
+    <section class="panel">
+      <h2>边界</h2>
+      <div class="kv"><span>口径</span><b>描述性 NPP，仅模型值</b></div>
+      <div class="kv"><span>归因</span><b>insufficient_evidence</b></div>
+      <div class="kv"><span>碳量/信用量</span><b>未计算</b></div>
+      <div class="kv"><span>链上</span><b>未上链</b></div>
+      <div class="kv"><span>禁用输出</span><b>REMOVAL / CREDIT / tCO2e</b></div>
+    </section>
+  </aside>
+</div>
+</main>
+<footer style="text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px">CarbonSat-MRV · 已有 NPP 估算结果入口 v1.1 · 零 CDN · 不部署、不发交易、不读私钥</footer>
+<script src="vendor/ethers.umd.min.js"></script>
+<script src="npp_entry_core.js"></script>
+<script src="npp_entry.js"></script>
+</body></html>

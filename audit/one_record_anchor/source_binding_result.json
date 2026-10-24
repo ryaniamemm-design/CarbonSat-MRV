@@ -1,0 +1,38 @@
+{
+  "recordId": "cell_0030_2012",
+  "jsonPath": "evidence/npp_evidence_records.json",
+  "verifyFile": {
+    "ok": true,
+    "errorCount": 0,
+    "firstErrors": []
+  },
+  "recordBinding": {
+    "foundInCsv": true,
+    "claimClass": "DESCRIPTIVE_NPP_ONLY",
+    "attributionStatus": "insufficient_evidence",
+    "nppMatch": true,
+    "sourceHashMatch": true,
+    "evidenceRefMatch": true,
+    "recomputedSourceHash": "local-sha256:675843ab3dd7e187f5221d40a1d182465ba09011c7b3465f606994b28a38cc3e",
+    "storedSourceHash": "local-sha256:675843ab3dd7e187f5221d40a1d182465ba09011c7b3465f606994b28a38cc3e",
+    "recomputedEvidenceRef": "local-sha256:2ce9ccf0340e413457d9498f7244197b7a6a436a9d25127de548068ceb915533",
+    "storedEvidenceRef": "local-sha256:2ce9ccf0340e413457d9498f7244197b7a6a436a9d25127de548068ceb915533"
+  },
+  "manifest": {
+    "manifestPath": "evidence/evidence_pack_manifest.json",
+    "storedPackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+    "recomputedPackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+    "packSha256RecomputeOk": true,
+    "packSha256RecomputeError": null,
+    "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+    "packVersion": "v2",
+    "packHashVersion": "pack-hash-v2",
+    "inputsCurrent": true,
+    "staleInputs": [],
+    "onChainAnchored": false,
+    "scope": "本地离线独立核验（build_evidence.build_manifest 规则），未上链；链上只锚定单条记录内容"
+  },
+  "ok": true,
+  "details": [],
+  "publicationNote": "Published copy: local absolute paths were rewritten to repository-relative paths (fields: jsonPath, manifestPath). No values, flags or details changed."
+}

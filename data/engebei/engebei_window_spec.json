@@ -1,0 +1,81 @@
+{
+  "schema": "CarbonSat-EngebeiWindowSpec-v1.0",
+  "caseId": "engebei_paper_window_v1",
+  "windowVersion": "engebei-research-window-v1",
+  "windowLabel": "恩格贝相关论文报告范围研究窗口，非官方项目边界，非治理小班边界",
+  "statute": "PAPER_REPORTED_RESEARCH_WINDOW_NOT_PROJECT_BOUNDARY",
+  "statuteNote": "本窗口只表示论文报告的研究范围，不代表官方项目边界、治理小班边界或行政区划。",
+  "boundsWGS84": {
+    "W": 109.288888889,
+    "S": 40.308333333,
+    "E": 109.466666667,
+    "N": 40.438888889
+  },
+  "dms": {
+    "source": "109°17′20″–109°28′00″E、40°18′30″–40°26′20″N",
+    "conversions": {
+      "lonMin": "109 + 17/60 + 20/3600 = 109.288888889",
+      "lonMax": "109 + 28/60 + 0/3600 = 109.466666667",
+      "latMin": "40 + 18/60 + 30/3600 = 40.308333333",
+      "latMax": "40 + 26/60 + 20/3600 = 40.438888889"
+    }
+  },
+  "windowSha256": "local-sha256:aa2fcdcfccac9a9ae4e125cd8c638d742f59c9853d24337440d459c1f385594c",
+  "sourceRef": {
+    "doi": "10.1109/ACCESS.2023.3255879",
+    "kind": "paper_reported_range_author_accepted_manuscript",
+    "accessLevel": "author_accepted_manuscript_web_text_obtained_published_version_not_obtained",
+    "authorVersionUrl": "https://www.researchgate.net/publication/369152366_Research_on_the_Establishment_of_Carbon_Inversion_Model_in_Engebei_Ecological_Demonstration_Area_of_the_Kubuqi_Desert_Based_on_Remote_Sensing_Data",
+    "versionNote": "已取得该 DOI 对应的**公开作者接受稿**（accepted author version，页面自述 'accepted… author's version… not fully edited'）网页全文文本，其 II.A 确载 109°17′20″–109°28′00″E；40°18′30″–40°26′20″N，约 200 km²（检索/访问日期 2026-10-16）。**出版定稿 PDF 未取得**（DOI 入口本次工具访问失败）⇒ 不得声称出版定稿已取得。本窗口性质不变：仍为**论文报告范围研究窗口**，非官方项目边界、非治理小班边界；矩形面积不等于论文不规则研究区面积，不提供正式项目矢量，不产生 NPP 真值。"
+  },
+  "areaNote": {
+    "paperReportedKm2": 200.0,
+    "windowApproxKm2": 218.88,
+    "sameBasis": false,
+    "note": "论文自报面积与本窗口外接矩形面积口径不同，差异保留、标注待核，不自行纠正。"
+  },
+  "noOverlapWith34Cells": true,
+  "noOverlapEvidence": "72h-spike/audit/engebei_candidate_review_2026-10-13/bbox_check.json（intersectionCount=0，包围盒筛查）",
+  "methodVersion": "CarbonSat-NPP-Production-Integral-Engebei-v0.1",
+  "product": {
+    "collection": "MODIS/061/MOD17A3HGF",
+    "version": "MOD17A3HGF.v6.1",
+    "band": "Npp",
+    "scale": 0.0001,
+    "validRawRange": [
+      -30000,
+      32700
+    ],
+    "maskName": "engebei_npp_valid_mask",
+    "crs": "SR-ORG:6974",
+    "pixelScaleM": 500
+  },
+  "years": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "prodUnit": "tC/yr",
+  "generatedBy": "scripts/engebei_npp_integral.py --emit-spec"
+}

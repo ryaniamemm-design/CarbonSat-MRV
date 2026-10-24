@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CarbonSat-MRV — satellite NPP evidence workbench</title>
+<style>
+  :root { --ink:#1c2b2a; --muted:#5b6b69; --line:#dbe3e2; --bg:#f4f6f7; --primary:#0f5c55; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif; }
+  main { max-width:860px; margin:0 auto; padding:56px 24px 64px; }
+  h1 { font-size:28px; line-height:1.25; margin:0 0 8px; letter-spacing:-.01em; }
+  .tag { color:var(--muted); font-size:14px; margin:0 0 28px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin:28px 0; }
+  a.card { display:block; text-decoration:none; color:inherit; background:#fff; border:1px solid var(--line);
+           border-radius:10px; padding:18px 20px; transition:border-color .15s ease, box-shadow .15s ease; }
+  a.card:hover { border-color:var(--primary); box-shadow:0 2px 10px rgba(15,92,85,.08); }
+  a.card b { display:block; font-size:16px; color:var(--primary); margin-bottom:4px; }
+  a.card span { font-size:13.5px; color:var(--muted); }
+  h2 { font-size:16px; margin:32px 0 8px; }
+  ul { margin:8px 0 0; padding-left:20px; color:var(--ink); }
+  li { margin:4px 0; }
+  .note { border-left:3px solid var(--line); padding:2px 0 2px 14px; color:var(--muted); font-size:13.5px; }
+  footer { margin-top:40px; color:var(--muted); font-size:12.5px; border-top:1px solid var(--line); padding-top:14px; }
+  code { background:#eef2f1; padding:1px 5px; border-radius:4px; font-size:12.5px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>CarbonSat-MRV</h1>
+  <p class="tag">An auditable satellite evidence pipeline for vegetation productivity — with a read-only review workbench.</p>
+
+  <div class="cards">
+    <a class="card" href="web/workbench.html">
+      <b>Review workbench →</b>
+      <span>34 footprint cells × 24 years. Inspect one number, switch years and metrics, read the five-part provenance panel, and hand off to the change ledger.</span>
+    </a>
+    <a class="card" href="web/changes.html">
+      <b>Change ledger →</b>
+      <span>Locate a cell, compare the same cell across adjacent years inside one era, read the per-entry limits, export a review task list.</span>
+    </a>
+  </div>
+
+  <h2>What this demo does not do</h2>
+  <ul>
+    <li>It does not produce carbon removals, carbon credits, or any tradable quantity. NPP here is a <b>modelled productivity</b> value.</li>
+    <li>It does not accept a project boundary or geometry input, and it will not promote a record past its evidence gate.</li>
+    <li>It does not report a detection rate or any accuracy figure — there is no labelled reference to measure against.</li>
+    <li>The basemap is off by default; with it off the page makes no external requests.</li>
+  </ul>
+  <p class="note">The pages load their JSON siblings over HTTP. If you opened this file from disk, run a local static server
+  (see the repository README) instead of double-clicking.</p>
+
+  <footer>IEEE ClimateChain Global Hackathon 2026 · Track 4 — Climate Data &amp; Environmental Monitoring.
+  Data: MODIS MOD17A3HGF v6.1 and MCD12Q1, accessed through Google Earth Engine. Repository code has no declared licence yet; see NOTICE.md.</footer>
+</main>
+</body>
+</html>

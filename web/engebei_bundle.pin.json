@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "CarbonSat-EngebeiCaseBundlePin-v1.2",
+  "caseId": "engebei_paper_window_v1",
+  "bundlePath": "web/engebei_bundle.json",
+  "bundleFileSha256": "077a072388fb71df38c3df9ff8e336b04e31444297d47f99996857b748b4d104",
+  "stableDigest": "local-sha256:a2bbf60566b27ecc12dfece62db219850b581dbca1e4a0b47c4f43a627ebf021",
+  "windowSha256": "local-sha256:aa2fcdcfccac9a9ae4e125cd8c638d742f59c9853d24337440d459c1f385594c",
+  "csvSha256": "e842bfc2d593c0a6946b16398924fb3f4f1aab33dd59d8bc948dfd4ac062c0b0",
+  "deliveryState": "COMPLETE",
+  "generatedAtUTC": "2026-10-16T11:09:21Z",
+  "generator": "scripts/build_engebei_bundle.py",
+  "note": "已发布摘要（事件封套，含时间戳）。页面在未取得可信 pin 时只能报「未评估（仅包内声明）」。",
+  "pinSha256": "local-sha256:fd62f02489dacb12591b5697755c2fcd381264449bef43b712f55ae51df85544"
+}

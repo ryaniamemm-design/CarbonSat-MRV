@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CarbonSat-MRV · 独立入口（只读演示）</title>
+<style>
+  :root { --ink:#16303f; --dim:#6b7f8f; --line:#dbe4ec; --bg:#f6f9fc; --card:#ffffff; --blue:#0c447c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:14px/1.65 "Segoe UI","Microsoft YaHei",system-ui,-apple-system,sans-serif; }
+  header { background:#0c447c; color:#fff; padding:16px 22px 14px; }
+  header h1 { margin:0 0 4px; font-size:19px; letter-spacing:.3px; }
+  header .sub { font-size:12px; opacity:.9; }
+  #stamp { font-size:11.5px; opacity:.85; margin-top:6px; word-break:break-all; }
+  main { max-width:1040px; margin:0 auto; padding:16px 16px 60px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:8px;
+            padding:16px 18px; margin:14px 0; }
+  h2 { font-size:15px; margin:0 0 10px; color:var(--blue); }
+  h3 { font-size:13.5px; margin:0 0 8px; color:var(--blue); }
+  code { font-family:Consolas,"Courier New",monospace; font-size:12px; background:#eef3f8;
+         padding:1px 4px; border-radius:3px; word-break:break-all; }
+  .dim { color:var(--dim); }
+  .kv { display:flex; gap:10px; padding:3px 0; border-bottom:1px dashed #eef2f6; }
+  .kv > span { flex:0 0 132px; color:var(--dim); font-size:12.5px; }
+  .kv > b { flex:1 1 auto; font-weight:500; font-size:12.5px; word-break:break-all; }
+  .card { border:1px solid var(--line); border-radius:7px; padding:12px 14px; flex:1 1 46%; min-width:300px; }
+  .card-old { background:#fdf7f7; border-color:#e6bcbc; }
+  .card-live { background:#f4fbf7; border-color:#a9d5bf; }
+  .grid2 { display:flex; gap:12px; flex-wrap:wrap; }
+  .verdict { background:#f2f7fd; border-left:3px solid #4a86c8; padding:10px 12px;
+             border-radius:0 6px 6px 0; margin-top:12px; font-size:13px; }
+  .banner { padding:9px 12px; border-radius:6px; margin:0 0 10px; font-size:13px; }
+  .b-ok { background:#eef8f2; border:1px solid #9ccfb6; color:#1d5c43; }
+  .b-warn { background:#fdf8ea; border:1px solid #e0c88a; color:#7a5300; }
+  .b-bad { background:#fdf2f2; border:1px solid #e2aeae; color:#8a2b2b; }
+  .tag { display:inline-block; font-size:11.5px; padding:1px 7px; border-radius:10px; }
+  .tag-yes { background:#e3f4ea; color:#1d5c43; border:1px solid #a9d5bf; }
+  .tag-no  { background:#f1f4f7; color:#5b7083; border:1px solid #cfd9e2; }
+  .tag-bad { background:#fdecec; color:#8a2b2b; border:1px solid #e2aeae; }
+  .state { display:inline-block; vertical-align:top; width:calc(25% - 10px); min-width:190px;
+           margin:0 8px 8px 0; padding:10px 12px; border:1px solid var(--line);
+           border-radius:7px; background:#fbfdff; }
+  .sn { font-size:17px; color:#4a86c8; font-weight:700; }
+  .st { font-size:12.8px; font-weight:600; margin:2px 0 3px; }
+  .sd { font-size:11.8px; color:var(--dim); min-height:32px; }
+  .sw { margin-top:6px; font-size:11.5px; }
+  .res { padding:7px 10px; border-radius:5px; margin:5px 0; font-size:13px; border:1px solid; }
+  .res-ok { background:#f2fbf6; border-color:#a9d5bf; }
+  .res-no { background:#fdf3f3; border-color:#e2aeae; }
+  select, input[type=number] { font:12.5px/1.4 inherit; padding:4px 6px; border:1px solid #b9c8d6;
+        border-radius:5px; background:#fff; color:var(--ink); }
+  input[type=number] { width:96px; }
+  .controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px; }
+  footer { text-align:center; font-size:11.5px; color:var(--dim); padding:8px 0 30px; }
+  ul.red { margin:6px 0 0 18px; padding:0; font-size:12.8px; }
+  ul.red li { margin:3px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>CarbonSat-MRV · 独立入口页（只读演示）</h1>
+  <div class="sub">库布其沙漠 NPP 描述性证据 · 批量成员证明（<code style="background:#1b4f86;color:#dbe9f7">npp-merkle-batch-v2</code>）· 单条 Sepolia 存证</div>
+  <div id="stamp">正在读取本地产物…</div>
+</header>
+
+<main>
+  <div id="banners"></div>
+
+  <section>
+    <h2>读我之前先看这一句</h2>
+    <p style="margin:0 0 8px">
+      本页把项目<b>能证明什么</b>与<b>不能证明什么</b>并排放。所有数字都是<b>现场从本仓库产物重算</b>的，
+      不采信任何自称；批次 Merkle 根<b>未上链</b>，本页<b>不部署、不发交易、不需要钱包或私钥</b>。
+    </p>
+    <ul class="red">
+      <li>NPP 是 <b>MOD17 模型值</b>，已扣植物自养呼吸；净留存还需考虑<b>异养呼吸、扰动和收获等</b>，不能据此认定净碳汇或碳信用。</li>
+      <li>34 格是<b>植被富集样本</b>；其合计<b>不代表库布其</b>。地类<b>逐年变化</b>，2024 单年快照不可外推。</li>
+      <li>异常复核模型<b>无真实标签</b> ⇒ <b>不报任何真实准确率</b>；分数是<b>复核优先级建议值</b>，不影响 <code>registrable</code>/REMOVAL。</li>
+      <li>链上只有<b>1 条</b>记录的三项元数据；整包 <code>packSha256</code>、A2 地类流、源文件核验<b>均未上链</b>。</li>
+      <li>9 条碳主张全部 <code>insufficient_evidence</code>、<b>0 REMOVAL</b>、与 816 条记录 <b>UNLINKED</b>。</li>
+    </ul>
+  </section>
+
+  <section id="workbenchEntry">
+    <h2>整合查看入口：遥感碳科学研究与证据复核工作台（首版 v1.0）</h2>
+    <p style="margin:0 0 8px">
+      把<b>已有</b>的两个案例放进同一张地图与同一条年度序列：库布其 34 格描述性 NPP（816 格年）与恩格贝论文报告范围研究窗口（2001–2024）。
+      工作台<b>只读</b>既有产物，在浏览器里重新核验数据包结构与内容摘要后再显示；<b>不新增估算、不训练模型、不扩展信用核算</b>。
+    </p>
+    <p style="margin:0 0 8px;font-size:12.8px">
+      两个案例<b>不能合计、不能排名、不能当作同一治理项目</b>；面积相等也不代表像元足迹相同。
+      地图框来自既有格框规则与窗口规格，<b>不是</b>项目边界；无逐像元数据，因此<b>不生成</b>连续碳量热力图。
+    </p>
+    <a href="workbench.html" style="display:inline-block;background:#16303a;color:#7fe3d0;padding:9px 16px;border-radius:6px;text-decoration:none">打开研究工作台 →</a>
+    <span style="font-size:12.5px;color:#6b7f8f;margin-left:10px">需本地静态服务访问（见 <code>docs/WORKBENCH_V1.md</code>）；断网时无底图，研究框与年度数据仍可用。</span>
+  </section>
+
+  <section id="parcelIntakeEntry">
+    <h2>真实地块从这里开始：证据登记与缺项提示</h2>
+    <p>登记边界、开工日、措施与物种、权属及治理前土地证据。页面在本机读取文件，列出待补项，并支持下载、导入和摘要核验。</p>
+    <p><b>资料齐备只表示可开始文件审阅</b>，不等于资格通过、权属真实或可签发信用；合成演示明确标注，不替代真实项目资料。</p>
+    <a href="parcel_review.html" style="display:inline-block;background:#176750;color:white;padding:9px 16px;border-radius:6px;text-decoration:none">打开单地块证据登记 →</a>
+  </section>
+
+  <section id="estimationEntries">
+    <h2>已有估算结果与情景试算：两个独立的只读模块</h2>
+    <p style="margin:0 0 10px">
+      下面两页都<b>只读</b>：不改动科研数据与模型、不重训、不重跑 GEE、不发交易、不需要钱包。
+      它们把<b>已经存在的</b> NPP 估算结果摊开给人看，并把"碳储量情景试算"的<b>参数假设</b>与<b>资料缺口</b>分开列清。
+    </p>
+    <div class="grid2">
+      <div class="card">
+        <h3>P0 · 已有 NPP 估算结果入口</h3>
+        <p style="margin:0 0 8px;font-size:12.8px">
+          从既有产物（<code>data/npp_annual_production_integral.csv</code> + A2 有效足迹 JSON）派生一份只读清单，
+          按<b>格、年、地类</b>展开，现场可核验来源哈希。展示的是<b>MOD17 模型年度 NPP 碳生产量</b>，
+          不是碳汇、不是碳信用；某年缺任一格即整年<b>置空</b>（不求和、不补零）。
+        </p>
+        <a href="npp_entry.html" style="display:inline-block;background:#0c447c;color:white;padding:9px 16px;border-radius:6px;text-decoration:none">打开 NPP 估算结果入口 →</a>
+      </div>
+      <div class="card">
+        <h3>P1 · 独立地上生物量碳储量情景试算（v0.1）</h3>
+        <p style="margin:0 0 8px;font-size:12.8px">
+          只做<b>地上生物量（AGB）单一碳库</b>：<code>C = 面积 × 生物量 × 含碳率</code>。
+          参数按<b>来源等级</b>标注（实测 / 文献 / 用户假设），缺参数时输出<b>补资料任务</b>、<b>不编数值</b>；
+          敏感性是<b>情景范围</b>，不是置信区间；不输出净碳汇、不计入核证减排量。
+        </p>
+        <a href="agb_scenario.html" style="display:inline-block;background:#7a4a00;color:white;padding:9px 16px;border-radius:6px;text-decoration:none">打开 AGB 情景试算 →</a>
+      </div>
+    </div>
+    <p style="margin:10px 0 0;font-size:12px" class="dim">
+      两个模块<b>相互独立</b>，也都与 816 条 NPP 记录 / 9 条碳主张<b>不自动链接</b>：不存在"NPP 累加得到库存"或"用占位 FVC 系数推算库存"的路径。
+    </p>
+  </section>
+
+  <section id="changeLedgerEntry">
+    <h2>发现变化与产出复核任务：变化台账（首版 v1.0）</h2>
+    <p style="margin:0 0 10px">
+      这一页把上面 P0 入口的数字<b>串成一条可执行流程</b>：
+      <b>定位原记录 → 同格同分析时段相邻年的整格模型值差异 → 条目级来源与局限 → 复核任务导出</b>。
+      差异是 <b>MOD17 模型值之差</b>，不是碳汇、不是减排量、<b>不判治理归因</b>；跨 2012 的对比<b>一律拒绝</b>。
+    </p>
+    <div class="grid2">
+      <div class="card">
+        <h3>变化台账与复核任务导出（v1.0）</h3>
+        <p style="margin:0 0 8px;font-size:12.8px">
+          只读、失败关闭、可复算。可比性判据<b>四维分列</b>（产品与方法、数值完整性、面积<b>数值</b>关系、实际有效足迹身份依据）；
+          面积容差 1e-9 的语义<b>仅</b>为数值一致性，<b>不得</b>当作足迹同一性 —— 足迹同一性本版恒记 <code>UNVERIFIED</code>。
+          任务 <code>taskId</code> 只由<b>稳定内容</b>派生（不含运行时间），并绑定实际使用的源产物版本。
+        </p>
+        <p style="margin:0 0 8px;font-size:12.4px" class="dim">
+          本版<b>不含</b>跨格对比、<b>不含</b>地类变化排序（后置项）。
+        </p>
+        <a href="changes.html" style="display:inline-block;background:#176750;color:white;padding:9px 16px;border-radius:6px;text-decoration:none">打开变化台账 →</a>
+      </div>
+      <div class="card">
+        <h3>这一页不能回答什么（先写清）</h3>
+        <ul class="red" style="margin:0">
+          <li>不回答"哪一格变化更大"——本版<b>不做跨格对比</b>。</li>
+          <li>不回答"差异是不是治理带来的"——<b>不作因果</b>。</li>
+          <li>不回答"精度/误差是多少"——<b>无匹配真值 ⇒ 当前不得声称</b>。</li>
+          <li>不把 34 格或任何筛选结果称作<b>项目边界</b>。</li>
+          <li>摘要自洽只说明<b>内部一致</b>，<b>不等于</b>来源真实、也<b>不等于</b>内容从未被改动。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="engebeiCaseEntry">
+    <h2>另一个独立案例：恩格贝研究窗口（公开资料研究案例 v1.0）</h2>
+    <p style="margin:0 0 10px">
+      这是<b>与上面 34 个离散研究足迹并列的、互不相关的第二个案例</b>。两者<b>不是同一区域</b>：既有 34 格包围范围与新窗口
+      <b>相交数 = 0</b>（包围盒筛查），因此<b>不共用数据、不合并、不默认求和、不相互改名</b>。
+    </p>
+    <div class="grid2">
+      <div class="card">
+        <h3>案例 B · 恩格贝研究窗口（v1.0）</h3>
+        <p style="margin:0 0 8px;font-size:12.8px">
+          <b>范围性质</b>：<span style="color:#7a4a00;font-weight:600">恩格贝相关论文报告范围研究窗口，非官方项目边界，非治理小班边界。</span><br>
+          范围来自公开论文报告的研究区经纬度（<code>109°17′20″–109°28′00″E、40°18′30″–40°26′20″N</code>）；
+          正式项目/小班矢量<b>未取得</b>。
+        </p>
+        <p style="margin:0 0 8px;font-size:12.4px" class="dim">
+          产品 <code>MODIS/061/MOD17A3HGF</code>（<code>Npp</code>），2001–2024 逐年；单位 <b>tC/yr（模型年度 NPP 碳生产量）</b>；
+          结果是<b>该窗口有效产品足迹上</b>的模型值，窗口内约 6.9% 的栅格面积没有有效产品值。
+        </p>
+        <a href="engebei.html" style="display:inline-block;background:#0c447c;color:white;padding:9px 16px;border-radius:6px;text-decoration:none">打开恩格贝研究案例 →</a>
+      </div>
+      <div class="card">
+        <h3>这个案例不能回答什么（先写清）</h3>
+        <ul class="red" style="margin:0">
+          <li>不回答"这是不是恩格贝的治理项目边界"——<b>只是论文报告范围</b>。</li>
+          <li>不回答"治理有没有成效/谁增汇更多"——<b>不作因果、不做案例间排名</b>。</li>
+          <li>不回答"精度/误差是多少"——<b>无匹配真值 ⇒ 当前不得声称</b>。</li>
+          <li>不回答碳汇/碳储量/碳信用——只给<b>模型 NPP 碳生产量</b>。</li>
+          <li>不跨 2012 做差分、增长率或整体趋势；<b>不解释断点成因</b>。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>① 两个合约必须分清（现场最容易被误读的一点）</h2>
+    <div class="grid2" id="twoContracts"></div>
+  </section>
+
+  <section>
+    <h2>② 架构：从离线数据到链上「单条」</h2>
+    <div id="arch"></div>
+  </section>
+
+  <section>
+    <h2>③ 证据核验的四态（不是四选一）</h2>
+    <div id="states"></div>
+  </section>
+
+  <section>
+    <h2>④ 年度 NPP 序列（现场聚合 + 五项逐年校验 + 三条行/表头级规则；INCOMPLETE 年不绘制总量，R1/R2 整份拒绝）</h2>
+    <p style="margin:6px 0 8px;font-size:12.5px" class="dim">
+      K1–K5 逐年校验：期望主键 / 唯一性 / 有限值 / 缺测标志 / 单位链。<br/>
+      R1 重复表头、R2 无法定位年份 ⇒ <b>整份拒绝</b>（不产出任何年度、不绘制任何柱）；R3 额外行 / 解析错误（年份可定位）⇒ <b>该年 INCOMPLETE</b>，其余年份照常。
+    </p>
+    <div id="annualSpec"></div>
+    <div class="controls" style="margin-top:10px">
+      <label>现场演示坏输入（不改磁盘、只改内存）：
+        <select id="annualBreak">
+          <option value="">（原样，真实数据）</option>
+          <option value="empty">补空值：2012 某格 prod 置空</option>
+          <option value="drop">删行：删掉 2012 一格</option>
+          <option value="dup">重复：复制 2012 一格</option>
+          <option value="nan">NaN：2012 某格 prod = NaN</option>
+          <option value="inf">Infinity：2012 某格 prod = Infinity</option>
+          <option value="missing">缺测标志：2012 某格 missing = true</option>
+          <option value="unit">单位链：2012 某格 prod 误填 integral 原值</option>
+          <option value="extra">R3 额外行：追加未授权键 cell_9999/2012 ⇒ 该年不可用</option>
+          <option value="parse">R3 解析错误：2012 某行字段数不符 ⇒ 该年不可用</option>
+          <option value="noyear">R2 无法定位年份：2012 某行 year=abc ⇒ 整份拒绝</option>
+          <option value="dupheader">R1 重复表头：prod_tC_yr 列名出现两次 ⇒ 整份拒绝</option>
+        </select>
+      </label>
+    </div>
+    <div id="annualBreakNote" style="margin-bottom:8px"></div>
+    <div id="annual"></div>
+    <div class="verdict" id="annualNote"></div>
+    <h3 style="margin-top:14px">④b 聚合校验自检（反例优先：改一处 CSV，看是否拒收）</h3>
+    <div id="annualValidation"></div>
+  </section>
+
+  <section>
+    <h2>⑤ 批量位置绑定演示（v2：按 index 的路径位核验）</h2>
+    <p style="margin:0 0 10px;font-size:13px">
+      本页用<b>自带的</b>协议实现：<code>buildPayload</code>（读自冻结件 <code>e2e_core.js</code>，只读）
+      → <code>keccak256</code> → 按 <code>index</code> 的第 0..9 位折叠。换 index 即换折叠次序。
+    </p>
+    <div id="merkleSpec"></div>
+    <div class="controls" style="margin-top:10px">
+      <label>样本：<select id="mdPick"></select></label>
+      <label>把 index 改成：<input type="number" id="mdClaim" value="0" min="0" step="1"/></label>
+    </div>
+    <div style="margin-bottom:8px" id="mdTree"></div>
+    <div id="mdResults"></div>
+    <div style="margin-top:10px" id="mdCases"></div>
+  </section>
+
+  <section>
+    <h2>⑥ 复现入口（都在本仓库内，可自行跑）</h2>
+    <div class="kv"><span>本地一键门禁</span><b><code>powershell -ExecutionPolicy Bypass -File scripts\run_all_gates.ps1</code>（<code>-List</code> 只看清单）</b></div>
+    <div class="kv"><span>建 v2 产物</span><b><code>node scripts/build_merkle_batch.js</code></b></div>
+    <div class="kv"><span>Python 独立第二实现</span><b><code>.venv-ee/Scripts/python.exe scripts/verify_merkle_batch.py --human</code></b></div>
+    <div class="kv"><span>位置绑定对照复现</span><b><code>node audit/merkle_v2_position_binding/repro_position_binding.js</code></b></div>
+    <div class="kv"><span>年度聚合对照复现</span><b><code>node audit/entry_annual_validation/repro_annual_validation.js</code></b></div>
+    <div class="kv"><span>年度聚合回归测试</span><b><code>npx hardhat test test/annual_aggregate.test.js</code></b></div>
+    <div class="kv"><span>本地 EVM 测试</span><b><code>npx hardhat test test/merkle_batch.test.js</code></b></div>
+    <div class="kv"><span>规范（权威）</span><b><code>docs/research/MERKLE_BATCH_SPEC_2026-10-10.md</code></b></div>
+    <div class="kv"><span>审计记录（含修复前证据）</span><b><code>audit/merkle_v2_position_binding/REPORT_2026-10-10.md</code> · <code>audit/entry_annual_validation/REPORT_2026-10-10.md</code></b></div>
+  </section>
+
+  <footer>只读演示页 · 零 CDN 依赖 · 批次根未上链 · 不新增任何公共交易</footer>
+</main>
+
+<script src="vendor/ethers.umd.min.js"></script>
+<script src="e2e_core.js"></script>
+<script src="merkle_core.js"></script>
+<script src="annual_core.js"></script>
+<script src="entry.js"></script>
+</body>
+</html>

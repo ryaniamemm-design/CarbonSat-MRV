@@ -1,0 +1,17 @@
+{
+  "nLabeledAnomalies": 103,
+  "nFlagged": 55,
+  "truePositives": 24,
+  "falsePositives": 31,
+  "falseNegatives": 79,
+  "precision": 0.4364,
+  "recall": 0.233,
+  "f1": 0.3038,
+  "prAuc": 0.3368,
+  "precisionAtK_anomalies": 0.3786,
+  "precisionAtTop5pct": 0.3846,
+  "scoreMean": -0.0931,
+  "scoreStd": 0.0537,
+  "note": "评估在注入的合成异常（仅见于验证单元，未参与训练）上进行；真实观测的异常分数为连续量，仅作 REVIEW 建议，不驱动最终判定。",
+  "evalScope": "PROCESS_TEST_ONLY（合成注入；不代表真实地块检出率）"
+}

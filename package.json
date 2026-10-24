@@ -1,0 +1,26 @@
+{
+  "name": "72h-spike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile",
+    "gate3": "hardhat run scripts/gate3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.2.0",
+    "@openzeppelin/contracts": "^5.6.1",
+    "chai": "^6.2.2",
+    "ethers": "^6.17.0",
+    "hardhat": "^2.22.19"
+  },
+  "private": true
+}

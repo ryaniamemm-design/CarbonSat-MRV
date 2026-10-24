@@ -1,0 +1,3824 @@
+{
+  "schemaVersion": "v3",
+  "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+  "methodologyVersion": "CarbonSat-MRV-v1.0",
+  "generatedAt": "2026-10-05T15:52:46.424100+00:00",
+  "units": {
+    "carbon": "tC",
+    "display": "tCO2e = tC * 44/12",
+    "tokenPrecision": "1 token = 0.001 tC"
+  },
+  "chain": {
+    "name": "Sepolia",
+    "contractAddress": "<DEPLOYED_BY_USER>",
+    "explorer": "https://sepolia.etherscan.io",
+    "deployed": false,
+    "note": "未部署：链上状态以 Etherscan 真实查询为准，records.json 中的 status 仅为本地建议（REVIEW/REJECT），不构成已上链。"
+  },
+  "governanceStartYear": null,
+  "dataStatus": {
+    "valid": true,
+    "expectedMethodVersion": "CarbonSat-FVC-v2.0-SR",
+    "endmemberShared": true,
+    "endmember": {
+      "p5": "0.050810403790727085",
+      "p95": "0.12929552907114827",
+      "scope": "treated_union_control",
+      "years": "1987-2024",
+      "method": "per-pixel percentile[5,95] over 38-year NDVI stack -> region mean @100m (shared)"
+    },
+    "reasons": [
+      "CSV 通过方法版本与共享端元校验"
+    ]
+  },
+  "externalEvidence": {
+    "ready": false,
+    "requiredCount": 12,
+    "registryPath": "evidence/external_evidence_registry.json",
+    "scope": "登记资料完整性；仅为可登记的必要条件，不能证明来源真实或归因成立"
+  },
+  "qualityAssessment": {
+    "assessed": true,
+    "label": "实测证据质量（GEE 可复算）",
+    "reason": "输入 CSV 已采信；证据质量分量来自 GEE 实测导出，缺失项标 N/A。",
+    "compositeTrustworthy": true,
+    "compositeDerivedFrom": [
+      "validPixelRatio",
+      "spatialCoverage",
+      "temporalConsistency"
+    ],
+    "note": "权重按【可用分量】重新归一化，缺失不当 0 计。",
+    "fix": null
+  },
+  "dataProvenance": {
+    "AGB_K": "PLACEHOLDER",
+    "CF": "LITERATURE(IPCC2006)",
+    "AREA_HA_TREATED": "PLACEHOLDER",
+    "AREA_HA_CONTROL": "PLACEHOLDER",
+    "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+    "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+    "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+    "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)",
+    "spatialCells": "PLACEHOLDER(H3-style, md5 占位, 非真实地理编码)",
+    "evidenceCID": "LOCAL_HASH(未上 IPFS)"
+  },
+  "anomalyModel": {
+    "trained": true,
+    "synthetic": false,
+    "reason": "",
+    "generatedAt": "2026-10-03T10:34:59.302246+00:00",
+    "modelPath": "evidence/anomaly_model.joblib",
+    "modelVersion": "CarbonSat-AnomalyIF-v1.0"
+  },
+  "honesty": {
+    "allCarbonIndicative": true,
+    "placeholderParamsDriveNoVerdict": true,
+    "stocksNotAdditiveAcrossYears": true,
+    "noCertifiedCredit": true,
+    "attributionConclusion": "insufficient_evidence"
+  },
+  "attributionReport": {
+    "method": "DiD-lite (two-period difference-in-differences), NOT formal additionality",
+    "post_year": 2024,
+    "pre_years": [
+      1987,
+      1990
+    ],
+    "governance_start_year": null,
+    "control_greener_than_treated": false,
+    "treated_starts_high": false,
+    "missing_treated": [],
+    "missing_control": [],
+    "csv_valid": true,
+    "year_ordering_errors": [
+      "governanceStartYear 未定义：无法校验前期年与治理起始年的先后顺序"
+    ],
+    "preTrend": {
+      "method": "pre-treatment OLS slope comparison (parallel-trend proxy)",
+      "governanceStartYear": null,
+      "postYear": 2024,
+      "minPreYears": 5,
+      "slopeTolerance": 0.002,
+      "slopeToleranceSource": "PLACEHOLDER_THRESHOLD（经验阈值，未经标定；仅用于判据透明化）",
+      "ok": false,
+      "reason": "治理起始年未定义 → 无法划分治理前期，无法做治理前趋势检验"
+    },
+    "controlMatching": {
+      "documented": false,
+      "missing": [
+        "soil",
+        "landform",
+        "historicalVegetation",
+        "precipitation",
+        "initialLandClass",
+        "preTrend"
+      ],
+      "dimensions": {
+        "soil": "PLACEHOLDER",
+        "landform": "PLACEHOLDER",
+        "historicalVegetation": "PLACEHOLDER",
+        "precipitation": "PLACEHOLDER",
+        "initialLandClass": "PLACEHOLDER",
+        "preTrend": "PLACEHOLDER"
+      }
+    },
+    "rows": [
+      {
+        "pre_year": 1987,
+        "computable": true,
+        "treated_change_fvc": 0.6927,
+        "control_change_fvc": 0.4415,
+        "did_fvc": 0.2511,
+        "did_carbon_tC_placeholder": 10411.1
+      },
+      {
+        "pre_year": 1990,
+        "computable": true,
+        "treated_change_fvc": 0.7733,
+        "control_change_fvc": 0.3446,
+        "did_fvc": 0.4288,
+        "did_carbon_tC_placeholder": 17773.6
+      }
+    ],
+    "conclusion": "insufficient_evidence",
+    "reasons": [
+      "governanceStartYear 未定义：无法校验前期年与治理起始年的先后顺序",
+      "治理前多期趋势检验未通过：治理起始年未定义 → 无法划分治理前期，无法做治理前趋势检验",
+      "对照区配对匹配依据不足（§4.9 六维中 ['soil', 'landform', 'historicalVegetation', 'precipitation', 'initialLandClass', 'preTrend'] 仍为 PLACEHOLDER）"
+    ],
+    "max_positive_carbon_tC_placeholder": 17773.6
+  },
+  "parcels": [
+    {
+      "parcelId": "Kubuqi-Treated-01",
+      "role": "treated",
+      "geometry": [
+        [
+          108.1,
+          40.05
+        ],
+        [
+          109.2,
+          40.05
+        ],
+        [
+          109.2,
+          40.55
+        ],
+        [
+          108.1,
+          40.55
+        ],
+        [
+          108.1,
+          40.05
+        ]
+      ],
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "area_ha": 1200.0,
+      "areaSource": "PLACEHOLDER",
+      "dataSource": "REAL_GEE_CSV",
+      "timeseries": [
+        {
+          "year": 1987,
+          "fvc": 0.17851284660431577,
+          "ndvi": 0.06482100692063142,
+          "carbonDensity_tC_ha": 6.1667,
+          "valid": true,
+          "evidenceConfidence": 81,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5930963434176445,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 1.0,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1988,
+          "fvc": 0.24236800978739,
+          "ndvi": 0.06983268740285674,
+          "carbonDensity_tC_ha": 8.3726,
+          "valid": true,
+          "evidenceConfidence": 73,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5412900438895621,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.744579347267703,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1989,
+          "fvc": 0.18501989291038268,
+          "ndvi": 0.06533171326516858,
+          "carbonDensity_tC_ha": 6.3915,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4736799410043339,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7706075324919707,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1990,
+          "fvc": 0.09787332206410718,
+          "ndvi": 0.05849200373453955,
+          "carbonDensity_tC_ha": 3.381,
+          "valid": true,
+          "evidenceConfidence": 67,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.45653252105864894,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.651413716614898,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1991,
+          "fvc": 0.20525176502930145,
+          "ndvi": 0.06691961428307938,
+          "carbonDensity_tC_ha": 7.0904,
+          "valid": true,
+          "evidenceConfidence": 69,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5387238815139459,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5704862281392229,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1992,
+          "fvc": 0.1010448625212096,
+          "ndvi": 0.05874092248464716,
+          "carbonDensity_tC_ha": 3.4906,
+          "valid": true,
+          "evidenceConfidence": 69,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5321096437618225,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5831723899676327,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1993,
+          "fvc": 0.09905779588884232,
+          "ndvi": 0.058584967311065266,
+          "carbonDensity_tC_ha": 3.422,
+          "valid": true,
+          "evidenceConfidence": 76,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.49435764165673657,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9920517334705309,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1994,
+          "fvc": 0.13675784724865592,
+          "ndvi": 0.06154386056511855,
+          "carbonDensity_tC_ha": 4.7243,
+          "valid": true,
+          "evidenceConfidence": 76,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5560368652174645,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8491997945607457,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1995,
+          "fvc": 0.16499582294908802,
+          "ndvi": 0.06376012162563245,
+          "carbonDensity_tC_ha": 5.6998,
+          "valid": true,
+          "evidenceConfidence": 73,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4657470586731228,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8870480971982716,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1996,
+          "fvc": 0.37684110098284346,
+          "ndvi": 0.0803868248121774,
+          "carbonDensity_tC_ha": 13.018,
+          "valid": true,
+          "evidenceConfidence": 61,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5831691867874821,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.15261888786497824,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1997,
+          "fvc": 0.281521813786814,
+          "ndvi": 0.07290567861495659,
+          "carbonDensity_tC_ha": 9.7252,
+          "valid": true,
+          "evidenceConfidence": 73,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.6028731437544943,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6187228512158822,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1998,
+          "fvc": 0.17118055799909657,
+          "ndvi": 0.06424553133085859,
+          "carbonDensity_tC_ha": 5.9134,
+          "valid": true,
+          "evidenceConfidence": 66,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4913690215083553,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5586349768491302,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1999,
+          "fvc": 0.22620741323863233,
+          "ndvi": 0.06856432095812115,
+          "carbonDensity_tC_ha": 7.8143,
+          "valid": true,
+          "evidenceConfidence": 83,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.7390376460513256,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7798925790418569,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2000,
+          "fvc": 0.25772692500403555,
+          "ndvi": 0.07103813378780653,
+          "carbonDensity_tC_ha": 8.9032,
+          "valid": true,
+          "evidenceConfidence": 81,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.6548118297531009,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8739219529383871,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2001,
+          "fvc": 0.14436649648929867,
+          "ndvi": 0.062141026353985176,
+          "carbonDensity_tC_ha": 4.9871,
+          "valid": true,
+          "evidenceConfidence": 71,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.6081287283991351,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5465582859410525,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2002,
+          "fvc": 0.2907656527891973,
+          "ndvi": 0.07363118247713069,
+          "carbonDensity_tC_ha": 10.0445,
+          "valid": true,
+          "evidenceConfidence": 69,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.6288033569825723,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.41440337480040546,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2003,
+          "fvc": 0.17695761905118745,
+          "ndvi": 0.06469894469128458,
+          "carbonDensity_tC_ha": 6.113,
+          "valid": true,
+          "evidenceConfidence": 69,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5548080270806222,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5447678650479606,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2004,
+          "fvc": 0.328364268595113,
+          "ndvi": 0.0765821145490284,
+          "carbonDensity_tC_ha": 11.3433,
+          "valid": true,
+          "evidenceConfidence": 61,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.45230193248444256,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.3943734018242979,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2005,
+          "fvc": 0.2600924154987529,
+          "ndvi": 0.07122378960563407,
+          "carbonDensity_tC_ha": 8.9849,
+          "valid": true,
+          "evidenceConfidence": 72,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5339267022559293,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7269125876145597,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2006,
+          "fvc": 0.25570971119986,
+          "ndvi": 0.07087981250966842,
+          "carbonDensity_tC_ha": 8.8335,
+          "valid": true,
+          "evidenceConfidence": 77,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5116536592734717,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9824691828044285,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2007,
+          "fvc": 0.38025730255585405,
+          "ndvi": 0.08065494582061832,
+          "carbonDensity_tC_ha": 13.136,
+          "valid": true,
+          "evidenceConfidence": 65,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.48407151408370286,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5018096345760239,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2008,
+          "fvc": 0.3186491289191008,
+          "ndvi": 0.0758196205944398,
+          "carbonDensity_tC_ha": 11.0077,
+          "valid": true,
+          "evidenceConfidence": 71,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.498003887918154,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.753567305452987,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2009,
+          "fvc": 0.42958623266813295,
+          "ndvi": 0.08452653308042966,
+          "carbonDensity_tC_ha": 14.8401,
+          "valid": true,
+          "evidenceConfidence": 65,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.46611539557880455,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5562515850038714,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2010,
+          "fvc": 0.4200520471603216,
+          "ndvi": 0.08377824133640231,
+          "carbonDensity_tC_ha": 14.5107,
+          "valid": true,
+          "evidenceConfidence": 72,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4164920324588905,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9618632579687545,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2011,
+          "fvc": 0.3831235966144575,
+          "ndvi": 0.08087990726889834,
+          "carbonDensity_tC_ha": 13.235,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.42109346728314206,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8522861978165437,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2012,
+          "fvc": 0.2947811903579755,
+          "ndvi": 0.07394634244628448,
+          "carbonDensity_tC_ha": 10.1832,
+          "valid": true,
+          "evidenceConfidence": 68,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4735365939275016,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.646630374974072,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2013,
+          "fvc": 1.0,
+          "ndvi": 0.14313163014056798,
+          "carbonDensity_tC_ha": 34.545,
+          "valid": true,
+          "evidenceConfidence": 54,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.510838610110427,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.0,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2014,
+          "fvc": 0.7966802827172189,
+          "ndvi": 0.11333795558822939,
+          "carbonDensity_tC_ha": 27.5213,
+          "valid": true,
+          "evidenceConfidence": 59,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5165197469529321,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.18672113086887565,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2015,
+          "fvc": 0.8864035588566701,
+          "ndvi": 0.12037989815660403,
+          "carbonDensity_tC_ha": 30.6208,
+          "valid": true,
+          "evidenceConfidence": 68,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.49369275100241516,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6411068954421952,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2016,
+          "fvc": 1.0,
+          "ndvi": 0.1300312869334412,
+          "carbonDensity_tC_ha": 34.545,
+          "valid": true,
+          "evidenceConfidence": 69,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5487451987155784,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5456142354266804,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2017,
+          "fvc": 0.9574588567527876,
+          "ndvi": 0.12595668211381847,
+          "carbonDensity_tC_ha": 33.0754,
+          "valid": true,
+          "evidenceConfidence": 76,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5553064449092375,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8298354270111505,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2018,
+          "fvc": 0.8728705136097888,
+          "ndvi": 0.11931775540497695,
+          "carbonDensity_tC_ha": 30.1533,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5222988434840419,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6616466274280048,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2019,
+          "fvc": 1.0,
+          "ndvi": 0.1293541639864254,
+          "carbonDensity_tC_ha": 34.545,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.6126335360733074,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.4914820544391554,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2020,
+          "fvc": 0.9058630681511036,
+          "ndvi": 0.12190718018147317,
+          "carbonDensity_tC_ha": 31.293,
+          "valid": true,
+          "evidenceConfidence": 72,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5818187128002242,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6234522726044145,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2021,
+          "fvc": 0.9478165968511602,
+          "ndvi": 0.12519990813745285,
+          "carbonDensity_tC_ha": 32.7423,
+          "valid": true,
+          "evidenceConfidence": 74,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5104008545426489,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8321858851997739,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2022,
+          "fvc": 0.8710757362278161,
+          "ndvi": 0.11917689207730235,
+          "carbonDensity_tC_ha": 30.0913,
+          "valid": true,
+          "evidenceConfidence": 79,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5735950872248623,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": 0.9601068411571342,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": false
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6930365575066237,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2023,
+          "fvc": 0.9462528358577753,
+          "ndvi": 0.1250771761599784,
+          "carbonDensity_tC_ha": 32.6883,
+          "valid": true,
+          "evidenceConfidence": 78,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5214081770413906,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": 0.9904695913655898,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": false
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6992916014801631,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2024,
+          "fvc": 0.8711838320455209,
+          "ndvi": 0.1191853759910972,
+          "carbonDensity_tC_ha": 30.095,
+          "valid": true,
+          "evidenceConfidence": 77,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5208689558011806,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": 0.9584143526911204,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": false
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6997239847509822,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        }
+      ]
+    },
+    {
+      "parcelId": "Kubuqi-Control-01",
+      "role": "control",
+      "geometry": [
+        [
+          107.3,
+          40.05
+        ],
+        [
+          108.0,
+          40.05
+        ],
+        [
+          108.0,
+          40.55
+        ],
+        [
+          107.3,
+          40.55
+        ],
+        [
+          107.3,
+          40.05
+        ]
+      ],
+      "geometryHash": "0x6779b29494b424d9b4e9e4f07ca9a452936b887ceb1090006b1207af8d040c52",
+      "area_ha": 900.0,
+      "areaSource": "PLACEHOLDER",
+      "dataSource": "REAL_GEE_CSV",
+      "timeseries": [
+        {
+          "year": 1987,
+          "fvc": 0.15713629985351293,
+          "ndvi": 0.06314326597083188,
+          "carbonDensity_tC_ha": 5.4283,
+          "valid": true,
+          "evidenceConfidence": 72,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.40493045585025755,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 1.0,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1988,
+          "fvc": 0.20610781820700738,
+          "ndvi": 0.06698680172397833,
+          "carbonDensity_tC_ha": 7.12,
+          "valid": true,
+          "evidenceConfidence": 77,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.6061596061956674,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8041139265860222,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1989,
+          "fvc": 0.19385099458297422,
+          "ndvi": 0.06602482338630607,
+          "carbonDensity_tC_ha": 6.6966,
+          "valid": true,
+          "evidenceConfidence": 77,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.535478780718376,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9509727055038674,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1990,
+          "fvc": 0.2541040761180216,
+          "ndvi": 0.07075379403911569,
+          "carbonDensity_tC_ha": 8.778,
+          "valid": true,
+          "evidenceConfidence": 72,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5254440331400839,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7589876738598105,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1991,
+          "fvc": 0.15936453344473678,
+          "ndvi": 0.06331814916339312,
+          "carbonDensity_tC_ha": 5.5052,
+          "valid": true,
+          "evidenceConfidence": 72,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5879090352816645,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6210418293068607,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1992,
+          "fvc": 0.0897858640614531,
+          "ndvi": 0.0578572585800011,
+          "carbonDensity_tC_ha": 3.1017,
+          "valid": true,
+          "evidenceConfidence": 74,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5773482755027449,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7216853224668653,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1993,
+          "fvc": 0.037753856526641025,
+          "ndvi": 0.05377351995003955,
+          "carbonDensity_tC_ha": 1.3042,
+          "valid": true,
+          "evidenceConfidence": 73,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5151091111204975,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7918719698607517,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1994,
+          "fvc": 0.16469566616636627,
+          "ndvi": 0.06373656378293677,
+          "carbonDensity_tC_ha": 5.6894,
+          "valid": true,
+          "evidenceConfidence": 67,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5342606394176657,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.49223276144109906,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1995,
+          "fvc": 0.22069039657245954,
+          "ndvi": 0.0681313172139024,
+          "carbonDensity_tC_ha": 7.6237,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.45656395373591385,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.776021078375627,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1996,
+          "fvc": 0.34868484593930654,
+          "ndvi": 0.07817697760765792,
+          "carbonDensity_tC_ha": 12.0453,
+          "valid": true,
+          "evidenceConfidence": 67,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5371511144370049,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.48802220253261197,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1997,
+          "fvc": 0.21781043206372916,
+          "ndvi": 0.06790528283863154,
+          "carbonDensity_tC_ha": 7.5243,
+          "valid": true,
+          "evidenceConfidence": 61,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4096304307336012,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.47650234449769047,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1998,
+          "fvc": 0.17036298362954744,
+          "ndvi": 0.06418136390403846,
+          "carbonDensity_tC_ha": 5.8852,
+          "valid": true,
+          "evidenceConfidence": 72,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4958565303463155,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8102102062632731,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 1999,
+          "fvc": 0.29135751859409803,
+          "ndvi": 0.07367763513897752,
+          "carbonDensity_tC_ha": 10.0649,
+          "valid": true,
+          "evidenceConfidence": 67,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5321012883423668,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5160218601417976,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2000,
+          "fvc": 0.17302768768447557,
+          "ndvi": 0.06439050353562474,
+          "carbonDensity_tC_ha": 5.9772,
+          "valid": true,
+          "evidenceConfidence": 66,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.49373977582651335,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5266806763615102,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2001,
+          "fvc": 0.022396900172544268,
+          "ndvi": 0.05256822730666231,
+          "carbonDensity_tC_ha": 0.7737,
+          "valid": true,
+          "evidenceConfidence": 63,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5077831143865807,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.3974768499522747,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2002,
+          "fvc": 0.19823574303953415,
+          "ndvi": 0.0663689609182423,
+          "carbonDensity_tC_ha": 6.8481,
+          "valid": true,
+          "evidenceConfidence": 61,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5011158048395155,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.29664462853204054,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2003,
+          "fvc": 0.10232403573650718,
+          "ndvi": 0.058841318554705146,
+          "carbonDensity_tC_ha": 3.5348,
+          "valid": true,
+          "evidenceConfidence": 67,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4695042906684483,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6163531707878922,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2004,
+          "fvc": 0.20896084708653373,
+          "ndvi": 0.06721072205301662,
+          "carbonDensity_tC_ha": 7.2186,
+          "valid": true,
+          "evidenceConfidence": 62,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.39499585758744554,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5734527545998938,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2005,
+          "fvc": 0.08959721367865484,
+          "ndvi": 0.05784245233107298,
+          "carbonDensity_tC_ha": 3.0951,
+          "valid": true,
+          "evidenceConfidence": 60,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.38347961312871437,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.5225454663684844,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2006,
+          "fvc": 0.07183123659173571,
+          "ndvi": 0.056448087393677036,
+          "carbonDensity_tC_ha": 2.4814,
+          "valid": true,
+          "evidenceConfidence": 74,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4810198489723003,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9289360916523235,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2007,
+          "fvc": 0.15746624012444485,
+          "ndvi": 0.06316916137433103,
+          "carbonDensity_tC_ha": 5.4397,
+          "valid": true,
+          "evidenceConfidence": 66,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4302778101067524,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6574599858691634,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2008,
+          "fvc": 0.20846928906428508,
+          "ndvi": 0.06717214206005784,
+          "carbonDensity_tC_ha": 7.2016,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4617332261115925,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7959878042406391,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2009,
+          "fvc": 0.2316943031254109,
+          "ndvi": 0.06899496019828484,
+          "carbonDensity_tC_ha": 8.0039,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.39194402020624924,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9070999437554967,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2010,
+          "fvc": 0.2220247265584925,
+          "ndvi": 0.06823604227002163,
+          "carbonDensity_tC_ha": 7.6698,
+          "valid": true,
+          "evidenceConfidence": 73,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4416147345004784,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9613216937323265,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2011,
+          "fvc": 0.1440828948726409,
+          "ndvi": 0.06211876784557206,
+          "carbonDensity_tC_ha": 4.9773,
+          "valid": true,
+          "evidenceConfidence": 67,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.44381084620719935,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6882326732565935,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2012,
+          "fvc": 0.1742640258813427,
+          "ndvi": 0.06448753769389483,
+          "carbonDensity_tC_ha": 6.02,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.40881943178245334,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.8792754759651927,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2013,
+          "fvc": 0.7459536479032604,
+          "ndvi": 0.10935666929980167,
+          "carbonDensity_tC_ha": 25.769,
+          "valid": true,
+          "evidenceConfidence": 51,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4379496448474138,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.0,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2014,
+          "fvc": 0.5156339743233117,
+          "ndvi": 0.09128000086433369,
+          "carbonDensity_tC_ha": 17.8126,
+          "valid": true,
+          "evidenceConfidence": 56,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5057804414572045,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.07872130568020541,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2015,
+          "fvc": 0.5680908184848711,
+          "ndvi": 0.09539708285016921,
+          "carbonDensity_tC_ha": 19.6247,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4552103733738378,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7901726233537625,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2016,
+          "fvc": 0.5502469527385422,
+          "ndvi": 0.09399660481158156,
+          "carbonDensity_tC_ha": 19.0083,
+          "valid": true,
+          "evidenceConfidence": 75,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4997519763453671,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.9286245370146844,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2017,
+          "fvc": 0.6333235026354184,
+          "ndvi": 0.10051687823810306,
+          "carbonDensity_tC_ha": 21.8782,
+          "valid": true,
+          "evidenceConfidence": 69,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.49185823239662685,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6676938004124953,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2018,
+          "fvc": 0.5796498457239402,
+          "ndvi": 0.09630429455114735,
+          "carbonDensity_tC_ha": 20.024,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4539009840420098,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7853053723540873,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2019,
+          "fvc": 0.6419260930735833,
+          "ndvi": 0.10119205362637858,
+          "carbonDensity_tC_ha": 22.1753,
+          "valid": true,
+          "evidenceConfidence": 71,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5001172317152629,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7508950106014276,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2020,
+          "fvc": 0.55622756222877,
+          "ndvi": 0.09446599369667537,
+          "carbonDensity_tC_ha": 19.2149,
+          "valid": true,
+          "evidenceConfidence": 70,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5258813240090133,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6572058766207469,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2021,
+          "fvc": 0.7221508293782615,
+          "ndvi": 0.10748850210584,
+          "carbonDensity_tC_ha": 24.9467,
+          "valid": true,
+          "evidenceConfidence": 62,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.511433671268923,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": null,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": true
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.33630693140203416,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2022,
+          "fvc": 0.5912327866593158,
+          "ndvi": 0.09721338312157601,
+          "carbonDensity_tC_ha": 20.4241,
+          "valid": true,
+          "evidenceConfidence": 73,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5198185070720551,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": 0.9521824456219024,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": false
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.47632782912421723,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2023,
+          "fvc": 0.5186566120911862,
+          "ndvi": 0.09151723296822264,
+          "carbonDensity_tC_ha": 17.917,
+          "valid": true,
+          "evidenceConfidence": 77,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.4900595556875679,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": 0.9926585021992225,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": false
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.7096953017274816,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        },
+        {
+          "year": 2024,
+          "fvc": 0.5986600068550411,
+          "ndvi": 0.09779630942912279,
+          "carbonDensity_tC_ha": 20.6807,
+          "valid": true,
+          "evidenceConfidence": 78,
+          "evidenceConfidenceAvailable": true,
+          "ecComponents": {
+            "validPixelRatio": {
+              "value": 0.5439552353955718,
+              "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+              "na": false
+            },
+            "spatialCoverage": {
+              "value": 1.0,
+              "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+              "na": false
+            },
+            "sensorAgreement": {
+              "value": 0.9959886788747143,
+              "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+              "na": false
+            },
+            "localGedi": {
+              "value": null,
+              "source": "GEDI 未接入/未验证 -> 恒 N/A",
+              "na": true
+            },
+            "temporalConsistency": {
+              "value": 0.6799864209445805,
+              "source": "由相邻年 FVC 变化计算（可复算）",
+              "na": false
+            },
+            "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+          }
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claimId": "0xfbe42c0dc83b0bd36d7c7e51092ab54c48d5032d5e7bf1511f233136be7d0814",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 1990,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat5",
+      "resolutionEra": 1,
+      "carbon_tC": 4057.2,
+      "carbon_tokens": 4057200,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 67,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.45653252105864894,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": null,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": true
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.651413716614898,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.09787332206410718,
+      "cid": "local-sha256:2bf59423c3d4aaf87a2c1141ae502739e0d2732303eee3156cf5b187bcdb3ff5",
+      "evidenceRef": "local-sha256:2bf59423c3d4aaf87a2c1141ae502739e0d2732303eee3156cf5b187bcdb3ff5",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": -0.1346
+    },
+    {
+      "claimId": "0x6e1b0b6da8320840770afbe024d696fd550b959721bc45158c3062a6758ebdb3",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 1995,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat5",
+      "resolutionEra": 1,
+      "carbon_tC": 6839.76,
+      "carbon_tokens": 6839760,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 73,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.4657470586731228,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": null,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": true
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.8870480971982716,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.16499582294908802,
+      "cid": "local-sha256:af78d477538c3a1e71f6dbbd9338b57986949fcbff8b2ad1c749f218d7c5cc62",
+      "evidenceRef": "local-sha256:af78d477538c3a1e71f6dbbd9338b57986949fcbff8b2ad1c749f218d7c5cc62",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": -0.158
+    },
+    {
+      "claimId": "0xda5ebb1014905bb043017d3049e57c4b26da632f16df7f186f8c80560d89dece",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 2000,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat7",
+      "resolutionEra": 1,
+      "carbon_tC": 10683.84,
+      "carbon_tokens": 10683840,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 81,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.6548118297531009,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": null,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": true
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.8739219529383871,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.25772692500403555,
+      "cid": "local-sha256:af799afc1af65e0aa9a062e37cad07eb013181a738624f07f9dcf4243759d68f",
+      "evidenceRef": "local-sha256:af799afc1af65e0aa9a062e37cad07eb013181a738624f07f9dcf4243759d68f",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": -0.1509
+    },
+    {
+      "claimId": "0xcfa1e21d813be3b780c8292861618eb55ec96234d02ea178109f418608a0af33",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 2005,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat7",
+      "resolutionEra": 1,
+      "carbon_tC": 10781.88,
+      "carbon_tokens": 10781880,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 72,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.5339267022559293,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": null,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": true
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.7269125876145597,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.2600924154987529,
+      "cid": "local-sha256:39b993806a388c7a52a2f3c4d09ff9de8737016060e8382d429b1318834d0f3d",
+      "evidenceRef": "local-sha256:39b993806a388c7a52a2f3c4d09ff9de8737016060e8382d429b1318834d0f3d",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": -0.1598
+    },
+    {
+      "claimId": "0xe626d344dde4f5f3390d274ad10675d37ce4adeb32e10fb3d03b5ce9db53a795",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 2010,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat7",
+      "resolutionEra": 1,
+      "carbon_tC": 17412.84,
+      "carbon_tokens": 17412840,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 72,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.4164920324588905,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": null,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": true
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.9618632579687545,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.4200520471603216,
+      "cid": "local-sha256:d2c9032526f53b13bd411801d0504d324604b3011d54a980da928512a9c06454",
+      "evidenceRef": "local-sha256:d2c9032526f53b13bd411801d0504d324604b3011d54a980da928512a9c06454",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": -0.1507
+    },
+    {
+      "claimId": "0xbcbcda2d0d51d7f552598caee7cd2efaff999e2aec2dbf409f23d6a40c67050b",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 2015,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat9",
+      "resolutionEra": 2,
+      "carbon_tC": 36744.96,
+      "carbon_tokens": 36744960,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 68,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.49369275100241516,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": null,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": true
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.6411068954421952,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.8864035588566701,
+      "cid": "local-sha256:7701a398b4d62c1c1fc211862ee483bc37775f33700094256118fabb057f394e",
+      "evidenceRef": "local-sha256:7701a398b4d62c1c1fc211862ee483bc37775f33700094256118fabb057f394e",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": -0.0922
+    },
+    {
+      "claimId": "0xe83830e0b9821c32609269aab5eb5e48706555ad318a921bad80e76a26fb9c83",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 2020,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat9",
+      "resolutionEra": 2,
+      "carbon_tC": 37551.6,
+      "carbon_tokens": 37551600,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 72,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.5818187128002242,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": null,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": true
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.6234522726044145,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.9058630681511036,
+      "cid": "local-sha256:a2d04b4efe7dfa819a23a71ab12bd4144751ce20c500607e2bf407e8d9e6c3f9",
+      "evidenceRef": "local-sha256:a2d04b4efe7dfa819a23a71ab12bd4144751ce20c500607e2bf407e8d9e6c3f9",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": -0.0683
+    },
+    {
+      "claimId": "0x6771685cbda4b81ddb750b82181c5ec9af97230df3f75365a01232e4f791f4fb",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x7e3fb95fb9307397b068fb45db504ac404ff5a300a51c047ac0f9894fec0cc7c",
+      "vintage": 2024,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat9",
+      "resolutionEra": 2,
+      "carbon_tC": 36114.0,
+      "carbon_tokens": 36114000,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 77,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.5208689558011806,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": 0.9584143526911204,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": false
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.6997239847509822,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_TREATED": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.8711838320455209,
+      "cid": "local-sha256:db3fd922b97f08464784b6afd29f1d3009b95d52b9fba047663fc98cb6603887",
+      "evidenceRef": "local-sha256:db3fd922b97f08464784b6afd29f1d3009b95d52b9fba047663fc98cb6603887",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_e52f9b8010",
+        "H3_8_ac8fb2a12b",
+        "H3_8_e808824ad2",
+        "H3_8_ea6af48dd3",
+        "H3_8_f412e4f03c",
+        "H3_8_dc05e457dd",
+        "H3_8_52061771ff",
+        "H3_8_a8f74d610d",
+        "H3_8_c2aee807ec",
+        "H3_8_d33f39b90a",
+        "H3_8_60a90a65c8",
+        "H3_8_c56e1d8101",
+        "H3_8_f26720dc5b",
+        "H3_8_52bb8b84ff",
+        "H3_8_e671ed4c63",
+        "H3_8_5c556f6072"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "modelAnomalyScore": 0.002
+    },
+    {
+      "claimId": "0x38b86e47ac45de89adc2a43207be966ca956066b06d2424946612cdd0d93dabb",
+      "claimClass": "STOCK",
+      "projectId": "0x7bcf6adbb66449e70302e45f9a1a1b1706e46336b15ab1ffb32b7ed2b8380f83",
+      "geometryHash": "0x6779b29494b424d9b4e9e4f07ca9a452936b887ceb1090006b1207af8d040c52",
+      "vintage": 2024,
+      "claimType": 0,
+      "claimTypeName": "BIOMASS_STOCK",
+      "sensor": "Landsat9",
+      "resolutionEra": 2,
+      "carbon_tC": 18612.63,
+      "carbon_tokens": 18612630,
+      "uncertainty": 0.267,
+      "uncertaintyComponents": {
+        "fvc": 0.1,
+        "classification": 0.08,
+        "biomassEq": 0.2,
+        "sensor": 0.05,
+        "area": 0.05,
+        "controlMatch": 0.1
+      },
+      "evidenceConfidence": 78,
+      "evidenceConfidenceAvailable": true,
+      "ecComponents": {
+        "validPixelRatio": {
+          "value": 0.5439552353955718,
+          "source": "GEE v7 clearPixelRatio 列（有效/无云像元占比）",
+          "na": false
+        },
+        "spatialCoverage": {
+          "value": 1.0,
+          "source": "GEE v7 spatialCoverage 列（AOI 有效空间覆盖占比）",
+          "na": false
+        },
+        "sensorAgreement": {
+          "value": 0.9959886788747143,
+          "source": "GEE v7 重叠年 L8/L9 交叉核验（无重叠观测年份标 N/A）",
+          "na": false
+        },
+        "localGedi": {
+          "value": null,
+          "source": "GEDI 未接入/未验证 -> 恒 N/A",
+          "na": true
+        },
+        "temporalConsistency": {
+          "value": 0.6799864209445805,
+          "source": "由相邻年 FVC 变化计算（可复算）",
+          "na": false
+        },
+        "provenance": "MEASURED_EVIDENCE_QUALITY（GEE实测/可复算；缺失标N/A；非训练模型精度）"
+      },
+      "anomalyStatus": 1,
+      "triage": "REVIEW",
+      "registrable": false,
+      "parameterStatus": {
+        "AGB_K": "PLACEHOLDER",
+        "AREA_HA_CONTROL": "PLACEHOLDER",
+        "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+        "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+        "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+        "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)"
+      },
+      "fvc": 0.5986600068550411,
+      "cid": "local-sha256:5884d29230af65407bc9e8682b087213db58111a92c36ea3e2981f77420e703b",
+      "evidenceRef": "local-sha256:5884d29230af65407bc9e8682b087213db58111a92c36ea3e2981f77420e703b",
+      "ipfs": false,
+      "spatialCells": [
+        "H3_8_856fe6942e",
+        "H3_8_0c11e40137",
+        "H3_8_d842f81ba9",
+        "H3_8_0d0f8f21b9",
+        "H3_8_9c991b537b",
+        "H3_8_ba84c94448",
+        "H3_8_5e1d7afa48",
+        "H3_8_62f55af4a6",
+        "H3_8_9d89bd1e49",
+        "H3_8_eb4652357c",
+        "H3_8_9f3bda7294",
+        "H3_8_20a29f5f6b",
+        "H3_8_acce022376",
+        "H3_8_b91d98f1db",
+        "H3_8_234e18ce22",
+        "H3_8_fb5c6a6ca0"
+      ],
+      "status": "REVIEW",
+      "registerToChain": true,
+      "isControl": true,
+      "modelAnomalyScore": -0.0311
+    }
+  ]
+}

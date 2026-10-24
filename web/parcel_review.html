@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>CarbonSat-MRV · 单地块证据登记</title>
+<style>
+:root{--ink:#153b3a;--muted:#607671;--line:#d9e5df;--green:#176750;--bg:#f4f8f5;--amber:#805500;--red:#a32e37}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI","Microsoft YaHei",sans-serif}header{background:#133f39;color:white;padding:26px max(22px,calc((100vw - 1240px)/2))}header a{color:#d3eadb}h1{font-size:28px;margin:9px 0}h2{font-size:19px;margin:0 0 14px}h3{font-size:16px;margin:0 0 9px}.sub{color:#d3e4db;max-width:840px;margin:0}main{max-width:1280px;padding:22px;margin:auto}.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,1fr);gap:22px;align-items:start}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:18px}.sidebar{position:sticky;top:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.wide{grid-column:1/-1}label{display:block;font-size:13px;font-weight:600}input,select,textarea{display:block;width:100%;margin-top:5px;padding:9px 10px;border:1px solid #bacdc3;border-radius:7px;background:white;color:var(--ink);font:inherit}textarea{min-height:70px;resize:vertical}input[type=checkbox]{display:inline;width:auto;margin:0 6px 0 0}input[type=file]{font-size:12px;padding:8px}button,.linkbutton{display:inline-block;border:1px solid #9ebdaf;border-radius:8px;padding:9px 13px;background:white;color:var(--green);font:600 13px/1.4 inherit;cursor:pointer;text-decoration:none}button:hover{background:#edf6ef}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--green);color:white;border-color:var(--green)}.primary:hover{background:#104d3c}.tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px}.tools label{flex:1;min-width:220px}details{border:1px solid var(--line);border-radius:10px;background:white;margin-bottom:12px}summary{padding:14px 16px;cursor:pointer;font-weight:600}details .inside{padding:0 16px 16px}.source{background:#f6f9f6;border:1px solid var(--line);border-radius:8px;padding:12px;margin:12px 0}.sourcehead{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.sourcehead span{font-size:12px;color:var(--muted)}.small{font-size:12px;color:var(--muted)}.notice{padding:12px 14px;border-radius:9px;border:1px solid #d9c997;background:#fff9e8;color:var(--amber);margin-bottom:16px}.good{border-color:#a6d1b7;background:#eff9f2;color:#145b42}.bad{border-color:#e3aab1;background:#fff0f1;color:var(--red)}.pill{display:inline-block;padding:3px 9px;border-radius:20px;background:#e9f1ec;font-size:12px;margin:4px 3px 4px 0}.statusline{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.big{font-size:30px;font-weight:700;color:var(--green)}ol.tasks{padding-left:22px;font-size:13px}ol.tasks li{margin-bottom:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;color:var(--muted)}.files{padding-left:20px;font-size:12px;overflow-wrap:anywhere}.error{color:var(--red);font-size:13px}footer{max-width:1240px;margin:15px auto 30px;color:var(--muted);font-size:12px;padding:0 22px}a{color:var(--green)}.checkrow{margin-top:12px}#modeBadge{font-size:12px;font-weight:700;padding:5px 9px;border-radius:5px;background:#e0efde;color:#154b39}#geometrySummary{overflow-wrap:anywhere}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #71b5a0;outline-offset:2px}@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{position:static}.grid{grid-template-columns:1fr}header{padding:20px}main{padding:14px}.panel{padding:16px}h1{font-size:23px}}
+.sidebar{max-height:calc(100vh - 30px);overflow-y:auto;padding-right:3px;scrollbar-gutter:stable}
+.source-invalid{border:2px solid var(--red)}input[aria-invalid=true]{border-color:var(--red)}#contentWarnings:not(:empty){background:#fff9e8;color:var(--amber);padding:12px 12px 12px 28px;border:1px solid #d9c997;border-radius:8px}
+@media(max-width:850px){.sidebar{max-height:none;overflow:visible;padding-right:0}}
+</style>
+</head>
+<body>
+<header><a href="entry.html">← 返回项目证据入口</a><h1>单地块证据登记</h1><p class="sub">记录资料、定位缺项，把文件内容交给专业人员审阅。五类资料齐备时，系统仍不判定方法学合格，不计算碳信用。</p></header>
+<main>
+<div class="notice">文件只在本机浏览器读取，不上传服务器。下载包包含坐标和资料来源，但不含附件原件；分享前请检查内容。</div>
+<div class="tools"><button id="btnBlank" type="button">新建真实登记</button><label>软件演示（不是真实地块）<select id="demoCase"><option value="complete">SYNTHETIC · 资料齐备但资格待核</option><option value="missing">SYNTHETIC · 缺治理前资料</option><option value="na">SYNTHETIC · 关键项标不适用</option><option value="mixed">SYNTHETIC · 复合措施未拆分</option></select></label><button id="btnDemo" type="button">载入合成演示</button><span id="modeBadge">真实资料空白登记</span></div>
+<div class="layout">
+<form id="intakeForm" novalidate>
+<section class="panel"><h2>1 地块与活动</h2><div class="grid">
+<label>地块编号<input id="parcelId" maxlength="300" placeholder="使用项目档案编号"></label>
+<label>名称<input id="parcelName" maxlength="1000"></label>
+<label>行政区<input id="administrativeArea" maxlength="1000"></label>
+<label>项目主体<input id="projectOwner" maxlength="1000"></label>
+<label>本次登记日期<input id="asOfDate" type="date"></label>
+<label>活动类型<select id="activityType"><option value="UNKNOWN">尚未明确</option><option value="FORESTATION">人工造林</option><option value="GRASSLAND_MANAGEMENT">草地管理</option><option value="MIXED">复合活动，需拆分</option><option value="OTHER">其他，待核</option></select></label>
+<label class="wide">措施与实施方式<textarea id="measures" placeholder="写项目事实，不填写估计的减排量"></textarea></label>
+<label>物种或不涉及物种的说明<input id="species" maxlength="3000"></label>
+<label>造林密度 / 株行距及其来源<input id="density" maxlength="3000"></label>
+<label class="wide">复合活动拆分（每行一项）<textarea id="components" placeholder="例如分别记录发电活动和植被管理活动；此处不判定其适用机制"></textarea></label>
+</div></section>
+<section class="panel"><h2>2 空间与时间</h2><div class="grid">
+<label>地块坐标系<select id="crs"><option value="">未确认</option><option value="EPSG:4326">EPSG:4326 / WGS84，经度在前</option><option value="UNKNOWN">未知，需要转换核对</option></select></label>
+<label>导入地块 GeoJSON（Polygon / MultiPolygon）<input id="geometryFile" type="file" accept=".json,.geojson,application/json"></label>
+<div class="wide small" id="geometrySummary">尚无边界。采样方框不能替代真实项目地块。</div><div class="wide"><button id="btnClearGeometry" type="button">清除边界</button></div>
+<label>首次实质性作业日期<input id="startDate" type="date"></label>
+<label class="checkrow"><input id="phased" type="checkbox">分批实施，需逐批登记</label>
+<label class="wide">批次清单（JSON 数组，仅分批项目）<textarea id="batches" placeholder='[{"batchId":"批次编号","startDate":"YYYY-MM-DD","evidenceReferenceId":"commencement-ref-1"}]'>[]</textarea></label>
+<label>治理前证据起始日期<input id="windowStart" type="date"></label><label>治理前证据结束日期<input id="windowEnd" type="date"></label>
+</div><p class="small">检查日期与几何输入的基本结构。连续三年非森林、真实连续面积、孔洞/多地块拓扑、坐标配准与活动合格性仍需专业核查；不使用 8 米折算扩大计量面积。</p></section>
+<section class="panel"><h2>3 权属主体</h2><div class="grid">
+<label>土地权利主体<input id="landOwner" maxlength="2000"></label><label>林木权利主体或不涉及的说明<input id="treeOwner" maxlength="2000"></label>
+<label>减排量权益主体<input id="reductionRightHolder" maxlength="2000"></label><label>权属有效期截止日<input id="validityEnd" type="date"></label>
+<label class="wide">项目主体的授权 / 转让资料<select id="transferStatus"><option value="UNKNOWN">关系待明确</option><option value="NOT_REQUIRED">主体一致，申报不需要转让（待审阅）</option><option value="DOCUMENTED">授权 / 转让材料已登记（待审阅）</option></select></label>
+</div><p class="small">填写主体或上传文书均不构成权属真实性、唯一性或项目寿命期覆盖的确认。</p></section>
+<section class="panel"><h2>4 五类资料来源</h2><p class="small">“已提供”须列文件名称、出具单位、日期，以及编号或页码定位。部分资料保留缺项；关键项“不适用”不会自动放行。</p><div id="evidenceCards"></div></section>
+<section class="panel"><h2>5 本地附件与备注</h2><label>添加附件摘要（单个最大 25 MiB；原件不进入下载包）<input id="attachmentFiles" type="file" multiple></label><p id="attachmentProgress" class="small"></p><ul id="attachmentList" class="files"></ul><p class="small">附件摘要匹配只证明当前选中的字节与登记值一致，不能鉴定文件真假。导入别人提供的资料包后，附件均重新处于“未读取原件”状态。</p><label>备注<textarea id="notes"></textarea></label></section>
+</form>
+<aside class="sidebar">
+<section class="panel" aria-live="polite"><h2>资料登记结果</h2><div><span class="big" id="groupCount">0 / 5</span><span class="small"> 类已登记</span></div><div id="verdict" class="notice">资料不足，等待填写</div><div id="groupStates"></div><div id="validationErrors" class="error"></div><ul id="contentWarnings" class="small" aria-live="polite"></ul><h3 style="margin-top:18px">下一步需要补什么</h3><ol id="tasks" class="tasks"></ol><details><summary>仍须专业审阅的事项</summary><ul id="professionalChecks" class="inside small"></ul></details><p class="small">资格状态：<b id="eligibilityStatus">未评估</b> · 碳量：未计算 · 来源真实性：未验证 · 未上链</p></section>
+<section class="panel"><h2>下载与核验</h2><button id="btnDownload" class="primary" type="button">下载本地资料包 JSON</button><p class="small">下载草稿也允许保留缺项。资料包不会写入既有科研记录、证据包或碳主张。</p><div class="tools"><button id="btnSave" type="button">保存本机草稿</button><button id="btnRestore" type="button">恢复本机草稿</button><button id="btnForget" type="button">删除本机草稿</button></div><label>导入资料包 JSON<input id="packageFile" type="file" accept=".json,application/json"></label><label>外部可信的记录摘要（可选）<input id="expectedRecordSha" placeholder="local-sha256:…" maxlength="90"></label><button id="btnVerifyCurrent" type="button" style="margin-top:10px">核验当前资料包</button><div id="packageVerdict" class="small" aria-live="polite"></div><label style="margin-top:12px">复核已声明附件的原件<input id="attachmentCheckFile" type="file"></label><label>要比对的附件<select id="attachmentToCheck"></select></label><button id="btnCheckAttachment" type="button" style="margin-top:8px">读取字节并核对</button><div id="attachmentCheckResult" class="small"></div><details><summary>摘要与核验范围</summary><pre id="hashDetails" class="inside"></pre></details></section>
+</aside>
+</div>
+</main><footer>CarbonSat-MRV · 独立资料登记模块 v1.3 / 完整性规则 v1.1 · 模型 NPP 不等于净碳汇；本页不请求钱包、私钥或链上交易。</footer>
+<script src="vendor/ethers.umd.min.js"></script><script src="parcel_core.js"></script><script src="parcel_review.js"></script>
+</body></html>

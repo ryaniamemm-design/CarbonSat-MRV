@@ -1,0 +1,153 @@
+{
+  "trained": true,
+  "synthetic": false,
+  "generatedAt": "2026-10-03T10:34:59.302246+00:00",
+  "csvUsed": "data/grid_samples.csv",
+  "modelPath": "evidence/anomaly_model.joblib",
+  "modelVersion": "CarbonSat-AnomalyIF-v1.1",
+  "modelType": "IsolationForest(unsupervised)",
+  "contamination": 0.05,
+  "nEstimators": 200,
+  "features": [
+    "fvc",
+    "ndvi",
+    "clearPixelRatio",
+    "spatialCoverage",
+    "sensorAgreement",
+    "fvcJump",
+    "yearNorm"
+  ],
+  "imputer": {
+    "method": "median",
+    "column": "sensorAgreement",
+    "value": 0.9831054394572873,
+    "nTrain": 2736,
+    "nMissingInTrain": 2520,
+    "allMissing": false,
+    "note": "按训练集中位数填补（仅用训练集拟合）。"
+  },
+  "sufficiency": {
+    "ok": true,
+    "reason": "样本充足，可训练",
+    "found": {
+      "cells": 90,
+      "yearsPerCellMin": 38,
+      "yearsPerCellMean": 38.0,
+      "samples": 3420
+    },
+    "required": {
+      "cells": 50,
+      "yearsPerCellMin": 10,
+      "samples": 500
+    }
+  },
+  "csvContract": {
+    "checks": {
+      "V1_required_columns": true,
+      "V2_unique_key": true,
+      "V3_year_range": true,
+      "V4_lonlat_range": true,
+      "V5_clearPixelRatio_0_1": true,
+      "V5_spatialCoverage_0_1": true,
+      "V5_sensorAgreement_0_1": true,
+      "V6_fvc_range": true,
+      "V6_ndvi_range": true,
+      "V7_method_version": true,
+      "V8_shared_endmember": true
+    },
+    "meta": {
+      "method_version": "CarbonSat-FVC-v2.0-SR",
+      "endmember_p5": 0.050810403790727,
+      "endmember_p95": 0.1292955290711482,
+      "nRows": 3420,
+      "nCells": 90,
+      "yearMin": 1987,
+      "yearMax": 2024
+    },
+    "missingReport": {
+      "fvc_sentinel_rows": 0,
+      "fvc_nan_rows": 0,
+      "ndvi_sentinel_rows": 0,
+      "ndvi_nan_rows": 0,
+      "rows_before": 3420,
+      "rows_after": 3420,
+      "rows_dropped": 0,
+      "droppedCells": 0
+    }
+  },
+  "missingReport": {
+    "fvc_sentinel_rows": 0,
+    "fvc_nan_rows": 0,
+    "ndvi_sentinel_rows": 0,
+    "ndvi_nan_rows": 0,
+    "rows_before": 3420,
+    "rows_after": 3420,
+    "rows_dropped": 0,
+    "droppedCells": 0
+  },
+  "sensorAgreementAllMissing": false,
+  "featureMeta": {
+    "nCells": 72,
+    "nSamples": 2736,
+    "yearsPerCellMean": 38.0,
+    "yearsPerCellMin": 38,
+    "sensorAgreementImputed": 2520,
+    "sensorAgreementFillValue": 0.9831,
+    "imputerSource": "train_fit(saved)",
+    "featureList": [
+      "fvc",
+      "ndvi",
+      "clearPixelRatio",
+      "spatialCoverage",
+      "sensorAgreement",
+      "fvcJump",
+      "yearNorm"
+    ]
+  },
+  "split": {
+    "nTrainCells": 72,
+    "nTestCells": 18,
+    "testCellsSample": [
+      "cell_0002",
+      "cell_0004",
+      "cell_0016",
+      "cell_0018",
+      "cell_0021"
+    ]
+  },
+  "evaluation": {
+    "nLabeledAnomalies": 103,
+    "nFlagged": 55,
+    "truePositives": 24,
+    "falsePositives": 31,
+    "falseNegatives": 79,
+    "precision": 0.4364,
+    "recall": 0.233,
+    "f1": 0.3038,
+    "prAuc": 0.3368,
+    "precisionAtK_anomalies": 0.3786,
+    "precisionAtTop5pct": 0.3846,
+    "scoreMean": -0.0931,
+    "scoreStd": 0.0537,
+    "note": "评估在注入的合成异常（仅见于验证单元，未参与训练）上进行；真实观测的异常分数为连续量，仅作 REVIEW 建议，不驱动最终判定。",
+    "evalScope": "PROCESS_TEST_ONLY（合成注入；不代表真实地块检出率）"
+  },
+  "scoreTable": "evidence/anomaly_scores_grid.csv",
+  "advisoryOnly": "模型仅输出 REVIEW 建议分数，不参与 REGISTER/REJECT 判定，不越过数据/参数/归因硬门禁。",
+  "note": "真实 GEE 网格样本训练；异常分数为连续量，高于阈值的观测建议送人工 REVIEW。",
+  "preprocessingVersion": "CarbonSat-FVC-TrainImputer-v1.1",
+  "migration": {
+    "migratedAt": "2026-10-24T04:00:13.435690+00:00",
+    "fromVersion": "CarbonSat-AnomalyIF-v1.0",
+    "estimatorRetrained": false,
+    "sourceModelSha256": "c035c987fec1b2f8b3f93593873f69a5d94bca13f2665a3b0aa158555333cda3",
+    "estimatorStateHash": "sha256:2f719270eab047c9871e73824685c4d847120ed5082cfbffaa20198c80ba99fb",
+    "originalTrainingTimestamp": "2026-10-03T10:34:59.302246+00:00",
+    "scope": "Corrected scoring and synthetic evaluation preprocessing only. No source-data change."
+  },
+  "artifactSha256": {
+    "anomaly_model.joblib": "1aa29b1af39bd1a0f9a0540dc39e8b0c4ea5a86a69cb45e6750285d2d3326fac",
+    "anomaly_scores_grid.csv": "c9b14bc8f55183a25676c1140880a7de19d24d7efdbbed736fb33ecbde9ede64",
+    "anomaly_eval_report.json": "a90b5db869d70aa15d6f64dcbaacdc0e3d6b8c581f5b6c57691776adbe4b1e3b"
+  }
+}

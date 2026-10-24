@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "generator": "scripts/build_review_targets.py",
+    "generatorVersion": "CarbonSat-ReviewTargets-v1.0",
+    "declarationCategory": "DESCRIPTIVE_NPP_ONLY",
+    "attributionStatus": "insufficient_evidence",
+    "note": "人工复核闭环的两条目标证据（非碳信用/非增汇/非 REMOVAL）。",
+    "selectionRule": "普通 ML 标记记录 = flag=1 且 year≠2012 中 recordId 最小者；2012 结构性断点记录 = flag=1 且 year=2012 中 recordId 最小者。确定性，无随机/时间依赖。",
+    "recordCount": 2,
+    "wholeBundlePackSha256": "71d13dd8355d19424ab3195131dcd1c6bcb5763581014e2d3e7b5b83097e196c",
+    "methodHash": "5be56ba3f89ae3f53ec719c5df0d4388ddb0fb5dbd96cb0dc77ba456cb2b1f6f",
+    "verifyCommand": "python scripts/build_review_targets.py --verify"
+  },
+  "records": [
+    {
+      "recordId": "cell_0020_2002",
+      "cellId": "cell_0020",
+      "year": 2002,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.12172007185972987,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "prevNpp": 0.0745414515665421,
+      "jump": 0.04717862029318777,
+      "rulePrescreen": {
+        "method": "rule-based-advisory-v1",
+        "score": 0.0,
+        "flag": 0,
+        "reasons": []
+      },
+      "mlReview": {
+        "method": "IsolationForest(NPP-specific,unsupervised)",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "score": 0.062134,
+        "flag": 1,
+        "eraFlag": 0,
+        "interpretationStatus": "建议复核"
+      },
+      "sourceHash": "local-sha256:bbf3e64bc804e69ee559c557575ab6dc1959a3354a6d27197fa99f13bce991e0",
+      "evidenceRef": "local-sha256:ad9c135edabcd1c8cfa31b37ba49790a25d12f00f4173c946d796993c6327803",
+      "modelVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "declarationCategory": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "knownLimitations": [
+        "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。",
+        "逐格跨年恒定，成因（产品掩膜/QC/填补）未证实；仅表示固定有效陆地足迹，不代表逐年有效观测质量稳定",
+        "人工审查意见仅作为复核记录单独保存，绝不反写为训练真值；本证据 attributionStatus 恒为 insufficient_evidence，不代表已证实的治理增汇。"
+      ],
+      "wholeBundlePackSha256": "71d13dd8355d19424ab3195131dcd1c6bcb5763581014e2d3e7b5b83097e196c",
+      "methodHash": "5be56ba3f89ae3f53ec719c5df0d4388ddb0fb5dbd96cb0dc77ba456cb2b1f6f"
+    },
+    {
+      "recordId": "cell_0030_2012",
+      "cellId": "cell_0030",
+      "year": 2012,
+      "lon": 107.94999999999997,
+      "lat": 40.099999999999966,
+      "npp": 0.1386160279805352,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "prevNpp": 0.08793239051094888,
+      "jump": 0.05068363746958633,
+      "rulePrescreen": {
+        "method": "rule-based-advisory-v1",
+        "score": 0.0,
+        "flag": 0,
+        "reasons": []
+      },
+      "mlReview": {
+        "method": "IsolationForest(NPP-specific,unsupervised)",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "score": 0.057633,
+        "flag": 1,
+        "eraFlag": 1,
+        "interpretationStatus": "结构性断点待核"
+      },
+      "sourceHash": "local-sha256:675843ab3dd7e187f5221d40a1d182465ba09011c7b3465f606994b28a38cc3e",
+      "evidenceRef": "local-sha256:2ce9ccf0340e413457d9498f7244197b7a6a436a9d25127de548068ceb915533",
+      "modelVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "declarationCategory": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "knownLimitations": [
+        "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。",
+        "逐格跨年恒定，成因（产品掩膜/QC/填补）未证实；仅表示固定有效陆地足迹，不代表逐年有效观测质量稳定",
+        "人工审查意见仅作为复核记录单独保存，绝不反写为训练真值；本证据 attributionStatus 恒为 insufficient_evidence，不代表已证实的治理增汇。"
+      ],
+      "wholeBundlePackSha256": "71d13dd8355d19424ab3195131dcd1c6bcb5763581014e2d3e7b5b83097e196c",
+      "methodHash": "5be56ba3f89ae3f53ec719c5df0d4388ddb0fb5dbd96cb0dc77ba456cb2b1f6f"
+    }
+  ],
+  "targetsSha256": "local-sha256:9f27404b44e8d5aa912b46e3614e3ac7bd853315114fa88576c58c267f8b9275"
+}

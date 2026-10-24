@@ -1,0 +1,32 @@
+{
+  "schema": "CarbonSat-ChangeLedgerPresentationManifest-v1",
+  "presentationVersion": "1.4",
+  "scientificProtocolChanged": false,
+  "files": [
+    {
+      "path": "web/changes.html",
+      "bytes": 5016,
+      "sha256": "0af3a0ff60cf2bdedaaf3b4871a550248f8fb5a047c5d30d10266953b0020702"
+    },
+    {
+      "path": "web/changes.js",
+      "bytes": 19044,
+      "sha256": "f8d98e30cea344d84e5b45ba93f86c16b2e7be635acff68b043aa86b655cc6dc"
+    },
+    {
+      "path": "web/changes.css",
+      "bytes": 4964,
+      "sha256": "3e5029c3cd3c7151f5b3a7ed10fdc360d81d3a956a392edba06be11650eafc8c"
+    },
+    {
+      "path": "web/ui_en.js",
+      "bytes": 4532,
+      "sha256": "bc59c51a96f015c59cd97bda2cc9810f6b6b3d61e17ceeba156bba470baf46f6"
+    },
+    {
+      "path": "docs/CHANGE_LEDGER_V1.md",
+      "bytes": 36862,
+      "sha256": "041197d66462911aaa454f7b7aa5bc215c1925384f693d620fa803ac04773f46"
+    }
+  ]
+}

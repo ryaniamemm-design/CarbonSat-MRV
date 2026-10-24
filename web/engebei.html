@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarbonSat-MRV · 恩格贝研究案例（论文报告范围研究窗口）v1.2</title>
+<style>
+  :root{
+    --bg:#0f1216; --panel:#161b22; --panel2:#1c232c; --line:#2b333d;
+    --fg:#e6edf3; --dim:#9fb0c0; --accent:#58a6ff; --ok:#3fb950; --warn:#d29922; --bad:#f85149;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+  a{color:var(--accent)}
+  header{padding:18px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#141a21,#0f1216)}
+  header h1{margin:0 0 6px;font-size:18px}
+  .banner{margin:10px 0 0;padding:10px 12px;border:1px solid #6b4b00;background:#2a1f05;border-radius:6px;color:#ffd479;font-weight:600}
+  .wrap{padding:18px 22px;max-width:1180px}
+  .grid{display:grid;gap:14px}
+  .cols2{grid-template-columns:1fr 1fr}
+  @media (max-width:900px){.cols2{grid-template-columns:1fr}}
+  section.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  section.panel h2{margin:0 0 10px;font-size:15px;color:var(--fg);border-left:3px solid var(--accent);padding-left:8px}
+  .kv{display:flex;gap:10px;padding:3px 0;border-bottom:1px dashed #222a33}
+  .kv:last-child{border-bottom:0}
+  .kv span{flex:0 0 190px;color:var(--dim)}
+  .kv b{font-weight:600;min-width:0;overflow-wrap:anywhere;word-break:break-word}
+  .mono{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;overflow-wrap:anywhere;word-break:break-all}
+  .tag{display:inline-block;padding:1px 7px;border-radius:10px;background:#22303f;color:#9ecbff;font-size:12px;margin-right:4px}
+  .tag.ok{background:#12301b;color:#7ee787}
+  .tag.bad{background:#3a1416;color:#ff9c96}
+  .tag.warn{background:#332905;color:#ffd479}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:left}
+  th{color:var(--dim);font-weight:600}
+  td.num{text-align:right;font-family:ui-monospace,Consolas,monospace}
+  .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)} .dim{color:var(--dim)}
+  .small{font-size:12.5px;color:var(--dim)}
+  button,select,input[type=file]{background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:13px}
+  button{cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  ul.notes{margin:6px 0 0 18px;padding:0}
+  ul.notes li{margin:2px 0}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .bar{height:9px;background:#22303f;border-radius:5px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:var(--accent)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media (max-width:900px){.two-col{grid-template-columns:1fr}}
+  .pill{display:inline-block;background:#22303f;border-radius:10px;padding:1px 8px;margin:2px 4px 2px 0;font-size:12px;color:#c9d6e2}
+  .chart{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:8px}
+</style>
+</head>
+<body>
+<header>
+  <h1>恩格贝研究案例 · v1.2（独立只读研究案例；非官方项目边界）</h1>
+  <div class="small">CarbonSat-MRV · 零 CDN · 只读 · 不部署、不发交易、不读私钥 · 不计算碳量或信用量</div>
+  <div class="banner" id="statuteBanner">恩格贝相关论文报告范围研究窗口，非官方项目边界，非治理小班边界。</div>
+  <div class="row" style="margin-top:10px">
+    <span class="small">案例切换：</span>
+    <a href="./entry.html">项目入口</a>
+    <a href="./npp_entry.html">案例 A · 34 个离散研究足迹（既有主线）</a>
+    <b>案例 B · 恩格贝研究窗口（当前）</b>
+    <a href="./changes.html">变化台账</a>
+  </div>
+</header>
+
+<div class="wrap grid">
+
+  <section class="panel" id="pLoad">
+    <h2>0 · 载入数据包</h2>
+    <div class="row">
+      <button id="btnAuto">自动载入 web/engebei_bundle.json</button>
+      <label class="small">或选择文件载入：<input type="file" id="fileInput" accept="application/json"></label>
+      <button id="btnClear">清除已载入内容</button>
+    </div>
+    <div id="loadState" class="small" style="margin-top:8px">尚未载入。</div>
+  </section>
+
+  <section class="panel" id="pCase">
+    <h2>1 · 我现在看的是哪个案例？范围怎么来的？</h2>
+    <div id="caseInfo"><div class="small">载入数据包后显示。</div></div>
+  </section>
+
+  <section class="panel" id="pAcquire">
+    <h2>2 · 数据取得状态（24 年的取得 / 计算 / 覆盖是**三件事**）</h2>
+    <div id="acquireInfo"><div class="small">载入数据包后显示。</div></div>
+  </section>
+
+  <section class="panel" id="pYear">
+    <h2>3 · 年度结果（模型值 · 有效产品足迹上）</h2>
+    <div class="row">
+      <label class="small">选择年份：<select id="yearSel"></select></label>
+      <span class="small" id="yearHint"></span>
+    </div>
+    <div id="yearDetail" style="margin-top:10px"></div>
+  </section>
+
+  <section class="panel" id="pSeries">
+    <h2>4 · 年度序列（按 2012 分段呈现，**不拟合趋势、不给增长率**）</h2>
+    <div class="chart" id="chart"></div>
+    <div class="small" id="chartNote"></div>
+    <div style="margin-top:10px"><table id="yearTable"></table></div>
+  </section>
+
+  <section class="panel" id="pArea">
+    <h2>5 · 面积与覆盖（三个面积量不可混用）</h2>
+    <div id="areaInfo"><div class="small">载入数据包后显示。</div></div>
+  </section>
+
+  <section class="panel" id="pSrc">
+    <h2>6 · 来源与方法摘要</h2>
+    <div id="srcInfo"><div class="small">载入数据包后显示。</div></div>
+  </section>
+
+  <section class="panel" id="pExport">
+    <h2>7 · 下载与核验（四层来源证明**互不代替**）</h2>
+    <div class="row">
+      <button id="btnVerify">现场重算并核验</button>
+      <button id="btnPin">用本站独立持有的 pin 评估</button>
+      <button id="btnExport">生成导出件</button>
+      <button id="btnReimport">重新导入已生成导出件</button>
+      <button id="btnDownload">下载导出 JSON</button>
+    </div>
+    <div id="verifyVerdict" style="margin-top:10px"></div>
+    <div id="importVerdict" style="margin-top:10px"></div>
+    <div class="small" style="margin-top:8px">
+      ③ 源文件逐项复算：本页**不读源 CSV**，恒记「未核验」；由 <span class="mono">scripts/verify_engebei_case.js</span> 独立复算。<br>
+      ④ 原始来源真实性与科学精度：本页恒记 <b>NOT_VERIFIED</b>。
+    </div>
+  </section>
+
+  <section class="panel" id="pBoundary">
+    <h2>8 · 能说 / 不能说（固定声明，不得删减）</h2>
+    <div id="boundaryInfo"><div class="small">载入数据包后显示。</div></div>
+  </section>
+
+</div>
+
+<script src="./vendor/ethers.umd.min.js"></script>
+<script src="./npp_entry_core.js"></script>
+<script src="./engebei_core.js"></script>
+<script src="./engebei.js"></script>
+</body>
+</html>

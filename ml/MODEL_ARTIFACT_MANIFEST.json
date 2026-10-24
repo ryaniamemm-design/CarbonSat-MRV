@@ -1,0 +1,91 @@
+{
+  "schema": "CarbonSat-PackagedModelArtifacts-v1",
+  "scope": "Trusted packaged model artifacts and their frozen inputs; byte integrity only.",
+  "files": [
+    {
+      "path": "project/data/grid_samples.csv",
+      "bytes": 995190,
+      "sha256": "c3e457445b3e2ae0d35101a1d9e8e5d301855fca6e9e8f5d61049665d687ee5e"
+    },
+    {
+      "path": "project/data/landcover_34_2024.csv",
+      "bytes": 2762,
+      "sha256": "0ec3e24ee564db2c6471c9f5962984f0263dec12840935b7f5a17ce123d79028"
+    },
+    {
+      "path": "project/data/npp_subset_fullperiod.csv",
+      "bytes": 70251,
+      "sha256": "5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164"
+    },
+    {
+      "path": "project/evidence/anomaly_eval_report.json",
+      "bytes": 605,
+      "sha256": "a90b5db869d70aa15d6f64dcbaacdc0e3d6b8c581f5b6c57691776adbe4b1e3b"
+    },
+    {
+      "path": "project/evidence/anomaly_model.joblib",
+      "bytes": 2611766,
+      "sha256": "1aa29b1af39bd1a0f9a0540dc39e8b0c4ea5a86a69cb45e6750285d2d3326fac"
+    },
+    {
+      "path": "project/evidence/anomaly_model_status.json",
+      "bytes": 4764,
+      "sha256": "fd8e9a99fb83da2b2f94d33413e34617f77453b62453a03f0b80f35d31f45e0b"
+    },
+    {
+      "path": "project/evidence/anomaly_scores_grid.csv",
+      "bytes": 81558,
+      "sha256": "c9b14bc8f55183a25676c1140880a7de19d24d7efdbbed736fb33ecbde9ede64"
+    },
+    {
+      "path": "project/evidence/npp_anomaly/npp_anomaly_model.joblib",
+      "bytes": 2891134,
+      "sha256": "216e58702559b27bc06036c83b82abe706931d4349087bc8fd55571a46498fe3"
+    },
+    {
+      "path": "project/evidence/npp_anomaly/npp_anomaly_model_cellholdout.joblib",
+      "bytes": 2891798,
+      "sha256": "6a90cf588a3cdf0eebaed98984027155d89be1b61d8850e4aee5659ee6f1fc0b"
+    },
+    {
+      "path": "project/evidence/npp_anomaly/npp_anomaly_model_status.json",
+      "bytes": 14483,
+      "sha256": "f0e1486a0a0c4fbbf9bff48804ee71600d8862c86d2ef9cccde5a699ffe78ced"
+    },
+    {
+      "path": "project/evidence/npp_anomaly/npp_anomaly_model_timeholdout.joblib",
+      "bytes": 2815430,
+      "sha256": "73a0e5914507d38275eac1701fa084ef1389cb7c11f72cec66306afcbaa619f4"
+    },
+    {
+      "path": "project/evidence/npp_anomaly/npp_anomaly_scores.csv",
+      "bytes": 26031,
+      "sha256": "3615842b9d7b181a1b2f82d96eb13332b2fb673ca2e54977ca1dd8a3509312a1"
+    },
+    {
+      "path": "project/evidence/smoke/anomaly_eval_report.json",
+      "bytes": 605,
+      "sha256": "323dc1696787771cdaeaf9443afe7d2fd8613ee87ca23b049d1dd88047849fe2"
+    },
+    {
+      "path": "project/evidence/smoke/anomaly_model.joblib",
+      "bytes": 2637255,
+      "sha256": "114c290b59db4cff119fa87322493bd189f7b7ea6673ab9ce361b033103bc84a"
+    },
+    {
+      "path": "project/evidence/smoke/anomaly_model_status.json",
+      "bytes": 2760,
+      "sha256": "9814876a3f665a1ae1f0eea9a09915cfed43f790eb7a6ade1bfa26f1555c5991"
+    },
+    {
+      "path": "project/gee/_cell_centers.json",
+      "bytes": 1440,
+      "sha256": "ec37fdbae55fce45f8f11183f53b0a7bc359b9497bb6bc0a469b510682c5700e"
+    },
+    {
+      "path": "project/web/records.json",
+      "bytes": 142360,
+      "sha256": "8d0298153f86cea22788559e59568ed3566b30ceab1d66555bb16e0874b1c383"
+    }
+  ]
+}

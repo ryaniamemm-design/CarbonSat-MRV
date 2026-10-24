@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "CarbonSat-CurrentPack-v1.1",
+  "recordCount": 816,
+  "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+  "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+  "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+  "source": "evidence/evidence_pack_manifest.json",
+  "note": "当前（最新）证据包描述符；人工审查意见应绑定此 wholeBundlePackSha256。重新生成证据后此值会变化，旧意见将显示「版本过期」，不可静默套用到新证据。",
+  "landcoverStream": {
+    "streamId": "A2_NPP_LANDCOVER_VALID_FOOTPRINT",
+    "methodVersion": "CarbonSat-NPP-LandcoverValidFootprint-v0.1",
+    "schemaVersion": "CarbonSat-NPP-LandcoverValidFootprint-A2-v1.1",
+    "rowCount": 1523,
+    "cellYearCount": 816,
+    "anchorFields": [
+      "classRowRef",
+      "cellFootprintRef"
+    ],
+    "contentAnchor": "local-sha256:43f3235e805e10780352364e38b34c8be298c0ad5a3fd014531e454d34332a7b",
+    "declarationCategory": "DESCRIPTIVE_NPP_ONLY",
+    "attributionStatus": "insufficient_evidence",
+    "linkage": "UNLINKED（与 9 条碳主张无任何已核验对应关系）",
+    "scopeNote": "A2 为独立并行流；旧链上载荷（单条 evidenceCID）与旧人工复核下载包**不包含** A2，不可据此声称 A2 已上链或已进入旧包。"
+  }
+}

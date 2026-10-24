@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "CarbonSat-NPP-LandcoverValidFootprint-A2-v1.1",
+  "title": "CarbonSat-MRV A2 独立流：年度地类分解 · 有效足迹（描述性，非碳信用）",
+  "streamId": "A2_NPP_LANDCOVER_VALID_FOOTPRINT",
+  "note": "本 schema 为 A2 独立声明，**不并入** records_schema.json（索赔级 v3）。A2 是并行流，不建立任何指向 9 条碳主张的关系。v1.1：规范协议升 v2（数值显式展开）+ 补齐必填字段/声明/单位/行列绑定/兄弟集/格年唯一性校验。",
+  "unitOfRecord": "格年 × IGBP 类别 (cellId, year, lcCode)",
+  "claimClass": "DESCRIPTIVE_NPP_ONLY",
+  "attributionStatus": "insufficient_evidence",
+  "forbiddenOutputs": ["REMOVAL", "GOVERNANCE_INCREMENT", "CARBON_CREDIT"],
+  "contentFile": "evidence/a2_landcover_valid_footprint.json",
+  "generator": "pipeline/a2_landcover_valid_footprint.py",
+  "generatorVersion": "a2-landcover-content-v1.1",
+  "methodVersion": "CarbonSat-NPP-LandcoverValidFootprint-v0.1",
+  "canonicalRules": {
+    "version": "a2-canonical-v2",
+    "encoding": "utf-8",
+    "keyOrder": "sorted",
+    "separators": ["\", \"", "\": \""],
+    "stringEscaping": "JSON escape, ensure_ascii=False",
+    "numberRule": "整型 → 精确整数十进制串；浮点 → 最短往返十进制串**展开为纯十进制**（无指数/无多余零/无正号）：1e-7→\"0.0000001\"、1e16→\"10000000000000000\"、1.0→\"1\"、-0.0→\"0\"；拒绝 NaN/Inf",
+    "missingKeyRule": "规范化的对象缺键必须显式报错，不得静默折叠为 null",
+    "sharedVectorTable": "NUMERIC_VECTORS（Python pipeline/a2_landcover_valid_footprint.py 与 JS web/a2_core.js 逐字同一张表，26 项）",
+    "hashAlgo": "sha256",
+    "anchorPrefix": "local-sha256:",
+    "jsImplementation": "web/a2_core.js canonicalize()（与 Python 逐位一致；Node 交叉核验 test/a2_cross_impl.test.js）"
+  },
+  "requiredTopKeys": ["schemaVersion", "generator", "generatorVersion", "contentSchemaFile",
+    "methodVersion", "claimClass", "attributionStatus", "forbiddenOutputs", "unitOfRecord",
+    "canonicalRules", "anchorRules", "fieldSemantics", "provenance", "coverage",
+    "rows", "cells", "expectedPrimaryKeys", "contentAnchor"],
+  "rowKeys": ["cellId", "lon", "lat", "year", "lcCode", "lcName", "pixelCount", "areaM2",
+    "classValidAreaM2", "coverageRatio", "prod_kgC_yr", "prod_tC_yr", "intensity_kg_m2_yr",
+    "cellTotalAreaM2", "cellValidAreaM2", "totalIntegral_kgC_yr", "totalProd_tC_yr",
+    "product", "lcProduct", "mask", "crs", "scale", "method_version", "classRowRef"],
+  "cellKeys": ["cellId", "year", "cellTotalAreaM2", "cellValidAreaM2", "totalIntegral_kgC_yr",
+    "totalProd_tC_yr", "classRowRefs", "cellFootprintRef"],
+  "anchors": {
+    "classRowRef": {
+      "formula": "local-sha256: sha256(canonical(逐类行 23 字段))",
+      "boundFields": ["cellId", "lon", "lat", "year", "lcCode", "lcName", "pixelCount",
+        "areaM2", "classValidAreaM2", "coverageRatio", "prod_kgC_yr", "prod_tC_yr",
+        "intensity_kg_m2_yr", "cellTotalAreaM2", "cellValidAreaM2", "totalIntegral_kgC_yr",
+        "totalProd_tC_yr", "product", "lcProduct", "mask", "crs", "scale", "method_version"],
+      "meaning": "类别行内容锚点：绑定全部影响解释的字段（单位、格网/几何来源、类别、面积分母、产品与版本、掩膜、统计投影尺度、方法版本）"
+    },
+    "cellFootprintRef": {
+      "formula": "local-sha256: sha256(canonical({cellId, year, cellTotalAreaM2, cellValidAreaM2, totalIntegral_kgC_yr, totalProd_tC_yr, classRowRefs(排序)}))",
+      "meaning": "格年锚点：在该格年全部类别行锚点的排序集合之上再加格级三项总量",
+      "siblingSetRules": [
+        "classRowRefs 必须是该格年**全部**类别行锚点，非空、无重复、元素须匹配 ^local-sha256:[0-9a-f]{64}$。",
+        "本格年每一行的 classRowRef 必须出现在其所属格年的 classRowRefs 内（自含）。",
+        "空兄弟集 / 少项 / 重复 / 非法格式 / 缺项一律**失败关闭**；绝不允许退化为『信任包内自报值』。",
+        "浏览器下载包另带 classRowCount；提供时其值必须等于 classRowRefs.length。"
+      ]
+    },
+    "contentAnchor": {
+      "formula": "local-sha256: sha256(canonical(除 contentAnchor 外的全部内容))",
+      "meaning": "A2 内容文件自身锚点；**不含** packSha256（避免循环）"
+    }
+  },
+  "rowFields": {
+    "cellId": {"type": "string", "required": true, "nullable": false, "unit": null},    "lon": {"type": "number", "required": true, "nullable": false, "unit": "degree"},
+    "lat": {"type": "number", "required": true, "nullable": false, "unit": "degree"},
+    "year": {"type": "integer", "required": true, "nullable": false, "unit": "year", "range": [2001, 2024]},
+    "lcCode": {"type": "integer", "required": true, "nullable": false, "unit": null},
+    "lcName": {"type": "string", "required": true, "nullable": false, "unit": null},
+    "pixelCount": {"type": "number", "required": false, "nullable": true, "unit": "weighted pixel count"},
+    "areaM2": {"type": "number", "required": true, "nullable": false, "unit": "m^2", "role": "background-only"},
+    "classValidAreaM2": {"type": "number", "required": true, "nullable": false, "unit": "m^2", "role": "intensity-denominator"},
+    "coverageRatio": {"type": "number", "required": false, "nullable": true, "unit": "dimensionless", "range": [0, 1]},
+    "prod_kgC_yr": {"type": "number", "required": false, "nullable": true, "unit": "kg C / yr"},
+    "prod_tC_yr": {"type": "number", "required": false, "nullable": true, "unit": "t C / yr"},
+    "intensity_kg_m2_yr": {"type": "number", "required": false, "nullable": true, "unit": "kg C / m^2 / yr"},
+    "cellTotalAreaM2": {"type": "number", "required": true, "nullable": false, "unit": "m^2"},
+    "cellValidAreaM2": {"type": "number", "required": true, "nullable": false, "unit": "m^2"},
+    "totalIntegral_kgC_yr": {"type": "number", "required": true, "nullable": false, "unit": "kg C / yr"},
+    "totalProd_tC_yr": {"type": "number", "required": true, "nullable": false, "unit": "t C / yr"},
+    "product": {"type": "string", "required": true, "nullable": false, "unit": null},
+    "lcProduct": {"type": "string", "required": true, "nullable": false, "unit": null},
+    "mask": {"type": "string", "required": true, "nullable": false, "unit": null},
+    "crs": {"type": "string", "required": true, "nullable": false, "unit": null},
+    "scale": {"type": "integer", "required": true, "nullable": false, "unit": "m"},
+    "method_version": {"type": "string", "required": true, "nullable": false, "unit": null}
+  },
+  "nullSemantics": {
+    "truthTable": [
+      {"classValidAreaM2": ">0", "prod": "finite (incl 0 and <0)", "semantics": "有效足迹内产品积分值（合法零 / 合法负）", "allowed": true},
+      {"classValidAreaM2": "==0", "prod": "null", "semantics": "无有效观测 → 缺测（展示为『无有效产品值』）", "allowed": true},
+      {"classValidAreaM2": "==0", "prod": "0 or other finite", "semantics": "伪零（无观测却写值）", "allowed": false},
+      {"classValidAreaM2": ">0", "prod": "null / missing", "semantics": "未知值缺失（绝不默认 0）", "allowed": false}
+    ],
+    "rules": [
+      "null 必须序列化为 JSON null（不是 \"\"、不是 0、不是省略字段）。",
+      "intensity 仅在 classValidAreaM2>0 时定义；classValidAreaM2>0 且 prod==0 → intensity==0.0（合法）；prod<0 → intensity<0（合法）。",
+      "消费者禁止 prod or 0 / .get(...,0) / sum(p for p in prods if p) / ?? 0 于生产量字段。"
+    ]
+  },
+  "validationRules": {
+    "requiredFields": [
+      "rowKeys / cellKeys / requiredTopKeys 均按**精确键集**校验：缺键与多余键都拒绝。",
+      "缺键**不得**静默折叠为 null（v1 下 JS `obj[k]` 取到 undefined 会被规范化成 \"null\"，使『删掉必填字段』与『值为 null』不可区分）。"
+    ],
+    "declaration": [
+      "claimClass 只允许 DESCRIPTIVE_NPP_ONLY；attributionStatus 只允许 insufficient_evidence。",
+      "claimClass / 下载包 declarationCategory 落在 forbiddenOutputs 内即拒绝。",
+      "forbiddenOutputs 必须与约定完全一致（无遗漏、无越界）。"
+    ],
+    "units": [
+      "fieldSemantics 与权威（类型/单位/可空/含义）表**逐字段深度比对**：改任一 unit 即拒绝。",
+      "单位链：prod_tC_yr == prod_kgC_yr/1000；intensity_kg_m2_yr == prod_kgC_yr/classValidAreaM2（分母为**有效面积**）。",
+      "areaM2（全类面积，仅背景）与 classValidAreaM2（逐类有效面积，强度分母）单位相同但语义不同，不得互换。"
+    ],
+    "rowToCellBinding": [
+      "行内 cellTotalAreaM2 / cellValidAreaM2 / totalIntegral_kgC_yr / totalProd_tC_yr 必须与所属格年条目一致。",
+      "行与格年的 cellId / year 必须一致；本行 classRowRef 必须在该格年兄弟集内。"
+    ],
+    "uniqueness": [
+      "(cellId, year) 在 cells 内唯一（格年唯一性）。",
+      "(cellId, year, lcCode) 在 rows 内唯一；expectedPrimaryKeys 无重复。"
+    ],
+    "counterexamples": "反例一律使用『**已重算自摘要的非法输入**』（contentAnchor / packageSha256 同步重算），以证明失败来自语义与关系判定，而非摘要未同步。见 pipeline/a2_landcover_valid_footprint.py --selftest 反例13–24 与 test/a2_cross_impl.test.js 反例1–15。"
+  },
+  "invariants": [
+    "landcover_valid_footprint_null_never_zero",
+    "class_area_and_valid_area_are_distinct_denominators",
+    "no_link_to_carbon_claims",
+    "no_pack_sha256_inside_content",
+    "attribution_always_insufficient_evidence",
+    "class_rows_1523_cell_years_816",
+    "cell_year_keys_unique",
+    "sibling_set_nonempty_self_contained"
+  ],
+  "limitations": [
+    "逐类值是 MOD17 模型 NPP 的产品积分值，不是地面实测碳量、不是碳汇、不是碳信用。",
+    "零有效足迹（classValidAreaM2==0）→ 生产量/强度 null（缺测），不得写作 0、不得称『真零』。",
+    "地类逐年变化不得解读为植被恢复/治理增汇；成因未证实。",
+    "跨 2012 断点不得作增减解释；不得跨断点、不得外推、不得给 tCO2e。",
+    "sourceHash / CSV 文件哈希只证明与本地 CSV 一致，不证明 GEE 原始资产真实。",
+    "本流与 9 条碳主张之间不存在任何已核验的对应关系（UNLINKED）。"
+  ]
+}

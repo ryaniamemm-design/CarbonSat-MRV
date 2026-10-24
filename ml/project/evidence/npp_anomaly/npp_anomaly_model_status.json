@@ -1,0 +1,412 @@
+{
+  "trained": true,
+  "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+  "featureVersion": "CarbonSat-NPP-Features-v1.0",
+  "modelType": "IsolationForest(unsupervised, NPP-specific, 3 separate models)",
+  "generatedAt": "2026-10-05T15:52:41.841100+00:00",
+  "trainingCsv": "data/npp_subset_fullperiod.csv",
+  "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+  "loadReport": {
+    "rows_before": 816,
+    "rows_after": 816,
+    "rows_dropped": 0
+  },
+  "features": [
+    "npp",
+    "nppJump",
+    "nppRelJump",
+    "nppZscore",
+    "validAreaRatio",
+    "varJump",
+    "yearNorm",
+    "eraFlag"
+  ],
+  "eraBreakYear": 2012,
+  "contamination": 0.05,
+  "nEstimators": 200,
+  "randomState": 20261005,
+  "featureMeta": {
+    "featureList": [
+      "npp",
+      "nppJump",
+      "nppRelJump",
+      "nppZscore",
+      "validAreaRatio",
+      "varJump",
+      "yearNorm",
+      "eraFlag"
+    ],
+    "featureVersion": "CarbonSat-NPP-Features-v1.0",
+    "eraBreakYear": 2012,
+    "yearMin": 2001,
+    "yearMax": 2024,
+    "nCells": 34,
+    "nSamples": 816,
+    "withinCellBaselineCount": 816,
+    "globalFallbackCount": 0
+  },
+  "modelPath": "evidence/npp_anomaly/npp_anomaly_model.joblib",
+  "timeHoldoutModelPath": "evidence/npp_anomaly/npp_anomaly_model_timeholdout.joblib",
+  "cellHoldoutModelPath": "evidence/npp_anomaly/npp_anomaly_model_cellholdout.joblib",
+  "scoreTable": "evidence/npp_anomaly/npp_anomaly_scores.csv",
+  "formalModel": {
+    "role": "供正式逐条推断使用（816 条分数表 / 证据记录）",
+    "trainSamples": 816,
+    "trainYears": [
+      2001,
+      2024
+    ],
+    "trainCellsCount": 34,
+    "trainingSubsetSha256": "sha256:4e0afea4d3e46d818cbd7e4b95c2485793a7a698eb3b331cdf2ebae255691db2",
+    "featureParamsSummary": {
+      "yearMin": 2001,
+      "yearMax": 2024,
+      "eraBreakYear": 2012,
+      "nCells": 34,
+      "globalFallbackCells": 0
+    },
+    "modelFileHash": "sha256:216e58702559b27bc06036c83b82abe706931d4349087bc8fd55571a46498fe3"
+  },
+  "timeHoldout": {
+    "role": "仅用于时间外推检查；时间测试集(>2016)只由本模型评分",
+    "cutYear": 2016,
+    "trainSamples": 544,
+    "trainYears": [
+      2001,
+      2016
+    ],
+    "trainCellsCount": 34,
+    "testSamples": 272,
+    "testYears": [
+      2017,
+      2024
+    ],
+    "trainingSubsetSha256": "sha256:68dfb7b306200a46fc02dcc43558f1b3821be860a9c0a436e665ad8078f685b8",
+    "featureParamsSummary": {
+      "yearMin": 2001,
+      "yearMax": 2016,
+      "eraBreakYear": 2012
+    },
+    "modelFileHash": "sha256:73a0e5914507d38275eac1701fa084ef1389cb7c11f72cec66306afcbaa619f4",
+    "historySeed": {
+      "purpose": "为测试期逐格提供截至训练期最后一年的 NPP 与 validAreaRatio 历史状态，使 2017 可用 2016 值算跳变；后续年份只用其前一已出现的值 carry-forward",
+      "source": "tr2（训练期 ≤2016）每格最后一年（即 2016）的 (npp, validAreaRatio)",
+      "rule": "首测试年(>训练末年)跳变=与本格训练末年之差；其后逐年只用前一已出现年；绝不读取未来年份，也不重算冻结的 median/MAD 或年份归一化参数",
+      "nCellsSeeded": 34,
+      "illustrative_cell_0020_2017_nppJump": "由 2016、2017 原始 NPP 之差计算（非 0 修复）；具体值见下方反例①核验"
+    },
+    "note": "时间测试集(>2016)只由本 ≤2016 模型评分；yearNorm 的 (min,max) 与格内 median/MAD 均用训练期(≤2016)固定参数；首年跳变改用训练末年历史基线（修复此前在测试子集内重算导致的 2017 特征=0 的泄漏/缺失）"
+  },
+  "cellHoldout": {
+    "role": "仅用于空间外推检查；未见网格只由本模型评分",
+    "testRatio": 0.25,
+    "nHoldoutCells": 8,
+    "testSamples": 192,
+    "testCellsSample": [
+      "cell_0020",
+      "cell_0030",
+      "cell_0055",
+      "cell_0061",
+      "cell_0062"
+    ],
+    "trainSamples": 624,
+    "trainCellsCount": 26,
+    "withinCellBaselineAvailableCount": 0,
+    "globalFallbackCount": 192,
+    "trainingSubsetSha256": "sha256:229761a2706f72012c39e54ffd5c8fecdf3c0fa2c51c23a01fea52643b363f84",
+    "featureParamsSummary": {
+      "yearMin": 2001,
+      "yearMax": 2024,
+      "eraBreakYear": 2012
+    },
+    "modelFileHash": "sha256:6a90cf588a3cdf0eebaed98984027155d89be1b61d8850e4aee5659ee6f1fc0b",
+    "fallbackNote": "未见网格无历史基线 → 回退全局 median/MAD 并标记withinCellBaseline=0；绝不跨测试网格重算格内统计量（防空间泄漏）。"
+  },
+  "holdoutDefinition": {
+    "time": {
+      "split": "year <= 2016 训练，> 2016 测试",
+      "scorer": "只由 ≤2016 模型评分（测试年未被训练）",
+      "fixedParams": true,
+      "leakageChecks": [
+        "yearNorm 用训练期(min,max)而非测试集自身",
+        "格内 median/MAD 用训练期，不用测试期未来年份"
+      ]
+    },
+    "cell": {
+      "split": "按网格分组，25% 网格作未见单元",
+      "scorer": "只由所见网格模型评分",
+      "fixedParams": true,
+      "unseenCellFallback": "全局 median/MAD，标记 withinCellBaseline=0"
+    }
+  },
+  "holdoutScoreDrift": {
+    "time": {
+      "label": "时间留出：≤2016 模型评分 >2016（测试年未被训练，首年跳变用训练末年基线）",
+      "trainStat": {
+        "mean": -0.111,
+        "std": 0.0571,
+        "p50": -0.1217,
+        "p95": -0.0,
+        "max": 0.0709
+      },
+      "holdoutStat": {
+        "mean": -0.0538,
+        "std": 0.0372,
+        "p50": -0.0607,
+        "p95": 0.0118,
+        "max": 0.0687
+      },
+      "meanShift": 0.0572,
+      "note": "无真实标签，只比较分数分布漂移；不构成准确率/召回率。"
+    },
+    "cell": {
+      "label": "空间留出：所见网格模型评分未见网格（新网格用全局回退基线）",
+      "trainStat": {
+        "mean": -0.0961,
+        "std": 0.0487,
+        "p50": -0.105,
+        "p95": 0.0,
+        "max": 0.0742
+      },
+      "holdoutStat": {
+        "mean": -0.0967,
+        "std": 0.0394,
+        "p50": -0.0996,
+        "p95": -0.0274,
+        "max": 0.0606
+      },
+      "meanShift": -0.0006,
+      "note": "无真实标签，只比较分数分布漂移；不构成准确率/召回率。"
+    }
+  },
+  "flagConcentration": {
+    "nSamples": 816,
+    "nFlagged": 41,
+    "overallFlagRate": 0.0502,
+    "byYear": {
+      "2001": {
+        "flags": 4,
+        "samples": 34,
+        "flagRate": 0.1176,
+        "shareOfAllFlags": 0.0976
+      },
+      "2002": {
+        "flags": 9,
+        "samples": 34,
+        "flagRate": 0.2647,
+        "shareOfAllFlags": 0.2195
+      },
+      "2003": {
+        "flags": 1,
+        "samples": 34,
+        "flagRate": 0.0294,
+        "shareOfAllFlags": 0.0244
+      },
+      "2004": {
+        "flags": 2,
+        "samples": 34,
+        "flagRate": 0.0588,
+        "shareOfAllFlags": 0.0488
+      },
+      "2005": {
+        "flags": 2,
+        "samples": 34,
+        "flagRate": 0.0588,
+        "shareOfAllFlags": 0.0488
+      },
+      "2006": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2007": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2008": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2009": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2010": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2011": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2012": {
+        "flags": 17,
+        "samples": 34,
+        "flagRate": 0.5,
+        "shareOfAllFlags": 0.4146
+      },
+      "2013": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2014": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2015": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2016": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2017": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2018": {
+        "flags": 3,
+        "samples": 34,
+        "flagRate": 0.0882,
+        "shareOfAllFlags": 0.0732
+      },
+      "2019": {
+        "flags": 1,
+        "samples": 34,
+        "flagRate": 0.0294,
+        "shareOfAllFlags": 0.0244
+      },
+      "2020": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2021": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2022": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2023": {
+        "flags": 0,
+        "samples": 34,
+        "flagRate": 0.0,
+        "shareOfAllFlags": 0.0
+      },
+      "2024": {
+        "flags": 2,
+        "samples": 34,
+        "flagRate": 0.0588,
+        "shareOfAllFlags": 0.0488
+      }
+    },
+    "maxSingleYearFlagShare": 0.4146,
+    "maxShareYear": 2012,
+    "concentrated": true,
+    "threshold": 0.2,
+    "flagRate_preEra": 0.0481,
+    "flagRate_era": 0.052,
+    "flagRate_2012": 0.5,
+    "note": "集中标记检查：若单一年份 flag 占全部 flag 比例超阈值即判 concentrated。2012 年 flag 集中（34/34 格同升的结构性断点），属'集中标记、原因未证实'——既非已证实的真实误报，也非治理异常；跨 2012 的异常判定不可用。"
+  },
+  "processTest": {
+    "scope": "PROCESS_TEST_ONLY",
+    "nInjectedAnomalies": 19,
+    "precision_onSynthetic": 0.8182,
+    "recall_onSynthetic": 0.4737,
+    "precisionAtK_onSynthetic": 0.7368,
+    "truePositives": 9,
+    "falsePositives": 2,
+    "falseNegatives": 10,
+    "disclaimer": "以上 precision/recall 仅针对**注入的合成异常**，用于验证代码路径。真实 NPP 格年无异常标签，因此不存在真实 Precision/Recall/置信度，本项目不作此类声明。"
+  },
+  "whySeparateModel": "旧模型 CarbonSat-AnomalyIF-v1.0 的 7 维特征为 fvc/ndvi/clearPixelRatio/spatialCoverage/sensorAgreement/fvcJump/yearNorm，而 NPP 源表仅有 cellId/lon/lat/year/validAreaRatio/npp_kg_m2_yr；其中 fvc/ndvi/clearPixelRatio/spatialCoverage/sensorAgreement 完全不存在。sklearn 只校验维度不校验语义（实测零向量可正常返回分数），直接套用旧分数会得到无意义结果。本模型独立训练，并显式区分三套模型以堵住留出评估的信息泄漏。",
+  "noRealLabels": true,
+  "honestyStatement": "真实 NPP 格年没有异常标签，因此本模型【不提供也不声称】真实 Precision / Recall / F1 / 置信度。所有指标要么是描述性的（flag 率、集中度、分数分布漂移），要么明确标注为合成注入的流程测试。时间/空间留出评估各自使用独立训练的模型与冻结特征参数，时间测试集只由 ≤2016 模型评分，杜绝训练期见到测试年份或测试网格。",
+  "year2012Statement": "2012 年 flag 属【集中标记、原因未证实】（concentrated flagging, cause unverified）：既非已证实的真实误报（real false positive），也非治理异常（governance anomaly）。严禁据此宣称模型可靠或存在治理效应；跨 2012 的异常判定不可用。",
+  "advisoryOnly": "ML 分数与规则预审都只给 REVIEW 优先级，不影响 attributionStatus / insufficient_evidence / REMOVAL 门禁。",
+  "rankingComparison": {
+    "note": "在各自留出测试集上比较 ML 排序与现有规则、稳健统计基线的重合/分歧；无真实标签，仅作描述性重合/分歧统计，不以分数漂移证明模型有效。",
+    "baseline": "per-cell median/MAD 稳健 z（冻结训练期参数，|z|>3.5 标异常）",
+    "full": {
+      "threshold": 3.5,
+      "nML": 41,
+      "nRule": 0,
+      "nBaseline": 5,
+      "overlap": {
+        "mlAndRule": 0,
+        "mlAndBaseline": 3,
+        "ruleAndBaseline": 0,
+        "allThree": 0
+      },
+      "mlOnly": 38,
+      "baselineOnly": 2,
+      "ruleOnly": 0,
+      "spearmanMlVsAbsZ": 0.40463511554204823,
+      "honestyNote": "无真实标签：仅报告三类方法的 flag 重合/分歧计数与排序相关性；不以分数漂移证明模型有效。规则基线仅用数据有效性字段（validAreaRatio / NPP 越界），未含土地覆盖检查。"
+    },
+    "timeHoldout": {
+      "threshold": 3.5,
+      "nML": 29,
+      "nRule": 0,
+      "nBaseline": 29,
+      "overlap": {
+        "mlAndRule": 0,
+        "mlAndBaseline": 11,
+        "ruleAndBaseline": 0,
+        "allThree": 0
+      },
+      "mlOnly": 18,
+      "baselineOnly": 18,
+      "ruleOnly": 0,
+      "spearmanMlVsAbsZ": 0.38045067587068887,
+      "honestyNote": "无真实标签：仅报告三类方法的 flag 重合/分歧计数与排序相关性；不以分数漂移证明模型有效。规则基线仅用数据有效性字段（validAreaRatio / NPP 越界），未含土地覆盖检查。"
+    },
+    "cellHoldout": {
+      "threshold": 3.5,
+      "nML": 2,
+      "nRule": 0,
+      "nBaseline": 0,
+      "overlap": {
+        "mlAndRule": 0,
+        "mlAndBaseline": 0,
+        "ruleAndBaseline": 0,
+        "allThree": 0
+      },
+      "mlOnly": 2,
+      "baselineOnly": 0,
+      "ruleOnly": 0,
+      "spearmanMlVsAbsZ": 0.21591772237745172,
+      "honestyNote": "无真实标签：仅报告三类方法的 flag 重合/分歧计数与排序相关性；不以分数漂移证明模型有效。规则基线仅用数据有效性字段（validAreaRatio / NPP 越界），未含土地覆盖检查。"
+    }
+  }
+}

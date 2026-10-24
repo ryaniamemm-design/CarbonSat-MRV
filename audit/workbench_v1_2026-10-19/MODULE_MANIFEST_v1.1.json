@@ -1,0 +1,67 @@
+{
+  "moduleVersion": "CarbonSat-ResearchWorkbench-v1.1",
+  "generatedAtUTC": "2026-10-19T10:38:46.747637+00:00",
+  "scope": "Read-only research workbench over existing products; not anchored by the scientific pack or public chain, and does not define any project boundary. The evidence registry binds historical conclusions to product identity only and executes no recomputation",
+  "files": [
+    {
+      "path": "web/workbench_core.js",
+      "bytes": 43968,
+      "sha256": "3788799537502267eddcbabb3843f285aee69c4adda86b9f755e7ffe65a50bae"
+    },
+    {
+      "path": "web/workbench.html",
+      "bytes": 5841,
+      "sha256": "e8eb5b2d42c84c91f473aadb61717d1fc0ee6c23e4fd39bd296bb0eb701f037e"
+    },
+    {
+      "path": "web/workbench.css",
+      "bytes": 18772,
+      "sha256": "ecbd60d193887186412d7d01a5b7dc5b3d85f8cb964160b71b3bb78d06688c1f"
+    },
+    {
+      "path": "web/workbench.js",
+      "bytes": 53928,
+      "sha256": "6e50a9677e924decac5029ceb13904bb64cb3d2f62c979ec730cc04112778cdf"
+    },
+    {
+      "path": "scripts/verify_workbench.js",
+      "bytes": 26565,
+      "sha256": "bc6ee35e4a44c92828e3aefa6ac6507834596ef4e0d789f65f7e56712ce8b682"
+    },
+    {
+      "path": "scripts/verify_workbench_module.py",
+      "bytes": 9301,
+      "sha256": "0ab865e79fa7a5caaba236c96428fc882740c6a69a7282708c341a93d2be3d02"
+    },
+    {
+      "path": "scripts/browser_workbench_drive.js",
+      "bytes": 32536,
+      "sha256": "87dfc6a58dc22ace999ebf6e6e2e6b494c61b5c3ebebaa82491c5adbbdf2cf88"
+    },
+    {
+      "path": "scripts/build_workbench_evidence_registry.js",
+      "bytes": 10504,
+      "sha256": "3e0f1fa068dde0456f1e7fcbcd30e21e7dd7537874ef7cc2ca3995ab5553c7fb"
+    },
+    {
+      "path": "scripts/workbench_shots.js",
+      "bytes": 9145,
+      "sha256": "44f5785ba8680aa9e92500eb0e301eee5372b9abd27c588f30579ae0df3d9e6a"
+    },
+    {
+      "path": "web/workbench_evidence_registry.json",
+      "bytes": 6901,
+      "sha256": "d1a90f6b03ca19a4c0de989debc5343f22314c5a0d2e7559e66f0f8e869421ba"
+    },
+    {
+      "path": "test/workbench.test.js",
+      "bytes": 27899,
+      "sha256": "58fa0302945c8b001a0cdd583f9ec105b8da6b667b9b01c8736d0bde1c8a0cc6"
+    },
+    {
+      "path": "docs/WORKBENCH_V1.md",
+      "bytes": 17946,
+      "sha256": "5bd100b1853dc23a42b789019e67190c2e535e9ae6c7059649b0537fc7bd1ec0"
+    }
+  ]
+}

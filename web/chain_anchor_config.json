@@ -1,0 +1,54 @@
+{
+  "configVersion": "CarbonSat-PublicChainAnchor-v1.0",
+  "generatedFrom": {
+    "deployState": "audit/one_record_anchor/sepolia_deploy_state.json",
+    "anchorResult": "audit/one_record_anchor/sepolia_anchor_result.json",
+    "independentVerification": "audit/one_record_anchor/sepolia_independent_verification.json",
+    "packManifest": "evidence/evidence_pack_manifest.json"
+  },
+  "network": "sepolia",
+  "chainId": 11155111,
+  "contractAddress": "0x248EFE2E5579613d47e9Abe743d7528fBECE3c88",
+  "recordId": "cell_0030_2012",
+  "packHash": "0xb3cd7107866918846f3a99f04350c037f046ae7864e7c045f8b0108c2cc75402",
+  "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+  "declarationCategory": "DESCRIPTIVE_NPP_ONLY",
+  "submitter": "0xD1009F9Ee57EeF40C33822326Caf32Fa6C2E4b88",
+  "deployTxHash": "0x4767c1485cae387e9da3bb40013fcffdb36f26acdd3a617bcb6e20b5e5299ebc",
+  "deployBlock": 11876912,
+  "registerTxHash": "0x79dee25dba251dc339049ca3d91400f32d5fbb5dacb85def9e507262303e450f",
+  "registerBlock": 11876913,
+  "explorer": "https://sepolia.etherscan.io",
+  "links": {
+    "contract": "https://sepolia.etherscan.io/address/0x248EFE2E5579613d47e9Abe743d7528fBECE3c88",
+    "deployTx": "https://sepolia.etherscan.io/tx/0x4767c1485cae387e9da3bb40013fcffdb36f26acdd3a617bcb6e20b5e5299ebc",
+    "registerTx": "https://sepolia.etherscan.io/tx/0x79dee25dba251dc339049ca3d91400f32d5fbb5dacb85def9e507262303e450f"
+  },
+  "rpc": {
+    "verifiedReadbackRpcUrl": "https://ethereum-sepolia-rpc.publicnode.com",
+    "note": "独立核验所用只读 RPC；网页默认预填该项，仅用于 getAnchor 只读调用。"
+  },
+  "verifiedAtUTC": "2026-10-09T12:13:01.561Z",
+  "verificationReport": "audit/one_record_anchor/sepolia_independent_verification.json",
+  "boundary": {
+    "onChainAnchoredFields": [
+      "packHash",
+      "methodVersion",
+      "declarationCategory"
+    ],
+    "onlySingleRecordAnchored": true,
+    "recordCountAnchored": 1,
+    "wholeBundleOnChainAnchored": false,
+    "a2StreamOnChainAnchored": false,
+    "sourceFileVerificationOnChainAnchored": false,
+    "ipfsUsed": false,
+    "noCarbonCredit": true,
+    "notGovernanceAttribution": true,
+    "attributionStatus": "insufficient_evidence",
+    "claimsReview": 9,
+    "removal": 0,
+    "linksEstablished": 0,
+    "statement": "公共链上仅登记**单条**描述性证据（cell_0030_2012）的 packHash / methodVersion / declarationCategory 三项。整包 packSha256、A2 年度地类分解流、源文件逐项核验结果**均未上链**。本登记不构成碳信用、治理增汇、碳汇认证或 REMOVAL；归因状态恒为 insufficient_evidence；816 条 NPP 记录与 9 条碳主张保持 UNLINKED。"
+  },
+  "localStageNote": "本机 Hardhat 内存链（chainId=31337）的单条闭环仍保留为历史阶段记录；其交易只存在于内存态、随进程销毁，不可被公众持续查询，不得当作公共链上证据。"
+}

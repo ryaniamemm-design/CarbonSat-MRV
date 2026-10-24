@@ -1,0 +1,411 @@
+{
+  "meta": {
+    "generator": "scripts/build_web_sample.py",
+    "generatorVersion": "CarbonSat-WebSample-v1.0",
+    "methodVersion": "MOD17A3HGF.v6.1",
+    "declarationCategory": "DESCRIPTIVE_NPP_ONLY",
+    "attributionStatus": "insufficient_evidence",
+    "note": "描述性 NPP 证据样本（非碳信用/非增汇/非 REMOVAL）。声明类别仅 DESCRIPTIVE_NPP_ONLY。",
+    "sampleCount": 12,
+    "selectionRule": {
+      "version": "web-sample-selection-v1",
+      "rule": "按 interpretationStatus 分三档，各档按 recordId 字典序升序取前 N 条：结构性断点待核=2、建议复核=4、未被模型标记=6；共 12 条。不使用随机数、不使用时间戳，输出仅依赖 816 条记录内容。",
+      "quotas": {
+        "结构性断点待核": 2,
+        "建议复核": 4,
+        "未被模型标记": 6
+      },
+      "sortKey": "recordId",
+      "expectedCount": 12
+    },
+    "sourceRecords": {
+      "path": "evidence/npp_evidence_records.json",
+      "recordCount": 816,
+      "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+    },
+    "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+    "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+    "twoHashSemantics": {
+      "singlePackageKeccak256": "网页对每条记录现场生成的下载包哈希（e2e_core.buildPackage）。它只证明【下载的那份 JSON】与网页选中的记录逐字段一致（传输/内容一致性），不证明样本来自管线。",
+      "sourceRecordAnchors": "每条记录的 sourceHash（与源 CSV 行逐字节一致）+ evidenceRef（记录体内容锚点）。网页样本的 NPP/AI 状态/来源锚点被改时，正是这一层被抓出。",
+      "wholeBundlePackSha256": "整包哈希（由 build_evidence 从纳入文件+元数据+全部 evidenceRef+methodHash 合成）。它与 sourceHash/evidenceRef 一起证明【本样本来自本次管线构建】。"
+    },
+    "sourceHashScope": "sourceHash = sha256(对 CSV 选定字段按固定精度规范化后的规范串 row_source_string)；它证明'该记录确实由此刻本地 CSV 的对应格行、按既定字段与精度规则生成'，不证明 GEE 原始资产(MODIS/061/MOD17A3HGF)的真实性与未被下游篡改，也不证明导出脚本未被改动。GEE 原始来源真实性须由外部独立核对（不在本契约范围内）。",
+    "verifyCommand": "python scripts/build_web_sample.py --verify"
+  },
+  "records": [
+    {
+      "recordId": "cell_0020_2001",
+      "cellId": "cell_0020",
+      "year": 2001,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.0745414515665421,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:d4e270e6fbb35701c573be0b5d82e80ab1e7e362e216a2ceda819715df88a7c5",
+      "evidenceRef": "local-sha256:0c56c00aec276628ce55d6eaf76e73d1a62ef0517239e6a0a561cbce1b015eb8",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": -0.08695,
+        "flag": 0,
+        "interpretationStatus": "未被模型标记",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0020_2002",
+      "cellId": "cell_0020",
+      "year": 2002,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.12172007185972987,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:bbf3e64bc804e69ee559c557575ab6dc1959a3354a6d27197fa99f13bce991e0",
+      "evidenceRef": "local-sha256:ad9c135edabcd1c8cfa31b37ba49790a25d12f00f4173c946d796993c6327803",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": 0.062134,
+        "flag": 1,
+        "interpretationStatus": "建议复核",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0020_2003",
+      "cellId": "cell_0020",
+      "year": 2003,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.094977832710549,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:f26d2993402370573456f9b629e89490d9f374a85ec325554b1f30a6b2020a46",
+      "evidenceRef": "local-sha256:e3b6f9d82f7a51f15a750b7a43f6aaeac85f72a49a5aed0eacea8d0cd2a8501c",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": -0.08175,
+        "flag": 0,
+        "interpretationStatus": "未被模型标记",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0020_2004",
+      "cellId": "cell_0020",
+      "year": 2004,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.1062312963495257,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:ba8d91229659df77a65e589181f85e8aa271c0ae84f85c2bef38843fe49a8b33",
+      "evidenceRef": "local-sha256:faaeead41c0f248404ace041093ffc890c7e657fd8c4df701f47f71c6707a5d8",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": -0.148477,
+        "flag": 0,
+        "interpretationStatus": "未被模型标记",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0020_2005",
+      "cellId": "cell_0020",
+      "year": 2005,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.07694598735268754,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:1d9375b2bd846e5249d758e6972bbbaf4b1b165efc9ec8d3f978f525512902ee",
+      "evidenceRef": "local-sha256:2e837797bce1dee30de2c06c13786ddf1f16cf8bbec105177d9b44528f3b3d67",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": -0.034516,
+        "flag": 0,
+        "interpretationStatus": "未被模型标记",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0020_2006",
+      "cellId": "cell_0020",
+      "year": 2006,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.0863098878988215,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:4cfc67d4b5e3ec22a63255ffa2aa4e29df39629aa832cfbf1546a73a590391dd",
+      "evidenceRef": "local-sha256:57b56d1b7d237a45214d06e33e6cba6c1dbd65d3ae29fbf5be6611d849035d70",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": -0.126094,
+        "flag": 0,
+        "interpretationStatus": "未被模型标记",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0020_2007",
+      "cellId": "cell_0020",
+      "year": 2007,
+      "lon": 107.74999999999999,
+      "lat": 40.099999999999966,
+      "npp": 0.1197204541534924,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:a68daf38ac63bfa435069ecfb115bb7a8d73d12fab490485254c3f7765d0ed51",
+      "evidenceRef": "local-sha256:1625fd72b30a07af355f89c127e8fd0875b03ee2ac4ca8f2f3fe5971358c24f2",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": -0.021194,
+        "flag": 0,
+        "interpretationStatus": "未被模型标记",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0030_2012",
+      "cellId": "cell_0030",
+      "year": 2012,
+      "lon": 107.94999999999997,
+      "lat": 40.099999999999966,
+      "npp": 0.1386160279805352,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 0.9450717496576405,
+      "sourceHash": "local-sha256:675843ab3dd7e187f5221d40a1d182465ba09011c7b3465f606994b28a38cc3e",
+      "evidenceRef": "local-sha256:2ce9ccf0340e413457d9498f7244197b7a6a436a9d25127de548068ceb915533",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": 0.057633,
+        "flag": 1,
+        "interpretationStatus": "结构性断点待核",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0030_2018",
+      "cellId": "cell_0030",
+      "year": 2018,
+      "lon": 107.94999999999997,
+      "lat": 40.099999999999966,
+      "npp": 0.1415734762773722,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 0.9450717496576405,
+      "sourceHash": "local-sha256:e8a1f103df1b3efbb2e8e10a2615bed135610c0d66e817d9d064ae3b91ff7eb6",
+      "evidenceRef": "local-sha256:ed49644ece5979a257e2a5b8515850d27af2011998d2b780995829ede9b522e0",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": 0.013228,
+        "flag": 1,
+        "interpretationStatus": "建议复核",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0040_2001",
+      "cellId": "cell_0040",
+      "year": 2001,
+      "lon": 108.14999999999996,
+      "lat": 40.099999999999966,
+      "npp": 0.05804180802103881,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 0.8743644381571003,
+      "sourceHash": "local-sha256:4c033bcc4fe23aff8913a0d0a2b0df0e328b241c836bbce55e76d36c5da2932b",
+      "evidenceRef": "local-sha256:91f4fc2120caa5dbc8c311bcce954fcce09cd7d1244579bc9515d7266d62b903",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": 0.001203,
+        "flag": 1,
+        "interpretationStatus": "建议复核",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0040_2002",
+      "cellId": "cell_0040",
+      "year": 2002,
+      "lon": 108.14999999999996,
+      "lat": 40.099999999999966,
+      "npp": 0.0812275936883629,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 0.8743644381571003,
+      "sourceHash": "local-sha256:fb27012782849a826b8f5d6b66ed9a9657a096ec5d239f4384fb82f4e715613d",
+      "evidenceRef": "local-sha256:a75e1c3ebebe543be80385f6747cdd2fcef430080869ed25c27b5c43ded58edd",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": 0.003383,
+        "flag": 1,
+        "interpretationStatus": "建议复核",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    },
+    {
+      "recordId": "cell_0045_2012",
+      "cellId": "cell_0045",
+      "year": 2012,
+      "lon": 108.24999999999996,
+      "lat": 40.099999999999966,
+      "npp": 0.13223333045902674,
+      "nppUnit": "kg C·m⁻²·yr⁻¹",
+      "validAreaRatio": 1.0,
+      "sourceHash": "local-sha256:07dbf093f444f4adcfd714eb8ca0135a91fdcbd746ba290527b08b5cb1c9c080",
+      "evidenceRef": "local-sha256:ca2fb45ec0d8dce1da11d5feb5578ccf07fa971b76dd3f65b75ad02426c77c6a",
+      "methodVersion": "CarbonSat-NPP-Evidence-v1.0",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "rawAssetId": "MODIS/061/MOD17A3HGF",
+      "mlReview": {
+        "score": 0.061831,
+        "flag": 1,
+        "interpretationStatus": "结构性断点待核",
+        "modelVersion": "CarbonSat-NPP-AnomalyIF-v1.0",
+        "featureVersion": "CarbonSat-NPP-Features-v1.0",
+        "trainingCsvSha256": "sha256:5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+        "noRealLabels": true,
+        "knownLimitation": "2012 年 flag 属【集中标记、原因未证实】：既非已证实的真实误报，也非治理异常；该年 flag 集中由 34/34 格同升的结构性断点导致，跨 2012 的异常判定不可用。解释状态（interpretationStatus）三态：flag=0→『未被模型标记』；flag=1 且 2012→『结构性断点待核』；其余 flag=1→『建议复核』；三者均属 advisory，不驱动 REMOVAL/归因判定。"
+      },
+      "provenance": {
+        "wholeBundlePackSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+        "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+        "recordsJsonSha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544"
+      }
+    }
+  ],
+  "sampleSha256": "local-sha256:d2fb0c95f0a584d3dffc85bf6fd95d904adfc5a11b8042cbdf44504bbe6ea4dc"
+}

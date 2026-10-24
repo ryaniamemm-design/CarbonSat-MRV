@@ -1,0 +1,448 @@
+{
+  "packVersion": "v2",
+  "packHashVersion": "pack-hash-v2",
+  "generatedAt": "2026-10-09T06:46:31.606857+00:00",
+  "ipfsUploaded": false,
+  "ipfsNote": "本证据包为本地构建，未上传 IPFS。evidenceCID 使用本地 sha256，不是伪造的 IPFS CID。",
+  "recomputeCommand": "python3 scripts/build_evidence.py",
+  "verifyCommand": "python3 scripts/verify_evidence.py  (加 --selftest 跑篡改自检)",
+  "verification": "重算 packSha256 与本清单比对；并逐条重算 evidenceRef。任一不一致即说明内容被改动。",
+  "packSha256": "9a3f24ea1183739a1bbd55bfe24b32f275e9c301e9463f527c1a062b34485339",
+  "methodHash": "aba68c85c5ab9c9021bde5d4a611b717575484f9a126a9ec914045ddbf49a851",
+  "methodFiles": [
+    "gee/01_kubuqi_fvc.js",
+    "gee/02_kubuqi_grid_samples.js",
+    "pipeline/audit_data.py",
+    "pipeline/produce_records.py",
+    "pipeline/check_external_evidence.py",
+    "pipeline/anomaly_model.py",
+    "pipeline/npp_evidence_record.py",
+    "pipeline/npp_anomaly_model.py",
+    "scripts/npp_subset_fullperiod.py",
+    "scripts/gee_mod17_export.py",
+    "scripts/gee_landcover_34.py",
+    "pipeline/artifact_index.py",
+    "scripts/run_pipeline.py",
+    "scripts/r31_landcover_valid_footprint.py",
+    "scripts/npp_annual_production_integral.py",
+    "pipeline/a2_landcover_valid_footprint.py",
+    "scripts/build_landcover_sample.py",
+    "web/a2_core.js",
+    "scripts/build_web_sample.py"
+  ],
+  "recordRefs": {
+    "0xfbe42c0dc83b0bd36d7c7e51092ab54c48d5032d5e7bf1511f233136be7d0814": "local-sha256:2bf59423c3d4aaf87a2c1141ae502739e0d2732303eee3156cf5b187bcdb3ff5",
+    "0x6e1b0b6da8320840770afbe024d696fd550b959721bc45158c3062a6758ebdb3": "local-sha256:af78d477538c3a1e71f6dbbd9338b57986949fcbff8b2ad1c749f218d7c5cc62",
+    "0xda5ebb1014905bb043017d3049e57c4b26da632f16df7f186f8c80560d89dece": "local-sha256:af799afc1af65e0aa9a062e37cad07eb013181a738624f07f9dcf4243759d68f",
+    "0xcfa1e21d813be3b780c8292861618eb55ec96234d02ea178109f418608a0af33": "local-sha256:39b993806a388c7a52a2f3c4d09ff9de8737016060e8382d429b1318834d0f3d",
+    "0xe626d344dde4f5f3390d274ad10675d37ce4adeb32e10fb3d03b5ce9db53a795": "local-sha256:d2c9032526f53b13bd411801d0504d324604b3011d54a980da928512a9c06454",
+    "0xbcbcda2d0d51d7f552598caee7cd2efaff999e2aec2dbf409f23d6a40c67050b": "local-sha256:7701a398b4d62c1c1fc211862ee483bc37775f33700094256118fabb057f394e",
+    "0xe83830e0b9821c32609269aab5eb5e48706555ad318a921bad80e76a26fb9c83": "local-sha256:a2d04b4efe7dfa819a23a71ab12bd4144751ce20c500607e2bf407e8d9e6c3f9",
+    "0x6771685cbda4b81ddb750b82181c5ec9af97230df3f75365a01232e4f791f4fb": "local-sha256:db3fd922b97f08464784b6afd29f1d3009b95d52b9fba047663fc98cb6603887",
+    "0x38b86e47ac45de89adc2a43207be966ca956066b06d2424946612cdd0d93dabb": "local-sha256:5884d29230af65407bc9e8682b087213db58111a92c36ea3e2981f77420e703b"
+  },
+  "recordRefCount": 9,
+  "anchorRelation": {
+    "evidenceRef": "local-sha256:sha256(claimId|parcelId|vintage|fvc|carbon_tC|methodologyVersion|parameterStatus) —— 单条记录内容锚点，链上 evidenceCID 存此值",
+    "methodHash": "sha256(方法文件 sha256 集合) —— 锚定算碳方法本身",
+    "packSha256": "sha256(纳入文件 sha256 + 元数据 + 全部 evidenceRef + methodHash) —— 整包锚点",
+    "noCircularHash": "recordRefs 与 methodHash 均不含 packSha256 自身，无自引用；evidenceRef 可独立重算，不依赖整包哈希"
+  },
+  "onChainScope": {
+    "anchored": "仅【单条记录的内容锚点】：链上 evidenceCID = 该条 evidenceRef = sha256(该条记录内容 bundle)",
+    "notAnchored": [
+      "整包 packSha256 未上链",
+      "methodHash 未上链",
+      "本清单（manifest）本身未上链、未上传 IPFS",
+      "输入 CSV / 方法代码的文件哈希未上链",
+      "A2 独立流的 classRowRef / cellFootprintRef 与整包内容锚点均未上链"
+    ],
+    "why": "链上只存得下一个 32 字节以内的引用；整包与方法的绑定只能以链下清单为桥梁。在清单被上传 IPFS 并把 CID 写回记录之前，不得声称'链上已锚定整包'。"
+  },
+  "verificationPath": [
+    "1) 在链上（或 Etherscan 的 token/记录页）取到该条记录的 evidenceCID；",
+    "2) 运行 `python3 scripts/verify_evidence.py --from-chain <该值>`：",
+    "     程序会在 web/records.json 中定位该 claim，重算其内容锚点并与链上值比对；",
+    "3) 若一致 → 只能说明【这条记录的内容】（claimId/地块/vintage/FVC/碳量/方法版本/参数来源）未被改动；",
+    "4) 若要继续核对输入 CSV 与方法代码：打开 evidence/evidence_pack_manifest.json，",
+    "     在 recordRefs 中找到同一 claimId 确认锚点一致，再按 files[].sha256 逐文件比对",
+    "     data/*.csv、gee/01_kubuqi_fvc.js、pipeline/*.py 的实际 sha256；",
+    "5) 该比对依赖【链下清单】，清单未上链/未上 IPFS，故这一层属于链下自证，不是链上保证。"
+  ],
+  "metadata": {
+    "project": "CarbonSat-MRV (Kubuqi reference deployment)",
+    "methodologyVersion": "CarbonSat-MRV-v1.0",
+    "schemaVersion": "v3",
+    "governanceStartYear": null,
+    "attributionConclusion": "insufficient_evidence",
+    "honesty": {
+      "allCarbonIndicative": true,
+      "placeholderParamsDriveNoVerdict": true,
+      "stocksNotAdditiveAcrossYears": true,
+      "noCertifiedCredit": true,
+      "attributionConclusion": "insufficient_evidence"
+    },
+    "dataProvenance": {
+      "AGB_K": "PLACEHOLDER",
+      "CF": "LITERATURE(IPCC2006)",
+      "AREA_HA_TREATED": "PLACEHOLDER",
+      "AREA_HA_CONTROL": "PLACEHOLDER",
+      "EC_validPixelRatio": "PLACEHOLDER(待 GEE v7 质量字段导出)",
+      "EC_sensorAgreement": "PLACEHOLDER(待 GEE v7 重叠年交叉核验)",
+      "EC_localGedi": "PLACEHOLDER(GEDI 未接入)",
+      "EC_spatialCompleteness": "PLACEHOLDER(待 GEE v7 spatialCoverage)",
+      "spatialCells": "PLACEHOLDER(H3-style, md5 占位, 非真实地理编码)",
+      "evidenceCID": "LOCAL_HASH(未上 IPFS)"
+    },
+    "chain": {
+      "deployed": false,
+      "note": "未部署：链上状态以 Etherscan 真实查询为准，records.json 中的 status 仅为本地建议（REVIEW/REJECT），不构成已上链。"
+    },
+    "ipfsUploaded": false,
+    "aiModel": {
+      "name": "CarbonSat 异常预审模型 (IsolationForest)",
+      "modelVersion": "CarbonSat-AnomalyIF-v1.0",
+      "trained": true,
+      "synthetic": false,
+      "modelPath": "evidence/anomaly_model.joblib",
+      "modelSha256": "c035c987fec1b2f8b3f93593873f69a5d94bca13f2665a3b0aa158555333cda3",
+      "trainingData": {
+        "csvPath": "data/grid_samples.csv",
+        "csvPresent": true,
+        "csvRows": 3420,
+        "nCells": 90,
+        "yearRange": [
+          1987,
+          2024
+        ],
+        "methodVersionUsedByTraining": "CarbonSat-FVC-v2.0-SR"
+      },
+      "codeFiles": [
+        "pipeline/anomaly_model.py",
+        "scripts/train_anomaly.py"
+      ],
+      "geeScript": "gee/02_kubuqi_grid_samples.js",
+      "advisoryOnly": "模型仅输出 REVIEW 建议分数，不参与 REGISTER/REJECT 判定，不越过数据/参数/归因硬门禁。",
+      "statusReason": null,
+      "note": "模型已训练，含模型文件 sha256 与训练数据摘要。"
+    },
+    "landcoverValidFootprint": {
+      "streamId": "A2_NPP_LANDCOVER_VALID_FOOTPRINT",
+      "contentFile": "evidence/a2_landcover_valid_footprint.json",
+      "schemaFile": "records_schema_a2_landcover.json",
+      "schemaVersion": "CarbonSat-NPP-LandcoverValidFootprint-A2-v1.1",
+      "methodVersion": "CarbonSat-NPP-LandcoverValidFootprint-v0.1",
+      "claimClass": "DESCRIPTIVE_NPP_ONLY",
+      "attributionStatus": "insufficient_evidence",
+      "forbiddenOutputs": [
+        "REMOVAL",
+        "GOVERNANCE_INCREMENT",
+        "CARBON_CREDIT"
+      ],
+      "unitOfRecord": "格年 × IGBP 类别 (cellId, year, lcCode)",
+      "contentAnchor": "local-sha256:43f3235e805e10780352364e38b34c8be298c0ad5a3fd014531e454d34332a7b",
+      "coverage": {
+        "cells": 34,
+        "years": [
+          2001,
+          2024
+        ],
+        "cellYears": 816,
+        "classRows": 1523
+      },
+      "anchorFields": [
+        "classRowRef",
+        "cellFootprintRef",
+        "contentAnchor"
+      ],
+      "relatedStreams": [
+        "A_DESCRIPTIVE_NPP"
+      ],
+      "supersedes": [
+        {
+          "file": "data/npp_annual_landcover_decomposition.csv",
+          "sha256": "sha256:1e1fcb18d632228198376a7ef8ddf4b1724e51065d8232d23ef787fddceec377",
+          "status": "superseded",
+          "reason": "R30 用全类面积作强度分母、且把『无有效观测』写成 0；R31 改为逐类有效面积 + null 缺测。"
+        }
+      ],
+      "linkage": "UNLINKED（与 9 条碳主张无任何已核验对应关系）",
+      "contentFileContainsPackSha256": false,
+      "note": "加法式独立流：不改动 816 条 NPP 记录体、sourceHash、evidenceRef 与 9 条旧主张；两级锚点 classRowRef/cellFootprintRef 由 R31 CSV 独立重算。"
+    }
+  },
+  "aoi": [
+    {
+      "parcelId": "Kubuqi-Treated-01",
+      "role": "treated",
+      "geometry": [
+        [
+          108.1,
+          40.05
+        ],
+        [
+          109.2,
+          40.05
+        ],
+        [
+          109.2,
+          40.55
+        ],
+        [
+          108.1,
+          40.55
+        ],
+        [
+          108.1,
+          40.05
+        ]
+      ],
+      "area_ha": 1200.0,
+      "areaSource": "PLACEHOLDER",
+      "dataSource": "REAL_GEE_CSV"
+    },
+    {
+      "parcelId": "Kubuqi-Control-01",
+      "role": "control",
+      "geometry": [
+        [
+          107.3,
+          40.05
+        ],
+        [
+          108.0,
+          40.05
+        ],
+        [
+          108.0,
+          40.55
+        ],
+        [
+          107.3,
+          40.55
+        ],
+        [
+          107.3,
+          40.05
+        ]
+      ],
+      "area_ha": 900.0,
+      "areaSource": "PLACEHOLDER",
+      "dataSource": "REAL_GEE_CSV"
+    }
+  ],
+  "files": [
+    {
+      "path": "data/kubuqi_fvc_treated.csv",
+      "sha256": "8f5ae47f1b858db5fcf6cd99cc8573b7b3a3462c5a0a9c14c3c06f6247cd3d56",
+      "bytes": 13562
+    },
+    {
+      "path": "data/kubuqi_fvc_control.csv",
+      "sha256": "ae28df2458d10f1702e15daa51b976e4b4080dae198427c619bd61e1f35843b5",
+      "bytes": 13627
+    },
+    {
+      "path": "data/grid_samples.csv",
+      "sha256": "c3e457445b3e2ae0d35101a1d9e8e5d301855fca6e9e8f5d61049665d687ee5e",
+      "bytes": 995190
+    },
+    {
+      "path": "evidence/external_evidence_registry.json",
+      "sha256": "bf4281e65ae4a59a103219db0344807b116a818c7f85a2b1c5b3195d7e57f708",
+      "bytes": 8388
+    },
+    {
+      "path": "gee/01_kubuqi_fvc.js",
+      "sha256": "dee46b86660ebaee743f0ee36e87f403b281a17a4b71b4e7b9d11dbb06d6c170",
+      "bytes": 17807
+    },
+    {
+      "path": "gee/02_kubuqi_grid_samples.js",
+      "sha256": "32d6d7ea791adcdedccea8a3d143e06de82b175a896cb018e46f1288394bbbd0",
+      "bytes": 17198
+    },
+    {
+      "path": "pipeline/produce_records.py",
+      "sha256": "f498fe9b3ed0511a14032b85e008e492baab78ea9b8d922bda57a4abfe8e077f",
+      "bytes": 50596
+    },
+    {
+      "path": "pipeline/audit_data.py",
+      "sha256": "941e3d8a3f88844b93d14f062c9fd0b5126aaee1ed5778ccc92ad8207c02b18d",
+      "bytes": 17128
+    },
+    {
+      "path": "pipeline/validate_records.py",
+      "sha256": "a6e5e0d93334bb80812bea48b9e6cac8f173ad6c47e1a7554c0866bcd7d26f38",
+      "bytes": 17219
+    },
+    {
+      "path": "pipeline/check_external_evidence.py",
+      "sha256": "56a30435c4eb12700e110f79b265f4952ae3d30ec121135fe9cdbf2521d9f6b9",
+      "bytes": 15662
+    },
+    {
+      "path": "pipeline/anomaly_model.py",
+      "sha256": "9aa8bcd897e6fb3a38229ffd2f6c2d887a3a7975d364f9a01d3bb6be26aaea43",
+      "bytes": 36815
+    },
+    {
+      "path": "scripts/train_anomaly.py",
+      "sha256": "53651ac4e9b19cf2afa5e2951f1e068ef48c784e341dc046a9fde753a7765212",
+      "bytes": 3469
+    },
+    {
+      "path": "evidence/anomaly_model_status.json",
+      "sha256": "9bdedb3915f345a700cfb3928ef37327585dc07c9b264dc093c1e2046030a6c9",
+      "bytes": 3908
+    },
+    {
+      "path": "records_schema.json",
+      "sha256": "14f8321e07c0b9d480224c9741461a852f727c1a792bd9284136cc35931124e2",
+      "bytes": 5135
+    },
+    {
+      "path": "contracts/CarbonMRV.sol",
+      "sha256": "d7170d8fd96822c73bffc1a36dbf60d50eafc03a0f7694fcd497244af0e245a5",
+      "bytes": 13406
+    },
+    {
+      "path": "web/records.json",
+      "sha256": "8d0298153f86cea22788559e59568ed3566b30ceab1d66555bb16e0874b1c383",
+      "bytes": 142360
+    },
+    {
+      "path": "evidence/data_quality_report.json",
+      "sha256": "d78d67fcd793467e4171dcbb35514c42fe6095fbc675fbd09bdb6db7469f072d",
+      "bytes": 14401
+    },
+    {
+      "path": "evidence/validation_report.json",
+      "sha256": "88ae5efaa2c146bad4f71f3b341f95f54a8af097da1d748e7960afcbaa837a04",
+      "bytes": 4074
+    },
+    {
+      "path": "data/npp_subset_fullperiod.csv",
+      "sha256": "5b426407e5f76e283441329aa5f6b00c8fe99511963aef6ae467e3b7d16fc164",
+      "bytes": 70251
+    },
+    {
+      "path": "data/landcover_34_2024.csv",
+      "sha256": "0ec3e24ee564db2c6471c9f5962984f0263dec12840935b7f5a17ce123d79028",
+      "bytes": 2762
+    },
+    {
+      "path": "scripts/npp_subset_fullperiod.py",
+      "sha256": "f1eaab9b7348731636c39fe4bf0c8ab39095d7b9910583695af31b834b62c877",
+      "bytes": 3540
+    },
+    {
+      "path": "scripts/gee_mod17_export.py",
+      "sha256": "f9e9ae39915b49c3e2059c8c2293dd0b5f57f324d89485a0fe5899797b82c380",
+      "bytes": 5822
+    },
+    {
+      "path": "scripts/gee_landcover_34.py",
+      "sha256": "00fda97b7cc2460d01daf1c557999d8d19b9e6c6ae68a582822babd570a6014c",
+      "bytes": 3211
+    },
+    {
+      "path": "pipeline/npp_evidence_record.py",
+      "sha256": "a93854d7ab9afc1725c2d2cbccfb84925fd5735adfb4b28be40e699eb9782c6b",
+      "bytes": 57038
+    },
+    {
+      "path": "evidence/npp_evidence_records.json",
+      "sha256": "9e8cfd57f77e28e7ac67166b0b66761714b958af6e145b0964cfe33583761544",
+      "bytes": 2639027
+    },
+    {
+      "path": "evidence/npp_human_review_checklist.json",
+      "sha256": "3e194952c4550cd322221b8135024ab90a9e743e0c140a6df41e35bab8e483b0",
+      "bytes": 52887
+    },
+    {
+      "path": "pipeline/npp_anomaly_model.py",
+      "sha256": "6c474f07f9a388add70360e39a1489429130e33bec81fa64e975aa0b818590bf",
+      "bytes": 62857
+    },
+    {
+      "path": "evidence/npp_anomaly/npp_anomaly_model_status.json",
+      "sha256": "f0e1486a0a0c4fbbf9bff48804ee71600d8862c86d2ef9cccde5a699ffe78ced",
+      "bytes": 14483
+    },
+    {
+      "path": "evidence/npp_anomaly/npp_anomaly_scores.csv",
+      "sha256": "3615842b9d7b181a1b2f82d96eb13332b2fb673ca2e54977ca1dd8a3509312a1",
+      "bytes": 26031
+    },
+    {
+      "path": "pipeline/artifact_index.py",
+      "sha256": "7a8f41a83075a333a3bf4ef1919963c4382f7d3f6e6406ca002a2a2dbd3c112c",
+      "bytes": 38611
+    },
+    {
+      "path": "scripts/run_pipeline.py",
+      "sha256": "3711d5bc6440c5279cce9d1684616a9633ae741d3debff84c5980cc61ca9d951",
+      "bytes": 44858
+    },
+    {
+      "path": "evidence/a2_landcover_valid_footprint.json",
+      "sha256": "b80ca8ec13a704489d882d9eda388d765f14dfa591dc65185eb32c809d598bc1",
+      "bytes": 2010610
+    },
+    {
+      "path": "records_schema_a2_landcover.json",
+      "sha256": "a8b1578768ee148dc800fdfa09333f4178a82a05c7fcde123e8ba62492e3547d",
+      "bytes": 10572
+    },
+    {
+      "path": "data/npp_annual_landcover_valid_footprint.csv",
+      "sha256": "902505ec02699a826c4dc77dec32ddb341b822b3ce491a574d096b9356e459db",
+      "bytes": 551886
+    },
+    {
+      "path": "data/npp_annual_production_integral.csv",
+      "sha256": "065d5d8f6737e48344c3ba082d96a03706d21a699ee427d325fb6b598af197a5",
+      "bytes": 206228
+    },
+    {
+      "path": "scripts/r31_landcover_valid_footprint.py",
+      "sha256": "264e85052e27e4b9bbe124982793dec350f85716effe9f5e8dc624153bca8723",
+      "bytes": 36706
+    },
+    {
+      "path": "scripts/npp_annual_production_integral.py",
+      "sha256": "a90ff8bcf769247254c237c9a757b11f27e48d96b8061ea5f548f326dd74d10b",
+      "bytes": 21780
+    },
+    {
+      "path": "pipeline/a2_landcover_valid_footprint.py",
+      "sha256": "e4606b70f55ee84f0916b48cb8084da245480d6c122dca124524bba011d941f0",
+      "bytes": 55014
+    },
+    {
+      "path": "scripts/build_landcover_sample.py",
+      "sha256": "53279b38dba6619a4c34733d776137cfc41a165932756ab5ebefa756e2f1d63a",
+      "bytes": 29208
+    },
+    {
+      "path": "web/a2_core.js",
+      "sha256": "68aef38f8d34d69b870e3060ad4b1eb7807424d6b1dbefc8e0d9ee942995a80e",
+      "bytes": 16964
+    },
+    {
+      "path": "test/a2_cross_impl.test.js",
+      "sha256": "e84d3c3a9b6a22b739c2931de3efe362768ef7dc76e08accd8e93600b684d9f0",
+      "bytes": 10486
+    },
+    {
+      "path": "scripts/build_web_sample.py",
+      "sha256": "3dfc5350e5047eaa9349a9a65499775fa64a2b39569e4e8bf77358deca488251",
+      "bytes": 24397
+    }
+  ],
+  "fileCount": 42,
+  "filePresent": 42
+}

@@ -1,0 +1,655 @@
+{
+  "probe": "independent-upstream-spotcheck",
+  "startedAtUtc": "2026-10-19T07:04:12.301216+00:00",
+  "declaration": "DECLARATION_sampling_and_tolerance.md",
+  "tolerance": {
+    "relative": 1e-09,
+    "countExact": true,
+    "categoricalExact": true
+  },
+  "inputHashesBefore": {
+    "cellCsv": "065d5d8f6737e48344c3ba082d96a03706d21a699ee427d325fb6b598af197a5",
+    "engebeiCsv": "e842bfc2d593c0a6946b16398924fb3f4f1aab33dd59d8bc948dfd4ac062c0b0"
+  },
+  "sharedAssumptions": [
+    "asset MODIS/061/MOD17A3HGF (Npp band semantics)",
+    "mask rule raw in [-30000, 32700] (0 and negatives retained, 32761-32767 excluded)",
+    "scale factor 0.0001",
+    "crs SR-ORG:6974 + scale 500 + bestEffort false",
+    "ee.Image.pixelArea() geodesic area",
+    "0.06 deg box (HALF=0.03) / engebei rectangle bounds",
+    "both paths use the same GEE default region reduction (Reducer.sum() is a weighted reducer) and the same mask; the platform-internal boundary/mask weighting is NOT independently verified in this round (fractional-weighting behaviour was withdrawn as an inference and is not asserted here)"
+  ],
+  "independenceNote": "两路径共享上述假设，故本抽查验证的是**实现路径是否复现**，不验证口径本身的科学正确性，也不构成地面精度证据。",
+  "status": "COMPLETED_ALL_MATCH",
+  "rows": [
+    {
+      "objectId": "cell_0020",
+      "layer": "A_high_valid_ratio",
+      "year": 2001,
+      "assetId": "2001_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            107.71999999999998,
+            40.069999999999965,
+            107.77999999999999,
+            40.12999999999997
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2001-01-01",
+          "2002-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 2545202.7081191065,
+        "prod_tC_yr": 2545.2027081191063,
+        "areaTotalM2": 34144791.67536766,
+        "areaValidM2": 34144791.67536766,
+        "validAreaRatio": 1.0,
+        "geomAreaM2": 34047890.32399437,
+        "validPixels": 143,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "FULL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 2545202.7081191065,
+        "prod_tC_yr": 2545.2027081191063,
+        "areaTotalM2": 34144791.67536766,
+        "areaValidM2": 34144791.67536766,
+        "validAreaRatio": 1.0,
+        "geomAreaM2": 34047890.32399437,
+        "validPixels": null,
+        "negPixels": null,
+        "missing": 0,
+        "coverageStatus": null
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 0.0,
+        "validPixels": "N/A(基线无此列)",
+        "negPixels": "N/A(基线无此列)",
+        "missing": 0,
+        "coverageStatus": "N/A(基线无此列)"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 978307200000
+    },
+    {
+      "objectId": "cell_0020",
+      "layer": "A_high_valid_ratio",
+      "year": 2012,
+      "assetId": "2012_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            107.71999999999998,
+            40.069999999999965,
+            107.77999999999999,
+            40.12999999999997
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2012-01-01",
+          "2013-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 4797240.500169446,
+        "prod_tC_yr": 4797.240500169446,
+        "areaTotalM2": 34144791.67536766,
+        "areaValidM2": 34144791.67536766,
+        "validAreaRatio": 1.0,
+        "geomAreaM2": 34047890.32399437,
+        "validPixels": 143,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "FULL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 4797240.500169445,
+        "prod_tC_yr": 4797.240500169445,
+        "areaTotalM2": 34144791.67536766,
+        "areaValidM2": 34144791.67536766,
+        "validAreaRatio": 1.0,
+        "geomAreaM2": 34047890.32399437,
+        "validPixels": null,
+        "negPixels": null,
+        "missing": 0,
+        "coverageStatus": null
+      },
+      "diff": {
+        "integral_kgC_yr": 1.9413714500713124e-16,
+        "prod_tC_yr": 1.8958705567102659e-16,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 0.0,
+        "validPixels": "N/A(基线无此列)",
+        "negPixels": "N/A(基线无此列)",
+        "missing": 0,
+        "coverageStatus": "N/A(基线无此列)"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 1325376000000
+    },
+    {
+      "objectId": "cell_0020",
+      "layer": "A_high_valid_ratio",
+      "year": 2024,
+      "assetId": "2024_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            107.71999999999998,
+            40.069999999999965,
+            107.77999999999999,
+            40.12999999999997
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2024-01-01",
+          "2025-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 4863538.075988655,
+        "prod_tC_yr": 4863.538075988655,
+        "areaTotalM2": 34144791.67536766,
+        "areaValidM2": 34144791.67536766,
+        "validAreaRatio": 1.0,
+        "geomAreaM2": 34047890.32399437,
+        "validPixels": 143,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "FULL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 4863538.075988655,
+        "prod_tC_yr": 4863.538075988655,
+        "areaTotalM2": 34144791.67536766,
+        "areaValidM2": 34144791.67536766,
+        "validAreaRatio": 1.0,
+        "geomAreaM2": 34047890.32399437,
+        "validPixels": null,
+        "negPixels": null,
+        "missing": 0,
+        "coverageStatus": null
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 0.0,
+        "validPixels": "N/A(基线无此列)",
+        "negPixels": "N/A(基线无此列)",
+        "missing": 0,
+        "coverageStatus": "N/A(基线无此列)"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 1704067200000
+    },
+    {
+      "objectId": "cell_0074",
+      "layer": "B_partial_valid",
+      "year": 2001,
+      "assetId": "2001_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            108.71999999999993,
+            40.46999999999997,
+            108.77999999999993,
+            40.52999999999997
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2001-01-01",
+          "2002-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 2438184.4558121026,
+        "prod_tC_yr": 2438.1844558121024,
+        "areaTotalM2": 33950660.39583334,
+        "areaValidM2": 27315451.221446086,
+        "validAreaRatio": 0.8045631779462653,
+        "geomAreaM2": 33846900.92144465,
+        "validPixels": 105,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 2438184.4558121026,
+        "prod_tC_yr": 2438.1844558121024,
+        "areaTotalM2": 33950660.39583334,
+        "areaValidM2": 27315451.221446086,
+        "validAreaRatio": 0.8045631779462653,
+        "geomAreaM2": 33846900.92144465,
+        "validPixels": null,
+        "negPixels": null,
+        "missing": 0,
+        "coverageStatus": null
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 0.0,
+        "validPixels": "N/A(基线无此列)",
+        "negPixels": "N/A(基线无此列)",
+        "missing": 0,
+        "coverageStatus": "N/A(基线无此列)"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 978307200000
+    },
+    {
+      "objectId": "cell_0074",
+      "layer": "B_partial_valid",
+      "year": 2012,
+      "assetId": "2012_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            108.71999999999993,
+            40.46999999999997,
+            108.77999999999993,
+            40.52999999999997
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2012-01-01",
+          "2013-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 4332524.098792874,
+        "prod_tC_yr": 4332.524098792875,
+        "areaTotalM2": 33950660.39583334,
+        "areaValidM2": 27315451.221446086,
+        "validAreaRatio": 0.8045631779462653,
+        "geomAreaM2": 33846900.92144465,
+        "validPixels": 105,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 4332524.098792874,
+        "prod_tC_yr": 4332.524098792875,
+        "areaTotalM2": 33950660.39583334,
+        "areaValidM2": 27315451.221446086,
+        "validAreaRatio": 0.8045631779462653,
+        "geomAreaM2": 33846900.92144465,
+        "validPixels": null,
+        "negPixels": null,
+        "missing": 0,
+        "coverageStatus": null
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 0.0,
+        "validPixels": "N/A(基线无此列)",
+        "negPixels": "N/A(基线无此列)",
+        "missing": 0,
+        "coverageStatus": "N/A(基线无此列)"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 1325376000000
+    },
+    {
+      "objectId": "cell_0074",
+      "layer": "B_partial_valid",
+      "year": 2024,
+      "assetId": "2024_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            108.71999999999993,
+            40.46999999999997,
+            108.77999999999993,
+            40.52999999999997
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2024-01-01",
+          "2025-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 4866424.085050926,
+        "prod_tC_yr": 4866.424085050926,
+        "areaTotalM2": 33950660.39583334,
+        "areaValidM2": 27315451.221446086,
+        "validAreaRatio": 0.8045631779462653,
+        "geomAreaM2": 33846900.92144465,
+        "validPixels": 105,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 4866424.085050926,
+        "prod_tC_yr": 4866.424085050926,
+        "areaTotalM2": 33950660.39583334,
+        "areaValidM2": 27315451.221446086,
+        "validAreaRatio": 0.8045631779462653,
+        "geomAreaM2": 33846900.92144465,
+        "validPixels": null,
+        "negPixels": null,
+        "missing": 0,
+        "coverageStatus": null
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 0.0,
+        "validPixels": "N/A(基线无此列)",
+        "negPixels": "N/A(基线无此列)",
+        "missing": 0,
+        "coverageStatus": "N/A(基线无此列)"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 1704067200000
+    },
+    {
+      "objectId": "engebei_paper_window_v1",
+      "layer": "C_independent_case",
+      "year": 2001,
+      "assetId": "2001_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            109.288888889,
+            40.308333333,
+            109.466666667,
+            40.438888889
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2001-01-01",
+          "2002-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 13318372.381792976,
+        "prod_tC_yr": 13318.372381792975,
+        "areaTotalM2": 219533784.00459555,
+        "areaValidM2": 204421479.99834552,
+        "validAreaRatio": 0.9311618297166796,
+        "geomAreaM2": 218627848.89175552,
+        "validPixels": 813,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 13318372.381792976,
+        "prod_tC_yr": 13318.372381792975,
+        "areaTotalM2": 219533784.00459555,
+        "areaValidM2": 204421479.99834552,
+        "validAreaRatio": 0.9311618297166796,
+        "geomAreaM2": 218627848.891752,
+        "validPixels": 813,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 1.6085206251510903e-14,
+        "validPixels": 0,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "MATCH"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 978307200000
+    },
+    {
+      "objectId": "engebei_paper_window_v1",
+      "layer": "C_independent_case",
+      "year": 2012,
+      "assetId": "2012_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            109.288888889,
+            40.308333333,
+            109.466666667,
+            40.438888889
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2012-01-01",
+          "2013-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 27775262.57277743,
+        "prod_tC_yr": 27775.262572777432,
+        "areaTotalM2": 219533784.00459555,
+        "areaValidM2": 204421479.99834552,
+        "validAreaRatio": 0.9311618297166796,
+        "geomAreaM2": 218627848.89175552,
+        "validPixels": 813,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 27775262.57277743,
+        "prod_tC_yr": 27775.262572777432,
+        "areaTotalM2": 219533784.00459555,
+        "areaValidM2": 204421479.99834552,
+        "validAreaRatio": 0.9311618297166796,
+        "geomAreaM2": 218627848.89175552,
+        "validPixels": 813,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 0.0,
+        "validPixels": 0,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "MATCH"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 1325376000000
+    },
+    {
+      "objectId": "engebei_paper_window_v1",
+      "layer": "C_independent_case",
+      "year": 2024,
+      "assetId": "2024_01_01",
+      "request": {
+        "geometry": {
+          "type": "Rectangle",
+          "bbox": [
+            109.288888889,
+            40.308333333,
+            109.466666667,
+            40.438888889
+          ]
+        },
+        "crs": "SR-ORG:6974",
+        "scale": 500,
+        "bestEffort": false,
+        "maxPixels": 1000000000,
+        "filterDate": [
+          "2024-01-01",
+          "2025-01-01"
+        ],
+        "expression": "integral = sum(pixelArea * raw * 0.0001) over mask(raw in [-30000,32700]); areaValid = sum(pixelArea) over same mask; areaTotal = sum(pixelArea); counts via constant-1 bands + Reducer.count"
+      },
+      "values": {
+        "integral_kgC_yr": 30780134.01430004,
+        "prod_tC_yr": 30780.13401430004,
+        "areaTotalM2": 219533784.00459555,
+        "areaValidM2": 204421479.99834552,
+        "validAreaRatio": 0.9311618297166796,
+        "geomAreaM2": 218627848.89175552,
+        "validPixels": 813,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "baseline": {
+        "integral_kgC_yr": 30780134.01430004,
+        "prod_tC_yr": 30780.13401430004,
+        "areaTotalM2": 219533784.00459555,
+        "areaValidM2": 204421479.99834552,
+        "validAreaRatio": 0.9311618297166796,
+        "geomAreaM2": 218627848.891752,
+        "validPixels": 813,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "PARTIAL_COVERAGE"
+      },
+      "diff": {
+        "integral_kgC_yr": 0.0,
+        "prod_tC_yr": 0.0,
+        "areaTotalM2": 0.0,
+        "areaValidM2": 0.0,
+        "validAreaRatio": 0.0,
+        "geomAreaM2": 1.6085206251510903e-14,
+        "validPixels": 0,
+        "negPixels": 0,
+        "missing": 0,
+        "coverageStatus": "MATCH"
+      },
+      "verdict": "MATCH",
+      "assetTimeStart": 1704067200000
+    }
+  ],
+  "failures": [],
+  "session": {
+    "ok": true,
+    "attempts": [
+      {
+        "mode": "via-env-proxy",
+        "ok": false,
+        "reasonClass": "NETWORK_EGRESS_BLOCKED",
+        "exceptionType": "TransportError",
+        "message": "HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 Bad Gateway')))",
+        "elapsedSec": 10.01
+      },
+      {
+        "mode": "direct-no-proxy",
+        "ok": true,
+        "elapsedSec": 9.0
+      }
+    ],
+    "mode": "direct-no-proxy",
+    "elapsedSec": 19.41,
+    "earthengineApi": "1.7.46",
+    "project": "i-destiny-509915-p2"
+  },
+  "summary": {
+    "objectYears": 9,
+    "MATCH": 9,
+    "DIFF": 0,
+    "ERROR": 0
+  },
+  "maxRelDiff": {
+    "integral_kgC_yr": 1.9413714500713124e-16,
+    "prod_tC_yr": 1.8958705567102659e-16,
+    "areaTotalM2": 0.0,
+    "areaValidM2": 0.0,
+    "validAreaRatio": 0.0,
+    "geomAreaM2": 1.6085206251510903e-14
+  },
+  "finishedAtUtc": "2026-10-19T07:05:07.398846+00:00",
+  "inputHashesAfter": {
+    "cellCsv": "065d5d8f6737e48344c3ba082d96a03706d21a699ee427d325fb6b598af197a5",
+    "engebeiCsv": "e842bfc2d593c0a6946b16398924fb3f4f1aab33dd59d8bc948dfd4ac062c0b0"
+  },
+  "inputsUnchanged": true,
+  "sharedAssumptionsRevision": {
+    "revisedAtUtc": "2026-10-19T07:37Z",
+    "field": "sharedAssumptions[6]",
+    "originalText": "no fractional boundary weighting in either path",
+    "reason": "独立审阅 P1：areaTotal > geomArea 不能推出未做分数边界加权；默认 sum 为加权归约",
+    "newText": "both paths use the same GEE default region reduction (Reducer.sum() is a weighted reducer) and the same mask; the platform-internal boundary/mask weighting is NOT independently verified in this round (fractional-weighting behaviour was withdrawn as an inference and is not asserted here)",
+    "numericRowsTouched": false,
+    "evidence": "audit/upstream_spotcheck_2026-10-19/grid_projection_weighting_probe.json（weighted/unweighted 实测不同）"
+  }
+}

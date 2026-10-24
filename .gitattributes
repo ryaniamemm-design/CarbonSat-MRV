@@ -1,0 +1,3 @@
+# Verification commands compare byte-level SHA-256 (module manifest, pins, evidence registry),
+# so line endings must survive a clone untouched. Disable Git's EOL conversion for every file.
+* -text

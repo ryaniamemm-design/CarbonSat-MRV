@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "CarbonSat-WorkbenchEvidenceRegistry-v1.0",
+  "generatedAtUTC": "2026-10-24T09:07:43.941Z",
+  "generatedBy": "scripts/build_workbench_evidence_registry.js",
+  "scopeNote": "本登记只把历史复算证据绑定到具体产物身份；它本身不执行复算，也不构成精度或来源真实性证据。",
+  "cases": {
+    "A": {
+      "caseId": "kubuqi_34_cells",
+      "methodVersion": "CarbonSat-NPP-Production-Integral-v0.1",
+      "bundle": {
+        "path": "web/npp_estimate_bundle.json",
+        "bytes": 739013,
+        "fileSha256": "090ef7a9c8a8532ee1b16d49dace5ac5b13af2420780dfdd420d415883c2d046",
+        "contentDigest": "local-sha256:138e8c2dd68b08b3946550e85e7e2baccb78c45240494c18d955cc35772268e2",
+        "contentDigestDomain": "NppEntryCore.verifyBundle().content.recomputed（local-sha256:…）"
+      },
+      "pin": {
+        "path": "web/npp_estimate_bundle.pin.json",
+        "fileSha256": "79004d484fe0b9be69d223adf96c37f98d9bf16146a7b3f44f2f3faa9166a191",
+        "declaredContentSha256": "local-sha256:138e8c2dd68b08b3946550e85e7e2baccb78c45240494c18d955cc35772268e2",
+        "declaredBundleFileSha256": "090ef7a9c8a8532ee1b16d49dace5ac5b13af2420780dfdd420d415883c2d046"
+      },
+      "sourceArtifacts": [
+        {
+          "path": "data/npp_annual_production_integral.csv",
+          "sha256": "065d5d8f6737e48344c3ba082d96a03706d21a699ee427d325fb6b598af197a5",
+          "bytes": 206228,
+          "role": "生产量积分 CSV（tC/yr 的直接来源）"
+        },
+        {
+          "path": "evidence/a2_landcover_valid_footprint.json",
+          "sha256": "b80ca8ec13a704489d882d9eda388d765f14dfa591dc65185eb32c809d598bc1",
+          "bytes": 2010610,
+          "role": "A2 有效足迹 JSON（有效面积分母）"
+        }
+      ],
+      "declaredSourceDigests": [
+        {
+          "field": "generatedFrom.productionIntegral.sha256",
+          "value": "065d5d8f6737e48344c3ba082d96a03706d21a699ee427d325fb6b598af197a5"
+        },
+        {
+          "field": "generatedFrom.a2ValidFootprint.sha256",
+          "value": "b80ca8ec13a704489d882d9eda388d765f14dfa591dc65185eb32c809d598bc1"
+        }
+      ],
+      "localRecompute": {
+        "claim": "既有清单派生脚本对源 CSV / A2 足迹做来源哈希核验并逐格派生清单（该轮 --verify 通过）",
+        "scriptPath": "scripts/build_npp_estimate_bundle.py",
+        "scriptSha256": "73a187e746a8345a996e4227e273c82280a35084c00111eeb385a05f6aed3519",
+        "reportPath": "audit/estimation_upgrade/ACCEPTANCE.md",
+        "reportSha256": "ec0d3c6518f1e498ebca11a7104338167a38e76634981e54559aaff52803c290",
+        "derived": {
+          "cellYears": 816,
+          "classRows": 1523
+        },
+        "appliesTo": "案例 A 的整包（34 格 × 24 年）；不适用于单条记录的地面真实性。"
+      }
+    },
+    "B": {
+      "caseId": "engebei_paper_window_v1",
+      "methodVersion": "CarbonSat-NPP-Production-Integral-Engebei-v0.1",
+      "bundle": {
+        "path": "web/engebei_bundle.json",
+        "bytes": 28861,
+        "fileSha256": "077a072388fb71df38c3df9ff8e336b04e31444297d47f99996857b748b4d104",
+        "contentDigest": "local-sha256:a2bbf60566b27ecc12dfece62db219850b581dbca1e4a0b47c4f43a627ebf021",
+        "contentDigestDomain": "EngebeiCore.stableDigestOf()（local-sha256:…，与 bundle.stableDigest 同域）"
+      },
+      "pin": {
+        "path": "web/engebei_bundle.pin.json",
+        "fileSha256": "127989c3b07fa8bb6dfa6625f603a2fbae5379cf30b9a069f9ad8fcbc5dc6f12",
+        "declaredContentSha256": "local-sha256:a2bbf60566b27ecc12dfece62db219850b581dbca1e4a0b47c4f43a627ebf021",
+        "declaredBundleFileSha256": "077a072388fb71df38c3df9ff8e336b04e31444297d47f99996857b748b4d104"
+      },
+      "windowSha256": {
+        "declared": "local-sha256:aa2fcdcfccac9a9ae4e125cd8c638d742f59c9853d24337440d459c1f385594c",
+        "recomputed": "local-sha256:aa2fcdcfccac9a9ae4e125cd8c638d742f59c9853d24337440d459c1f385594c"
+      },
+      "sourceArtifacts": [
+        {
+          "path": "data/engebei/engebei_npp_annual_integral.csv",
+          "sha256": "e842bfc2d593c0a6946b16398924fb3f4f1aab33dd59d8bc948dfd4ac062c0b0",
+          "bytes": 10048,
+          "role": "逐像元积分后的年度 NPP CSV"
+        },
+        {
+          "path": "data/engebei/engebei_window_spec.json",
+          "sha256": "11084aaad19354d4a3eb9e571da400858b8398b8849dbe3731789ea61eefe2f2",
+          "bytes": 3313,
+          "role": "窗口规格（boundsWGS84 来源）"
+        }
+      ],
+      "declaredSourceDigests": [
+        {
+          "field": "sourceRef.csvSha256",
+          "value": "e842bfc2d593c0a6946b16398924fb3f4f1aab33dd59d8bc948dfd4ac062c0b0"
+        },
+        {
+          "field": "sourceRef.windowSpecSha256",
+          "value": "11084aaad19354d4a3eb9e571da400858b8398b8849dbe3731789ea61eefe2f2"
+        }
+      ],
+      "localRecompute": {
+        "claim": "既有独立复算脚本从源 CSV 重算 24 年数值并做反例自检（该轮通过）",
+        "scriptPath": "scripts/verify_engebei_case.js",
+        "scriptSha256": "a20b5133d902d9dea681b0123c5c5b82addc56c2e2d96611c4646a02016df2c2",
+        "reportPath": "audit/engebei_research_case_2026-10-16/ACCEPTANCE.md",
+        "reportSha256": "6e45892493639288b4291006dadce6ced20d21db76be4ccd4fa23b1707c525a3",
+        "derived": {
+          "years": 24
+        },
+        "appliesTo": "案例 B 的整包（2001–2024，单窗口）；不适用于该项目的地面真实性或治理成效。"
+      }
+    }
+  },
+  "upstream": {
+    "reportPath": "audit\\upstream_spotcheck_2026-10-19\\REPORT.md",
+    "reportSha256": "db0e50a234f3418d5261a82b4813d97f4e192c2ef58bd00f1a2a125b5e028c91",
+    "resultsPath": "audit\\upstream_spotcheck_2026-10-19\\spotcheck_results.json",
+    "resultsSha256": "1890303255b6a5bbabd0136c2ad791726c373b41ba239295b022f9846d48e19a",
+    "toleranceRelative": 1e-09,
+    "status": "COMPLETED_ALL_MATCH",
+    "sampleSize": 9,
+    "totalObjectYears": 840,
+    "objectYears": [
+      {
+        "objectId": "cell_0020",
+        "year": 2001
+      },
+      {
+        "objectId": "cell_0020",
+        "year": 2012
+      },
+      {
+        "objectId": "cell_0020",
+        "year": 2024
+      },
+      {
+        "objectId": "cell_0074",
+        "year": 2001
+      },
+      {
+        "objectId": "cell_0074",
+        "year": 2012
+      },
+      {
+        "objectId": "cell_0074",
+        "year": 2024
+      },
+      {
+        "objectId": "engebei_paper_window_v1",
+        "year": 2001
+      },
+      {
+        "objectId": "engebei_paper_window_v1",
+        "year": 2012
+      },
+      {
+        "objectId": "engebei_paper_window_v1",
+        "year": 2024
+      }
+    ],
+    "appliesTo": "仅所抽对象年在该次声明的计算口径下复现一致；**不得**读成全量正确、地面精度已验证或治理效果成立。"
+  }
+}
