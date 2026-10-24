@@ -14,6 +14,12 @@ CarbonSat-MRV helps researchers hand over satellite vegetation results that anot
 - [Open the located change ledger](https://ryaniamemm-design.github.io/CarbonSat-MRV/web/changes.html?cell=cell_0020&era=2&year=2016)
 - [Demo landing page](https://ryaniamemm-design.github.io/CarbonSat-MRV/)
 
+## Project links
+
+- [Source repository](https://github.com/ryaniamemm-design/CarbonSat-MRV)
+- [English workbench](https://ryaniamemm-design.github.io/CarbonSat-MRV/web/workbench.html)
+- [Demo video](https://www.youtube.com/watch?v=JDcc-VNmPzY)
+
 ## The review workflow
 
 1. Select a research object and year.
